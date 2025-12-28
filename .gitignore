@@ -1,0 +1,25 @@
+# file types
+**.tmp
+**.tmp.*
+**.bk
+**.bk.*
+**.ignoreme
+**.ignoreme.*
+**.ig
+**.ig.*
+**.test
+**.test.*
+
+# dir types
+.temp/
+**/.temp/
+.ignoreme/
+**/.ignoreme/
+.test/
+**/.test/
+.diffs/
+**/.diffs/
+.patches/
+**/.patches/
+
+
