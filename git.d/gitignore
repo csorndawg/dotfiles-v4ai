@@ -1,0 +1,148 @@
+## custom (patterns universally ignored across all projects)
+**.ignored
+**.ignored.*
+**.ignored.*.
+**.junk
+**.junk.*
+**/.JUNK.
+**/.JUNK.*.
+**/.junk.*/
+**/.junk/
+**/diffs/
+**/ignored/
+**/patches/
+**/temp/
+**/test/
+**/tmp/
+.JUNK/
+.junk/
+ignored/
+
+# custom symlink extension
+**.SYML
+**.SYML.*
+**.syml
+**.syml.*
+**.patch
+**.patch.*
+
+# custom gitignore (gig) extension
+**.gig
+**.gig.*
+
+## local dotfiles
+.cargo/
+#.vim/plugged
+
+## GITIGNORE.IO copypasta
+
+# standard
+**.swp
+**.tar.**
+**.exe
+**.zip.**
+**.log
+**.log.**
+**.diff
+
+pkg/
+src/
+
+**.og
+**.ig
+**.tmp
+**.temp
+**.bk
+**.bak
+**.db
+**.avi
+**.pdf
+**.ps
+**.mid
+**.midi
+**.mp3
+**.aif
+**.wav
+
+## Other names that would make sense
+*tests
+*testsdir
+*testsfile
+*testsfiles
+*test
+*testdir
+*testfile
+*testfiles
+*testing
+*testingdir
+*testingfile
+*testingfiles
+temp
+temp.
+tempdir
+tempfile
+tempfiles
+tmp
+tmpdir
+tmpfile
+tmpfiles
+lol
+*untracked
+ignoreme
+
+
+#### Ansible ###
+*.retry
+# Ansible runtime and backups
+*.original
+*.tmp
+*.bkp
+*.retry
+*.*~
+
+# Tower runtime roles
+roles/**
+!roles/requirements.yml
+
+# Exclude all binaries
+*.bin
+*.jar
+*.tar
+*.zip
+*.gzip
+*.tgz
+
+### Compressed Files ###
+*.7z
+*.deb
+*.gz
+*.pkg
+*.rar
+*.rpm
+*.sit
+*.sitx
+*.tar
+*.zip
+*.zipx
+*.tgz
+
+### Font ###
+*.fnt
+*.fon
+*.otf
+*.ttf
+
+###  Git ###
+reated by git for backups. To disable backups in Git:
+# $ git config --global mergetool.keepBackup false
+*.orig
+
+# Created by git when using merge tools for conflicts
+*.BACKUP.*
+*.BASE.*
+*.LOCAL.*
+*.REMOTE.*
+*_BACKUP_*.txt
+*_BASE_*.txt
+*_LOCAL_*.txt
+*_REMOTE_*.txt
