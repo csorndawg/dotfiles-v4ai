@@ -1,0 +1,90 @@
+# For all configuration options see: https://alacritty.org/config-alacritty.html
+[terminal.shell]
+program = "C:\\Windows\\System32\\wsl.exe"
+args = ["~"]
+
+# Colors (Nord)
+
+# Default colors
+[colors.primary]
+background = '#2E3440'
+foreground = '#D8DEE9'
+
+# Normal colors
+[colors.normal]
+black   = '#3B4252'
+# custom (brighter and lighter) blacks:
+# #black   = '#5A667D'   
+# black   = '#3909DB3'
+red     = '#BF616A'
+green   = '#A3BE8C'
+yellow  = '#EBCB8B'
+blue    = '#81A1C1'
+magenta = '#B48EAD'
+cyan    = '#88C0D0'
+white   = '#E5E9F0'
+
+# Bright colors
+[colors.bright]
+black   = '#4C566A'
+#custom/testing: black   = '#3B4252'
+red     = '#BF616A'
+green   = '#A3BE8C'
+yellow  = '#EBCB8B'
+blue    = '#81A1C1'
+magenta = '#B48EAD'
+cyan    = '#8FBCBB'
+white   = '#ECEFF4'
+
+
+[cursor]
+
+style = "Beam"
+# vi_mode_style = { <shape>, <blinking> } | "None"
+
+
+[window]
+title = "Zacs Alacritty"
+#startup_mode = "Fullscreen"
+decorations = 'buttonless'
+dynamic_padding = true
+
+# full: borders and title bar
+# none: neither borders nor title bar
+
+# supress WARNING messages
+[debug]
+persistent_logging = false
+log_level = "Error"
+
+
+# for windows font must be among fonts listed at: Settings > Personalization > Fonts
+[font]
+
+size = 11
+
+[font.normal]
+family = "JetBrainsMono Nerd Font"
+style = "Light"
+#style = "Regular"
+
+[font.bold]
+family = "JetBrainsMono Nerd Font"
+style = "SemiBold"
+
+[font.italic]
+family = "JetBrainsMono Nerd Font"
+style = "Light Italic"
+
+[font.bold_italic]
+family = "JetBrainsMono Nerd Font"
+style = "SemiBold Italic"
+
+
+[scrolling]
+
+# max scroll history: 100000
+history = 15000
+
+[selection]
+save_to_clipboard = true
