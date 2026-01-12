@@ -1,3 +1,6 @@
+
+# Starter BASHRC thats is somewhere b/w the default ubuntu bashrc and a fully tricked out bashrc
+
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
