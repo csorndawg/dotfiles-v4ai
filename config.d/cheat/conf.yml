@@ -3,12 +3,12 @@
 editor: vim
 
 # Should 'cheat' always colorize output?
-colorize: false
+colorize: true
 
 # Which 'chroma' colorscheme should be applied to the output?
 # Options are available here:
 #   https://github.com/alecthomas/chroma/tree/master/styles
-style: monokai
+style: nord
 
 # Which 'chroma' "formatter" should be applied?
 # One of: "terminal", "terminal256", "terminal16m"
@@ -64,12 +64,19 @@ cheatpaths:
     tags: [ community ]
     readonly: true
 
-  # If you have personalized cheatsheets, list them last. They will take
-  # precedence over the more global cheatsheets.
+  # for anything that still need work before being verson-controlled
+  - name: drafts
+    path: /home/zac/.config/cheat/cheatsheets/drafts
+    tags: [ drafts, WIP ]
+    readonly: false
+
+  # @NOTE: This cheatfile will be/is VERSION CONTROLLED and should be viewed as a "pristine" version for my personal cheatfiles.
   - name: personal
     path: /home/zac/.config/cheat/cheatsheets/personal
-    tags: [ personal ]
+    tags: [ personal, version-control ]
     readonly: false
+
+
 
   # While it requires no configuration here, it's also worth noting that
   # cheat will automatically append directories named '.cheat' within the
