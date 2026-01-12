@@ -1,0 +1,9 @@
+#  shell-agnostic runtime config file for shell exports and env. variables
+
+export XDG_BIN_HOME="$HOME/.local/bin"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DOCXS_HOME="$HOME/.local/docxs"
+export XDG_DATA_HOME="$HOME/.local/data"
+export XDG_TMP_HOME="$HOME/.local/tmp"
+export XDG_GIT_REPOS_HOME="$HOME/git"
+

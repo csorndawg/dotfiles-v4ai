@@ -1,0 +1,9 @@
+# runtime config file with shell-agnostic aliases 
+
+alias gs="git status"
+alias python="python3"
+alias egv="egrep -v"
+alias la="ls -la"
+alias ll="ls -l"
+
+

@@ -1,0 +1,16 @@
+# runtime config file with shell-agnostic functions
+
+# XCLIP Helpers
+
+alias SSH="$(which ssh)"
+alias ssh="ssh -Y"
+
+xcopy() {
+    # copy remote STDIN to local (system) clipboard
+    xclip -selection clipboard
+}
+
+xpaste() {
+    # paste from local clipboard to remote terminal
+    xclip -selection clipboard -o
+}
