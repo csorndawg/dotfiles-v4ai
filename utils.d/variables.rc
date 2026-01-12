@@ -7,3 +7,8 @@ export XDG_DATA_HOME="$HOME/.local/data"
 export XDG_TMP_HOME="$HOME/.local/tmp"
 export XDG_GIT_REPOS_HOME="$HOME/git"
 
+# @TODO: add logic to set as nvim but use vim as fallback if not present
+# always use vim (or nvim) never nano
+#export EDITOR="nvim"
+export EDITOR="vim"
+

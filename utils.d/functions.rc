@@ -1,16 +1,9 @@
 # runtime config file with shell-agnostic functions
 
-# XCLIP Helpers
-
-alias SSH="$(which ssh)"
-alias ssh="ssh -Y"
-
-xcopy() {
-    # copy remote STDIN to local (system) clipboard
-    xclip -selection clipboard
-}
-
-xpaste() {
-    # paste from local clipboard to remote terminal
-    xclip -selection clipboard -o
+function mcd() {
+    local dirPath="$1"
+    # @TODO: add logic for handling no paths given 
+    # <if $1 doesnt exist ... do ... >
+    mkdir -pv "$dirPath"
+    cd "$dirPath"
 }

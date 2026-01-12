@@ -1,0 +1,26 @@
+# runtime config file with shell-agnostic functions
+
+
+# SSH-relaed configurations
+
+# need to configure $DISPLAY on LOCAL machine before SSHing with X11
+export DISPLAY=:0
+
+# ensure ssh-agent enabled/exists before attemping to cache ssh pwds
+eval "$(ssh-agent -s)" 1>/dev/null
+
+alias SSH="$(which ssh)"
+alias ssh="ssh -Y"
+
+
+# XCLIP Helpers
+
+xcopy() {
+    # copy remote STDIN to local (system) clipboard
+    xclip -selection clipboard
+}
+
+xpaste() {
+    # paste from local clipboard to remote terminal
+    xclip -selection clipboard -o
+}
