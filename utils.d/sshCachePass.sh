@@ -1,4 +1,5 @@
-# Runner script for ssh key cred caching
+
+# Runner script for ssh key cred caching expect script
 
 cache_ssh_pass() {
 
