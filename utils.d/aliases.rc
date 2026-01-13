@@ -1,9 +1,19 @@
 # runtime config file with shell-agnostic aliases 
 
 alias gs="git status"
+alias gcm="git merge"
+alias gbl="git branch -la"
+alias gcb="git checkout -b"
+alias gcmn="git checkout main"
+alias gpl="git pull"
 alias python="python3"
 alias egv="egrep -v"
 alias la="ls -la"
 alias ll="ls -l"
-
+alias ce="cheat -e"
+alias cl="cheat -l"
+alias XARGS="$(which xargs)"
+alias xargs="xargs -I \"{}\""
+alias fdcw="fd --changed-within"
+alias fdcb="fd --changed-before"
 

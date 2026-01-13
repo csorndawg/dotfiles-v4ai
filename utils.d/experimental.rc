@@ -2,4 +2,6 @@
 # code either is an RC undergoing final tests
 # or an adhoc/temporary configuration
 
+dummyVar="This isnt correct bash
+
 

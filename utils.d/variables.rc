@@ -4,11 +4,16 @@ export XDG_BIN_HOME="$HOME/.local/bin"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DOCXS_HOME="$HOME/.local/docxs"
 export XDG_DATA_HOME="$HOME/.local/data"
+mkdir -pv "$XDG_DATA_HOME" 
+ln -fs "$XDG_DOCXS_HOME" "$HOME/.local/share"
+
+# personal/non-standard XDG dirs
 export XDG_TMP_HOME="$HOME/.local/tmp"
 export XDG_GIT_REPOS_HOME="$HOME/git"
+export XDG_DOWNLOADS_HOME="$HOME/.local/var/downloads"
 
-# @TODO: add logic to set as nvim but use vim as fallback if not present
-# always use vim (or nvim) never nano
+# set editor to NVIM if installed, otherwise use VIM as fallback
+export EDITOR=$(command -v nvim || command -v vim || echo "vi")
 #export EDITOR="nvim"
-export EDITOR="vim"
+#export EDITOR="vim"
 
