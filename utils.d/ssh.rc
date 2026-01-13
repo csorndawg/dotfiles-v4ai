@@ -24,3 +24,10 @@ xpaste() {
     # paste from local clipboard to remote terminal
     xclip -selection clipboard -o
 }
+
+
+# caches (silently) ssh creds during session automatically at login
+sshCacheScriptName="sshCachePass.sh"
+sshCacheScriptDir="$HOME/.local/bin"
+#echo "source \"$sshCacheScriptDir/$sshCacheScriptName\""
+source "$sshCacheScriptDir/$sshCacheScriptName"
