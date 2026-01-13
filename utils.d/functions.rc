@@ -2,8 +2,36 @@
 
 function mcd() {
     local dirPath="$1"
-    # @TODO: add logic for handling no paths given 
-    # <if $1 doesnt exist ... do ... >
-    mkdir -pv "$dirPath"
-    cd "$dirPath"
+    if [[ -z "$1" ]]; then
+	    echo "Error - required path argument was not provided"
+	    return 1
+    else
+	    mkdir -p "$dirPath"
+	    cd "$dirPath"
+
+	    echo "Created dirpath: $dirPath"
+	    echo ""
+    fi
+}
+
+function venvActivate() {
+	
+	venvLinuxRgx="bin.activate$"		# pattern to filter out VENV file noise
+
+	# use "XDG Local Config 'venvs' dir for default
+	if [[ ! -d "$1" ]]; then
+		VENV_DIR="$HOME/.config/venvs"
+	else
+		VENV_DIR="$1"
+	fi
+
+	echo "VENV search will start from dir: \"$VENV_DIR\""
+	echo ""
+
+	# fetch venv path from FZF and activate
+	activateScriptPath="$(find "$VENV_DIR" -type f  | egrep "$venvLinuxRgx" \
+				 	| fzf --exit-0 --select-1)"
+
+	#echo source "$activateScriptPath"
+	source "$activateScriptPath" 1> /dev/null
 }

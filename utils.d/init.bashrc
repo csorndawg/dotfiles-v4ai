@@ -143,3 +143,8 @@ export PATH="$PATH:$HOME/.local/bin"
 eval "$(ssh-agent -s)" 1>/dev/null
 sshCachePassRunner="$HOME/.ssh/sshCachePass.sh"
 source "$sshCachePassRunner"
+
+# <need to copy/transfer other config code from zac nyc3 bashrc file>
+bash "$HOME/dotfiles/utils.d/source_rc_utils.sh" 1>/dev/null
+bash "$HOME/dotfiles/utils.d/make_utilsd_symlinks.sh" 1>/dev/null
+
