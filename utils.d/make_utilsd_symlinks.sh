@@ -1,28 +1,30 @@
 #!/usr/bin/env bash
 
+# VARIABLES
 DOTFILE_STEM="$HOME/dotfiles"
 UTILSD_RGX="\.rc"
-UTILSD_IGNR='ignore(me)?|test|experiment|\.sw(ap)'
+UTILSD_IGNR='ignore(me)?|test|experiment|\.sw[ap]$'
 SYML_TARG="$HOME/.local/bin"
 
-echo find "$DOTFILE_STEM/utils.d" -maxdepth 1 -type f | egrep "$UTILSD_RGX" | egrep -v "$UTILSD_IGNR"
-find "$DOTFILE_STEM/utils.d" -maxdepth 1 -type f | egrep "$UTILSD_RGX" | egrep -v "$UTILSD_IGNR"
 
+# List of files to make LOCAL_BIN symlinks
 rcModules=$(find "$DOTFILE_STEM/utils.d" -maxdepth 1 -type f | egrep "$UTILSD_RGX" | egrep -v "$UTILSD_IGNR")
-echo $rcModules
+
+# iterate over list of files and make symlink unless its an ignored file
 for rcmod in ${rcModules[@]}; do 
 
 	name="$(basename "$rcmod")"
 
-	#echo $rcmod
-	#echo $name 
-	echo ln -sf "$rcmod" "$SYML_TARG/$name"
-	ln -sf "$rcmod" "$SYML_TARG/$name" 1>/dev/null
-	echo "Created symlink: $rcmod  -->  \"$SYML_TARG/$name\""
-	echo ""
-done
-echo "Runtime config submodules symlinks have been created."
-echo "" 
-echo "LSing \"$SYML_TARG\" after generating symlinks:"
-ls -la "$SYML_TARG" 
+	ignoreMe="$(echo "$name" | egrep -c "$UTILSD_IGNR")"
+	if (($ignoreMe < 0)); then
+		continue
+	fi
 
+	# remove comment below for debugging 
+	ln -s "$rcmod" "$SYML_TARG/$name" >> /dev/null 2>&1 #|| echo "Error occurred when trying to create \"$name\" symlink" && echo ""
+done
+
+# show symlinks in terminal for confirmation
+echo "XDG_BIN directory after creating runtime config symlinks:"
+echo "" 
+ls -la "$SYML_TARG" | grep '^l' | awk '{print $9, $10, $11}'

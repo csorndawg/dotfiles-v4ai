@@ -6,12 +6,14 @@ DOTFILE_DIRPATHS=$(find ~+ -maxdepth 1 -type d | egrep "\.d$" | egrep -v "ansibl
 for d in ${DOTFILE_DIRPATHS[@]}; do 
 
 	dirname=$(basename $d | cut -f 1 -d '.')
-	echo "" 
 	#echo $d
 	#echo $dirname 
 	#echo ln -s "$d" "$LOCAL_CONFIG/$dirname"
-	ln -s "$d" "$LOCAL_CONFIG/$dirname"
-	echo "Created symlink: $d  -->  \"$LOCAL_CONFIG/$dirname\""
+	ln -s "$d" "$LOCAL_CONFIG/$dirname" 2>/dev/null || echo "Error occurred when trying to create \"$d\" symlink" && echo ""
+	#echo "Created symlink: \"$d\""
 done
-echo "Local config directory after creating symlinks"
-ls -la ~/.config/
+
+# show changes
+echo "XDG_CONFIG directory after creating new batch of symlinks:"
+echo ""
+ls -la "$LOCAL_CONFIG" | grep '^l' | awk '{print $9, $10, $11}'
