@@ -1,0 +1,3 @@
+# This is a sample cheatfile that should still be version controlled even though its in "drafts".
+# Any cheatfile with the version control exception suffix ("-vcx") will be UNIGNORED by the cheat gitignore.
+

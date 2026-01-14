@@ -1,8 +1,14 @@
 # runtime config file with shell-agnostic aliases 
 
 alias gs="git status"
-alias gcm="git merge"
+alias gm="git merge"
+alias glg="git log"
+alias gcm="git commit"
 alias gbl="git branch -la"
+# sorted with the most recent commits first
+alias gbs="git branch -la --sort=-committerdate"
+# sorted with the oldest commits first
+alias gbS="git branch -la --sort=-committerdate"
 alias gcb="git checkout -b"
 alias gcmn="git checkout main"
 alias gpl="git pull"

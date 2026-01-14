@@ -1,0 +1,21 @@
+---
+tags: [ git, git-branch, lazygit ]
+---
+
+# view all local and remote branches, and set sorting & filtering to be case insensitive (-i)
+git branch --list --all --ignore-case
+
+# view all local and remote branches, sorted by most recent commits
+git branch -la --sort=-committerdate
+
+# view local branches, sorted by oldest (latest) commits
+git branch --sort=committerdate
+
+# view name of current checked out branch
+git branch --show-current
+
+# view remote branches only
+git branch -r
+
+# forcefully delete current branch
+git branch -D
