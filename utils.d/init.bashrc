@@ -123,28 +123,44 @@ fi
 # MY ADDONS
 ###############################################################
 
-# aliases
-alias gs="git status"
-alias gd="git diff"
-alias gcm="git commit"
-alias gcmn="git checkout main"
-alias jc="jupyter console"
-alias jl="jupyter lab"
-alias v="vim"
-alias python="python3"
-
-# vim as EDITOR
-export EDITOR="vim"
+## MISC.
 
 # add to PATH
 export PATH="$PATH:$HOME/.local/bin"
 
+### CLI Tools ###
+
+# rust setup
+export PATH="$PATH:$HOME/.cargo/bin"
+. "$HOME/.cargo/env"
+
+# zoxide
+eval "$(zoxide init bash)"
+#eval "$(zoxide init zsh)"
+
+# fdfind symlink to binary
+if [ ! -e ~/.local/bin/fd ]; then
+      ln -s "$(command -v fdfind)" "$HOME/.local/bin/fd"
+fi
+
+# golang setup
+export GOPATH="/usr/lib/go"
+export GOBIN="$GOPATH/bin"
+export PATH="$PATH:$GOBIN"
+
+
+### SSH ###
+
 # ssh key cred caching
 eval "$(ssh-agent -s)" 1>/dev/null
 sshCachePassRunner="$HOME/.ssh/sshCachePass.sh"
-source "$sshCachePassRunner"
+source "$sshCachePassRunner" 1> /dev/null
+
+
+### DOTFILE V4 CONFIGURATION ###
 
 # <need to copy/transfer other config code from zac nyc3 bashrc file>
-bash "$HOME/dotfiles/utils.d/source_rc_utils.sh" 1>/dev/null
-bash "$HOME/dotfiles/utils.d/make_utilsd_symlinks.sh" 1>/dev/null
+source "$HOME/dotfiles/utils.d/source_rc_utils.sh" 1>/dev/null
+source "$HOME/dotfiles/utils.d/make_utilsd_symlinks.sh" 1>/dev/null
 
+echo "Successfully sourced:  \"$HOME/.bashrc\""

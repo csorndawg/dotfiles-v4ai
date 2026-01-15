@@ -1,25 +1,64 @@
 # runtime config file with shell-agnostic aliases 
 
-alias gs="git status"
-alias gm="git merge"
-alias glg="git log"
-alias gcm="git commit"
-alias gbl="git branch -la"
-# sorted with the most recent commits first
-alias gbs="git branch -la --sort=-committerdate"
-# sorted with the oldest commits first
-alias gbS="git branch -la --sort=-committerdate"
-alias gcb="git checkout -b"
-alias gcmn="git checkout main"
-alias gpl="git pull"
-alias python="python3"
-alias egv="egrep -v"
-alias la="ls -la"
-alias ll="ls -l"
+# adhoc aliases
+
 alias ce="cheat -e"
 alias cl="cheat -l"
-alias XARGS="$(which xargs)"
-alias xargs="xargs -I \"{}\""
-alias fdcw="fd --changed-within"
+alias egv="egrep -v"
 alias fdcb="fd --changed-before"
+alias fdcw="fd --changed-within"
+alias jc="jupyter console"
+alias jl="jupyter lab"
+alias la="ls -la"
+alias ll="ls -l"
+alias python="python3"
+alias nv="nvim"
+alias n="nvim"
+alias v="vim"
+alias xargs="xargs -I \"{}\""
+alias XARGS="$(which xargs)"
+
+
+# tmux aliases
+alias tma='tmux attach'
+alias tmab='tmux save-buffer -a'
+alias tmcb='tmux choose-buffer'
+alias tmds='tmux detach'
+alias tmka='tmux kill-session -a'
+alias tmkp='tmux kill-pane'
+alias tmkpa='tmux kill-pane -a'
+alias tmks='tmux kill-session'
+alias tmkw='tmux kill-window'
+alias tmlk='tmux list-keys'
+alias tmlkg='tmux list-keys  | egrep -i '
+alias tmls='tmux ls'
+alias tmmw='tmux move-window'
+alias tmns='tmux new-session -t'
+alias tmnw='tmux new-window -t'
+alias tmnwn='tmux new-window -n '
+alias tmpb='tmux paste-buffer'
+alias tmshb='tmux show-buffer'
+alias tmsk='tmux send-keys '
+alias tmstb='tmux set-buffer'
+alias tmsvb='tmux save-buffer'
+
+# git aliases
+alias ga="git add"
+alias gbl="git branch -la"
+alias gcb="git checkout -b"
+alias gcm="git commit"
+alias gcmn="git checkout main"
+alias gd="git diff"
+alias glg="git log"
+alias gm="git merge"
+alias gp="git push"
+alias gpl="git pull"
+alias gs="git status"
+
+# sort branches, with the most recent commits first
+alias gbs="git branch -la --sort=-committerdate"
+# sort branches, with the oldest commits first
+alias gbS="git branch -la --sort=-committerdate"
+
+# unsorted aliases
 
