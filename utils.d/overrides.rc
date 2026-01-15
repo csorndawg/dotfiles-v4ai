@@ -1,0 +1,31 @@
+# hotfix with additional runtime configuration that either extends, overrides, or adds new shell-agnostic configuration
+
+# @TODO: Remove interim fix from file once ZSH installed and configured on machine/for user
+#### NY3 'zac' interim fix  ####
+
+# rust setup
+export PATH="$PATH:$HOME/.cargo/bin"
+. "$HOME/.cargo/env"
+
+# zoxide
+eval "$(zoxide init bash)"
+#eval "$(zoxide init zsh)"
+
+# fdfind symlink to binary
+if [ ! -e ~/.local/bin/fd ]; then
+	ln -s "$(command -v fdfind)" "$HOME/.local/bin/fd"
+fi
+
+# golang setup
+export GOPATH="/usr/lib/go"
+export GOBIN="$GOPATH/bin"
+export PATH="$PATH:$GOBIN"
+
+# venvs
+export VENVS_HOME="$HOME/.config/venvs"
+alias vv="source \"$VENVS_HOME/venv/bin/activate\""
+
+source "/home/zac/dotfiles/utils.d/source_rc_utils.sh" 1>/dev/null
+source "/home/zac/dotfiles/utils.d/make_utilsd_symlinks.sh" 1>/dev/null
+
+
