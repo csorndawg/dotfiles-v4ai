@@ -1,4 +1,6 @@
 # file types
+**.orig
+**.orig.*
 **.tmp
 **.tmp.*
 **.bk

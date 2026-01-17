@@ -1,2 +1,11 @@
 # ignore tpm plugins
 plugins/
+tpm/
+
+
+**.ark
+**.ark.*
+**.test.
+**.test.*
+**.orig
+**.orig.*
