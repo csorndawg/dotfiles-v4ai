@@ -44,6 +44,7 @@ alias tmsvb='tmux save-buffer'
 
 # git aliases
 alias ga="git add"
+alias gco="git checkout"
 alias gbl="git branch -la"
 alias gcb="git checkout -b"
 alias gcm="git commit"

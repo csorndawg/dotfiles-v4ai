@@ -1,0 +1,6 @@
+# Shell-agnostic, runtime configuration for rust.
+
+# Master "cargo" folder is accessible via an /OPT/LOCAL/LIB symlink
+OPT_CARGO_PATH="/opt/local/lib/cargo"
+export PATH="$PATH:$OPT_CARGO_PATH/bin"
+source "$OPT_CARGO_PATH/env"
