@@ -17,7 +17,7 @@ formatter: terminal256
 # Through which pager should output be piped?
 # 'less -FRX' is recommended on Unix systems
 # 'more' is recommended on Windows
-pager: 
+pager: less -FRX
 
 # Cheatpaths are paths at which cheatsheets are available on your local
 # filesystem.
@@ -78,5 +78,5 @@ cheatpaths:
   # before being verson-controlled
   - name: drafts
     path: /home/zac/.config/cheat/cheatsheets/drafts
-      tags: [ drafts, WIP ]
+    tags: [ drafts, WIP ]
     readonly: false
