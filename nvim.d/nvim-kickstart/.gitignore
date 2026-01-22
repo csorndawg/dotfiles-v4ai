@@ -1,0 +1,26 @@
+# file patterns
+**.lazyignore
+**.lazyignore.*
+**.orig
+**.orig.*
+
+# directory patterns
+lazyignore/
+**/lazyignore/
+
+
+# anything and everything
+
+# file patterns
+**.lazyignore
+**.lazyignore.*
+**.orig
+**.orig.*
+
+# directory patterns
+lazyignore/
+**/lazyignore/
+
+
+# anything and everything
+
