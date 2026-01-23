@@ -26,3 +26,8 @@ export EDITOR="vim"
 #fi
 #
 #export VISUAL=$EDITOR
+
+
+
+# configure $PATH for extra directories
+export PATH="$PATH:/opt/local/bin"
