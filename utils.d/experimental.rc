@@ -2,6 +2,18 @@
 # code either is an RC undergoing final tests
 # or an adhoc/temporary configuration
 
-dummyVar="This isnt correct bash
+
+# nvim kickstart-modular parallel configuration
+alias nvim-kickstart='NVIM_APPNAME="nvim-kickstart" nvim'
+alias nk='NVIM_APPNAME="nvim-kickstart" nvim'
+
+# nvim aliases
+alias n="nvim"
+alias nv="nvim"
+alias NV="nvim"
+
+# vim aliases
+alias v="vim"
+alias V="vim"
 
 
