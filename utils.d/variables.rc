@@ -31,3 +31,10 @@ export EDITOR="vim"
 
 # configure $PATH for extra directories
 export PATH="$PATH:/opt/local/bin"
+
+# x11 ssh clipboard
+#export DISPLAY=:0
+
+# WSL alacritty config file path
+export WSL_TERMINAL_CONFIG="/mnt/c/Users/zaccs/AppData/Roaming/alacritty/alacritty.toml"
+export WSL_ALACRITTY_CONFIG="/mnt/c/Users/zaccs/AppData/Roaming/alacritty/alacritty.toml"

@@ -49,7 +49,18 @@
 **.test.*
 **.ignored
 **.ignored.*
-
+**/ignored-*
+**/ignored.*
+**/temp-*
+**/tmp-*
+**/test-*
+**/ignore.*
+**/ignore.*
+**/ignored.*
+**/temp.*
+**/tmp.*
+**/test.*
+**.swp
 
 ###########################
 # Dirs
@@ -69,3 +80,9 @@
 .patches/
 **/.patches/
 
+
+###########################
+# Misc.
+###########################
+
+**/nvim-kickstart/

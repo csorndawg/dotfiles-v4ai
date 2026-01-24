@@ -35,3 +35,8 @@ function venvActivate() {
 	#echo source "$activateScriptPath"
 	source "$activateScriptPath" 1> /dev/null
 }
+
+# OSC 52 clipboard workaround
+clip() {
+    printf "\033]52;c;$(base64 -w0)\a"
+}
