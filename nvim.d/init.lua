@@ -35,14 +35,14 @@ vim.g.have_nerd_font = true
 -- imports "custom/lazy.lua" file which bootstraps lazy.nvim
 require 'custom.lazy'
 
+-- import custom options/settings
+require 'custom.opts'
+
 -- import custom core (non-plugin) keymaps
 require 'custom.keymaps'
 
 -- import custom autocmds
 require 'custom.autocmds'
-
--- import custom options/settings
-require 'custom.opts'
 
 -- import custom <x>
 -- require 'custom.x'

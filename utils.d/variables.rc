@@ -1,17 +1,42 @@
 #  shell-agnostic runtime config file for shell exports and env. variables
 
+##################################################
+# XDG Variables
+##################################################
+
 export XDG_BIN_HOME="$HOME/.local/bin"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DOCXS_HOME="$HOME/.local/docxs"
 export XDG_DATA_HOME="$HOME/.local/data"
-
-mkdir -pv "$XDG_DATA_HOME" 
-ln -fs "$XDG_DOCXS_HOME" "$HOME/.local/share"
+export XDG_STATE_HOME="$HOME/.local/state"
+export XDG_LIB_HOME="$HOME/.local/lib"
+export XDG_RUNTIME_HOME="$HOME/.local/runtime"
+export XDG_DOWNLOADS_HOME="$HOME/.local/data/usr/downloads"
 
 # personal/non-standard XDG dirs
 export XDG_TMP_HOME="$HOME/.local/tmp"
 export XDG_GIT_REPOS_HOME="$HOME/git"
 export XDG_DOWNLOADS_HOME="$HOME/.local/var/downloads"
+
+# make XDG dirs and relevant symlinks
+mkdir -pv "$XDG_DATA_HOME" 
+mkdir -pv "$XDG_BIN_HOME" 
+mkdir -pv "$XDG_DOCXS_HOME" 
+mkdir -pv "$XDG_DOWNLOADS_HOME" 
+mkdir -pv "$XDG_STATE_HOME" 
+mkdir -pv "$HOME/linkfarm"
+mkdir -pv "$XDG_RUNTIME_HOME"
+ln -fs "$XDG_DATA_HOME" "$HOME/.local/share"
+ln -fs "$XDG_DATA_HOME" "$HOME/linkfarm/LOCAL_DATA"
+ln -fs "$XDG_DOCS_HOME" "$HOME/linkfarm/"
+ln -fs "$XDG_DOWNLOADS_HOME" "$HOME/linkfarm/"
+ln -fs "$XDG_LIB_HOME" "$HOME/linkfarm/"
+ln -fs "$XDG_STATE_HOME" "$HOME/linkfarm/"
+ln -fs "$XDG_RUNTIME_HOME" "$HOME/linkfarm/"
+
+##################################################
+# Everything Else
+##################################################
 
 # set editor to NVIM if installed, otherwise use VIM as fallback
 #export EDITOR=$(command -v nvim || command -v vim || echo "vi")
@@ -19,15 +44,15 @@ export XDG_DOWNLOADS_HOME="$HOME/.local/var/downloads"
 export EDITOR="vim"
 #export EDITOR="nvim"
 
-#if command -v nvim >/dev/null 2>&1; then
-#  export EDITOR='nvim'
-#else
-#  export EDITOR='vim'
-#fi
-#
-#export VISUAL=$EDITOR
+# set $EDITOR to nvim if its installed, otherwise set to vim
+if command -v nvim >/dev/null 2>&1; then
+	export EDITOR='nvim'
+else
+	export EDITOR='vim'
+fi
+export VISUAL=$EDITOR
 
 
 
 # configure $PATH for extra directories
-export PATH="$PATH:/opt/local/bin"
+export PATH="$XDG_BIN_HOME:$PATH:/opt/local/bin"
