@@ -1,0 +1,6 @@
+Running doc for any pip modules system depedencies
+
+# psycopg2 depedencies (run before pip installing)
+sudo apt-get install build-essential
+sudo apt-get install python3-pip
+sudo apt install python3-dev libpq-dev

@@ -38,3 +38,6 @@ export PATH="$PATH:/opt/local/bin"
 # WSL alacritty config file path
 export WSL_TERMINAL_CONFIG="/mnt/c/Users/zaccs/AppData/Roaming/alacritty/alacritty.toml"
 export WSL_ALACRITTY_CONFIG="/mnt/c/Users/zaccs/AppData/Roaming/alacritty/alacritty.toml"
+
+# nvim python venv.
+export VENV_NVIMD="$HOME/dotfiles/config.d/venvs/venv-nvimd"

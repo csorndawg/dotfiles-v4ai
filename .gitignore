@@ -90,3 +90,10 @@
 # ignore cheat VC repo and cheatsheets symlink
 config.d/cheat/cheatfiles-2026/
 config.d/cheat/cheatsheets
+
+# ignore all venv files/folders 
+config.d/venvs/*/**
+# except the requirements and depedencies text files
+#!config.d/venvs/*/*.txt
+!config.d/venvs/*/requirements.txt
+!config.d/venvs/*/dependencies.txt

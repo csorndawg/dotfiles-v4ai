@@ -163,4 +163,7 @@ source "$sshCachePassRunner" 1> /dev/null
 source "$HOME/dotfiles/utils.d/source_rc_utils.sh" 1>/dev/null
 source "$HOME/dotfiles/utils.d/make_utilsd_symlinks.sh" 1>/dev/null
 
+# enable nvim python venv by default
+source "$HOME/dotfiles/config.d/venvs/venv-nvimd/bin/activate"
+
 echo "Successfully sourced:  \"$HOME/.bashrc\""
