@@ -2,6 +2,7 @@
 [terminal.shell]
 program = "C:\\Windows\\System32\\wsl.exe"
 args = ["~"]
+osc52 = "CopyPaste"
 
 # Colors (Nord)
 
@@ -82,7 +83,6 @@ style = "SemiBold Italic"
 
 
 [scrolling]
-
 # max scroll history: 100000
 history = 15000
 
