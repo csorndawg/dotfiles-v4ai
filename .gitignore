@@ -86,3 +86,7 @@
 ###########################
 
 **/nvim-kickstart/
+
+# ignore cheat VC repo and cheatsheets symlink
+config.d/cheat/cheatfiles-2026/
+config.d/cheat/cheatsheets
