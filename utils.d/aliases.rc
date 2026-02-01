@@ -63,3 +63,5 @@ alias gbS="git branch -la --sort=-committerdate"
 
 # unsorted aliases
 
+# alias bloated newdots nvim config until dotfiles-v4 nvim is operational
+alias nvim-newdots='NVIM_APPNAME="nvim-newdots" nvim'
