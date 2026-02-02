@@ -16,3 +16,12 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 --  autocmd CmdlineEnter [\/\?] :set hlsearch
 --  autocmd CmdlineLeave [\/\?] :set nohlsearch
 --augroup END
+--
+
+-- disable new line auto-commenting
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "*",
+  callback = function()
+    vim.opt_local.formatoptions:remove({ "c", "r", "o" })
+  end,
+})

@@ -40,3 +40,17 @@ function venvActivate() {
 clip() {
     printf "\033]52;c;$(base64 -w0)\a"
 }
+
+# git rebase helper
+# Interactive rebase helper
+
+function grbi() {
+  # verify the input is a positive int
+  if [[ -n "$1" && "$1" =~ ^[0-9]+$ ]]; then
+    echo "Starting interactive rebase for the last $1 commits..."
+    git rebase -i "HEAD~$1"
+  else
+    echo "Error: Please provide a valid number of commits."
+    echo "Usage: grb 3"
+  fi
+}

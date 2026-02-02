@@ -31,6 +31,10 @@ vim.g.have_nerd_font = true
 -- MY CUSTOM CONFIG
 -- ==========================================================================================
 
+
+-- @TODO: move to a settings/opts file
+vim.g.python3_host_prog = vim.fn.expand("~/dotfiles/config.d/venvs/venv-nvimd/bin/python")
+
 -- imports "custom/lazy.lua" file which bootstraps lazy.nvim
 require 'custom.lazy'
 

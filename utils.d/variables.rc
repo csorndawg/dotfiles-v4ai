@@ -28,6 +28,13 @@ export EDITOR="vim"
 #export VISUAL=$EDITOR
 
 
+# add RC env. vars for core dotfiles files
+export BASHRC="$HOME/.bashrc"
+export TMUX_CONF="$HOME/.config/tmux/tmux.conf"
+export GITCONFIG_LOCAL="$HOME/.gitconfig"
+export VIMRC="$HOME/.vimrc"
+export NVIM_INIT="$HOME/.config/nvim/init.lua"
+export SSHRC_DIR="$HOME/.ssh"
 
 # configure $PATH for extra directories
 export PATH="$PATH:/opt/local/bin"
