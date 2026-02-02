@@ -131,8 +131,8 @@ export PATH="$PATH:$HOME/.local/bin"
 ### CLI Tools ###
 
 # rust setup
-export PATH="$PATH:$HOME/.cargo/bin"
-. "$HOME/.cargo/env"
+#export PATH="$PATH:$HOME/.cargo/bin"
+#. "$HOME/.cargo/env"
 
 # zoxide
 eval "$(zoxide init bash)"
@@ -166,4 +166,13 @@ source "$HOME/dotfiles/utils.d/make_utilsd_symlinks.sh" 1>/dev/null
 # enable nvim python venv by default
 source "$HOME/dotfiles/config.d/venvs/venv-nvimd/bin/activate"
 
-echo "Successfully sourced:  \"$HOME/.bashrc\""
+# source shell (bash) completion scripts
+BASHD_COMP_SUBMODULE="$HOME/dotfiles/bash.d/completions.bash"
+source $BASHD_COMP_SUBMODULE
+#source '/home/zac/.bash_completions/sqlfmt.sh'
+
+
+# @TEMPFIX: move to "variables.rc" or "rust.rc" after figuring out rust/cargo issue
+export PATH="$HOME/.cargo/bin:$PATH"
+echo "Sourced bashrc configuration:  \"$HOME/.bashrc\""
+echo ""

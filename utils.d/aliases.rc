@@ -44,27 +44,72 @@ alias tmsvb='tmux save-buffer'
 
 # git aliases
 alias ga="git add"
+alias gad="git add --dry-run"
 alias gco="git checkout"
+alias gbl="git branch -la"
+alias gbsa="git branch --sort=refname"		# [g]it [b]ranch [s]ort [a]lphabetically
 alias gbl="git branch -la"
 alias gcb="git checkout -b"
 alias gcm="git commit"
+alias gcmm="git commit -m '"
+alias gcma="git commit -a"
 alias gcmn="git checkout main"
 alias gd="git diff"
+alias gdst="git diff --stat"
+alias gdsg="git diff --staged"
+alias gdo="git diff origin"
+alias gdm="git diff main"
+alias gdom="git diff origin/main"
 alias glg="git log"
 alias gm="git merge"
 alias gp="git push"
 alias gpl="git pull"
 alias gs="git status"
+alias grs="git restore"
+alias grss="git restore --staged"
+alias gfo="git fetch origin"
+alias grb="git rebase"
+alias grbi="git rebase -i HEAD~"
 
-# sort branches, with the most recent commits first
-alias gbs="git branch -la --sort=-committerdate"
+# sort branches, with the most recent commits first 	(gbst == [g]it [b]ranch [s]orted by [t]ime descending)
+alias gbst="git branch -la --sort=-committerdate"
+
 # sort branches, with the oldest commits first
-alias gbS="git branch -la --sort=-committerdate"
+alias gbsT="git branch -la --sort=committerdate"
 
-# unsorted aliases
+# ------------------------------------------------------------------------------------
+# Unsorted Aliases
+# ------------------------------------------------------------------------------------
+
+# alias for enabling nvim python venv
+alias vvn='source "$HOME/dotfiles/config.d/venvs/venv-nvimd/bin/activate"'
+
+# misc.
+alias ag="alias | egrep"
+alias hg="history | egrep"
+alias vg="env | egrep"
+alias h5="head -n 5"
+alias h15="head -n 5"
+alias h25="head -n 5"
+alias h50="head -n 5"
+alias h100="head -n 5"
+alias t5="tail -n 5"
+alias t15="tail -n 5"
+alias t25="tail -n 5"
+alias t50="tail -n 5"
+alias t100="tail -n 5"
+
+# zoxide shortcuts
+alias Z="zi"
+alias za="zoxide add"
+alias zq="zoxide query"
+alias zr="zoxide remove"
+alias ze="zoxide edit"
+
+# ------------------------------------------------------------------------------------
+# Final Aliases (aliases that are intentionally sourced last)
+# ------------------------------------------------------------------------------------
 
 # alias bloated newdots nvim config until dotfiles-v4 nvim is operational
 alias nvim-newdots='NVIM_APPNAME="nvim-newdots" nvim'
 
-# alias for enabling nvim python venv
-alias vvn='source "$HOME/dotfiles/config.d/venvs/venv-nvimd/bin/activate"'
