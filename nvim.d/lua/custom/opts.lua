@@ -1,24 +1,9 @@
-<<<<<<< HEAD
 -- Nvim Custom Options/Settings
 --
 
 vim.opt.number = true		-- turn line numbers on
 vim.opt.relativenumber = true	-- turn relative line numbers on
 vim.opt.incsearch = true	-- turn on incremental search
-||||||| 1a5b5ce
-=======
--- Nvim Custom Options/Settings
--- source: https://neovim.io/doc/user/quickref.html#option-list
---
--- @TODO: Review rest of Lazyvim options
--- @TODO: Review old dotfiles vim/nvim options settings
--- @TODO: Review other nvim distro options for inspiration (chad, astro, lunar, etc.)
---
-
-vim.opt.number = true		-- turn line numbers on
-vim.opt.relativenumber = true	-- turn relative line numbers on
-vim.opt.incsearch = true	-- turn on incremental search
-
 
 -- Lazyvim Options Copypasta
 local opt = vim.opt
@@ -92,4 +77,3 @@ vim.g.clipboard = {
     ['*'] = require('vim.ui.clipboard.osc52').paste('*'),
   },
 }
->>>>>>> rc-nvimd-1
