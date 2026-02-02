@@ -71,7 +71,6 @@ alias grs="git restore"
 alias grss="git restore --staged"
 alias gfo="git fetch origin"
 alias grb="git rebase"
-alias grbi="git rebase -i HEAD~"
 
 # sort branches, with the most recent commits first 	(gbst == [g]it [b]ranch [s]orted by [t]ime descending)
 alias gbst="git branch -la --sort=-committerdate"

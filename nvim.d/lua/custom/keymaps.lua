@@ -23,14 +23,34 @@ vim.keymap.set("n","<space><space>qaa",":qa!<Cr>")
 -- Experimental mode cycling keymaps
 
 -- Toggle between normal and insert mode with <Leader>,,
+vim.keymap.set("n", "jk", "i", { desc = "Normal to insert mode" })
+vim.keymap.set("n", "kj", "i", { desc = "Normal to insert mode" })
 vim.keymap.set("n", "<Leader>,,", "i", { desc = "Normal to insert mode" })
-vim.keymap.set("i", "<Leader>,,", "<Esc>", { desc = "Insert to normal mode" })
 
--- Toggle between normal and command mode with <Leader>;;
+vim.keymap.set("i", "jj", "<C-c>", { desc = "Insert to normal mode" })
+vim.keymap.set("i", "kk", "<C-c>", { desc = "Insert to normal mode" })
+vim.keymap.set("i", "jk", "<C-c>", { desc = "Insert to normal mode" })
+vim.keymap.set("i", "kj", "<C-c>", { desc = "Insert to normal mode" })
+vim.keymap.set("i", ",,", "n", { desc = "Insert to normal mode" })
+
+-- Normal/Command mode toggling with <Leader>;;
 vim.keymap.set("n", "<Leader>;;", ":", { desc = "Normal to command mode" })
 vim.keymap.set("c", "<Leader>;;", "<C-c>", { desc = "Command to normal mode" })
 
--- Alternative ESC with <Leader><Leader>cc
-vim.keymap.set("i", "<Leader><Leader><Leader>c", "<Esc>", { desc = "Alternative escape" })
-vim.keymap.set("v", "<Leader><Leader><Leader>c", "<Esc>", { desc = "Alternative escape (visual)" })
-vim.keymap.set("c", "<Leader><Leader><Leader>c", "<C-c>", { desc = "Alternative escape (command)" })
+-- Alternative <ESC> Mapping: <Leader>/
+vim.keymap.set("i", "<Leader>/", "<Esc>", { desc = "Alternative escape" })
+vim.keymap.set("v", "<Leader>/", "<Esc>", { desc = "Alternative escape (visual)" })
+vim.keymap.set("c", "<Leader>/", "<C-c>", { desc = "Alternative escape (command)" })
+
+-- Alternative <ESC> Mapping 3: <leader>//
+--vim.keymap.set("i", "<Leader>//", "<Esc>", { desc = "Alternative escape" })
+--vim.keymap.set("v", "<Leader>//", "<Esc>", { desc = "Alternative escape (visual)" })
+--vim.keymap.set("c", "<Leader>//", "<C-c>", { desc = "Alternative escape (command)" })
+
+
+-- swap ";" with ":"
+vim.keymap.set({ "n", "v" }, ";", ":", { desc = "Enter command mode" })
+vim.keymap.set({ "n", "v" }, ":", ";", { desc = "Repeat last f, t, F, or T" })
+
+-- buffer keymaps
+-- <TBD>

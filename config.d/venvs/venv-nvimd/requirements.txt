@@ -1,3 +1,4 @@
+ansicolor==0.3.3
 anyio==4.12.1
 appdirs==1.4.4
 argon2-cffi==25.1.0
@@ -108,7 +109,6 @@ six==1.17.0
 soupsieve==2.8.3
 SQLAlchemy==2.0.46
 sqlfluff==2.3.5
-sqlfmt==0.0.3
 stack-data==0.6.3
 tblib==3.2.2
 terminado==0.18.1
@@ -127,3 +127,4 @@ webcolors==25.10.0
 webencodings==0.5.1
 websocket-client==1.9.0
 widgetsnbextension==4.0.15
+yamllint==1.38.0
