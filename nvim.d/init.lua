@@ -44,8 +44,12 @@ require 'custom.opts'
 -- import custom core (non-plugin) keymaps
 require 'custom.keymaps'
 
+
 -- import custom autocmds
 require 'custom.autocmds'
+
+-- import custom plugin keymaps
+require 'custom.lazy-keymaps'
 
 -- import custom <x>
 -- require 'custom.x'
