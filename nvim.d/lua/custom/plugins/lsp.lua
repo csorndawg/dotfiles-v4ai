@@ -18,57 +18,44 @@ return {
           "lua_ls",	-- lua
           "powershell_es",	-- powershell
           "pyright",	-- python types only
-	  --"ruff",	-- everything else besides python types
+          "ruff",	-- everything else besides python types
           "sqlls",	-- SQL
           "taplo",	-- TOML
           "yamlls",
           "vimls",	-- vimscript
-	--"awk_ls",
-	--"copilot",
-	--"diagnosticls",		-- diagnostics integrates w/ linters
-	--"docker_compose_language_service",
-	--"docker_language_service",
-	--"dockerls",
-	--"jinja_lsp",		-- 
-	--"jqls",		-- JQ
-	--"just",		-- just
-	--"lsp_ai",		-- 
-	--"marksman",		-- markdown
-	--"postgres_lsp",		-- 
-	--"",		-- 
+          --"awk_ls",
+          --"copilot",
+          --"diagnosticls",		-- diagnostics integrates w/ linters
+          --"docker_compose_language_service",
+          --"docker_language_service",
+          --"dockerls",
+          --"jinja_lsp",		-- 
+          --"jqls",		-- JQ
+          --"just",		-- just
+          --"lsp_ai",		-- 
+          --"marksman",		-- markdown
+          --"postgres_lsp",		-- 
         },
       })
 
-      ----------------------------------------------------------------
-      -- LSP CONFIGURATION
-      ----------------------------------------------------------------
+      -- LSP servers configuration 
       local lsp = vim.lsp
 
-      ----------------------------------------------------------------
-      -- PYTHON
-      ----------------------------------------------------------------
+      -- Python LSP 
       lsp.config.pyright = {}
 
-      ----------------------------------------------------------------
-      -- C / C++
-      ----------------------------------------------------------------
+      -- C/C++ LSP
       lsp.config.clangd = {}
 
-      ----------------------------------------------------------------
-      -- BASH
-      ----------------------------------------------------------------
+      -- Bash LSP
       lsp.config.bashls = {}
 
-      ----------------------------------------------------------------
       -- POWERSHELL
-      ----------------------------------------------------------------
       lsp.config.powershell_es = {
         bundle_path = vim.fn.stdpath("data") .. "/mason/packages/powershell-editor-services",
       }
 
-      ----------------------------------------------------------------
       -- YAML
-      ----------------------------------------------------------------
       lsp.config.yamlls = {
 				settings = {
 					yaml = {
@@ -76,20 +63,13 @@ return {
 					},
 				},
 			}
-
-      ----------------------------------------------------------------
       -- JSON
-      ----------------------------------------------------------------
       lsp.config.jsonls = {}
 
-      ----------------------------------------------------------------
       -- TOML
-      ----------------------------------------------------------------
       lsp.config.taplo = {}
 
-      ----------------------------------------------------------------
       -- LUA (Neovim)
-      ----------------------------------------------------------------
 			lsp.config.lua_ls = {
 				settings = {
 					Lua = {
@@ -104,40 +84,34 @@ return {
 					},
 				},
 			}
-
-      ----------------------------------------------------------------
       -- VIMSCRIPT
-      ----------------------------------------------------------------
 			lsp.config.vimls = {}
 
-      ----------------------------------------------------------------
       -- SQL (Postgres + MySQL)
-      ----------------------------------------------------------------
 			lsp.config.sqlls = {}
 			
---      lspconfig.sqlls.setup({
---        settings = {
---          sqlLanguageServer = {
---            connections = {
---              {
---                driver = "postgresql",
---                --dataSourceName = "postgresql://user:password@localhost:5432/dbname",
---                -- dataSourceName = "postgresql://zac:zac@localhost:5432/nonprod",
---                dataSourceName = "postgresql://dba:zac@localhost:5432/prod",
---              },
---              -- {
---              --   driver = "mysql",
---              --   -- dataSourceName = "mysql://user:password@localhost:3306/dbname",
---              --   dataSourceName = "mysql://dba:zac@localhost:3306/dbname",
---              -- },
---            },
---          },
---        },
---      })
+      --      lspconfig.sqlls.setup({
+      --        settings = {
+      --          sqlLanguageServer = {
+      --            connections = {
+      --              {
+      --                driver = "postgresql",
+      --                --dataSourceName = "postgresql://user:password@localhost:5432/dbname",
+      --                -- dataSourceName = "postgresql://zac:zac@localhost:5432/nonprod",
+      --                dataSourceName = "postgresql://dba:zac@localhost:5432/prod",
+      --              },
+      --              -- {
+      --              --   driver = "mysql",
+      --              --   -- dataSourceName = "mysql://user:password@localhost:3306/dbname",
+      --              --   dataSourceName = "mysql://dba:zac@localhost:3306/dbname",
+      --              -- },
+      --            },
+      --          },
+      --        },
+      --      })
 
-      ----------------------------------------------------------------
-      -- ENABLE LSP SERVERS
-      ----------------------------------------------------------------
+      --
+      -- once LSP servers are configured turn them on
 			lsp.enable({
 				"pyright",
 				"clangd",
@@ -150,6 +124,17 @@ return {
 				"vimls",
 				"sqlls",
 			})
+
+        -- disable builtin LSP formatting 
+        -- Conform plugin handles all LSP formatting
+      vim.api.nvim_create_autocmd("LspAttach", {
+        callback = function(args)
+          local client = vim.lsp.get_client_by_id(args.data.client_id)
+          if client then
+            client.server_capabilities.documentFormattingProvider = false
+            client.server_capabilities.documentRangeFormattingProvider = false
+          end
+        end,})
     end,
-  },
+    },
 }
