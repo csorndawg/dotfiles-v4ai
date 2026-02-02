@@ -11,29 +11,30 @@ return {
 
       require("mason-lspconfig").setup({
         ensure_installed = {
-          "bashls",	-- bash
-          "clangd",	-- c/c++
+          "bashls",	    -- bash
+          "clangd",	    -- c/c++
           "html",
           "jsonls",
-          "lua_ls",	-- lua
+          "lua_ls",	    -- lua
           "powershell_es",	-- powershell
           "pyright",	-- python types only
-          "ruff",	-- everything else besides python types
-          "sqlls",	-- SQL
-          "taplo",	-- TOML
+          "ruff",   	-- everything else besides python types
+          "sqlls",    -- SQL
+          "taplo",    -- TOML
           "yamlls",
-          "vimls",	-- vimscript
+          "vimls",    -- vimscript
+          "lemminx",  -- xml
           --"awk_ls",
           --"copilot",
-          --"diagnosticls",		-- diagnostics integrates w/ linters
-          --"docker_compose_language_service",
-          --"docker_language_service",
-          --"dockerls",
-          --"jinja_lsp",		-- 
-          --"jqls",		-- JQ
-          --"just",		-- just
-          --"lsp_ai",		-- 
-          --"marksman",		-- markdown
+          "diagnosticls",   -- diagnostics integrates w/ linters
+            --"docker_compose_language_service",
+            --"docker_language_service",
+            --"dockerls",
+            --"jinja_lsp",		-- 
+            --"jqls",		-- JQ
+            --"just",		-- just
+            --"lsp_ai",		-- 
+          "marksman",   -- markdown
           --"postgres_lsp",		-- 
         },
       })
@@ -89,26 +90,32 @@ return {
 
       -- SQL (Postgres + MySQL)
 			lsp.config.sqlls = {}
-			
-      --      lspconfig.sqlls.setup({
-      --        settings = {
-      --          sqlLanguageServer = {
-      --            connections = {
-      --              {
-      --                driver = "postgresql",
-      --                --dataSourceName = "postgresql://user:password@localhost:5432/dbname",
-      --                -- dataSourceName = "postgresql://zac:zac@localhost:5432/nonprod",
-      --                dataSourceName = "postgresql://dba:zac@localhost:5432/prod",
-      --              },
-      --              -- {
-      --              --   driver = "mysql",
-      --              --   -- dataSourceName = "mysql://user:password@localhost:3306/dbname",
-      --              --   dataSourceName = "mysql://dba:zac@localhost:3306/dbname",
-      --              -- },
-      --            },
-      --          },
-      --        },
-      --      })
+--       lspconfig.sqlls.setup({
+--         settings = {
+--           sqlLanguageServer = {
+--             connections = {
+--               {
+--                 driver = "postgresql",
+--                 --dataSourceName = "postgresql://user:password@localhost:5432/dbname",
+-- --                -- dataSourceName = "postgresql://zac:zac@localhost:5432/nonprod",
+--                 dataSourceName = "postgresql://dba:zac@localhost:5432/prod",
+--               },
+-- --              -- {
+-- --              --   driver = "mysql",
+-- --              --   -- dataSourceName = "mysql://user:password@localhost:3306/dbname",
+-- --              --   dataSourceName = "mysql://dba:zac@localhost:3306/dbname",
+-- --              -- },
+--             },
+--           },
+--         },
+--       })
+	
+
+      -- Markdown LSP
+      vim.lsp.config.marksman = {}
+
+      -- XML LSP
+      vim.lsp.config.lemminx = {}
 
       --
       -- once LSP servers are configured turn them on
@@ -123,6 +130,8 @@ return {
 				"lua_ls",
 				"vimls",
 				"sqlls",
+				"marksman",
+				"lemminx",
 			})
 
         -- disable builtin LSP formatting 
@@ -137,4 +146,4 @@ return {
         end,})
     end,
     },
-}
+ }
