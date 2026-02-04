@@ -54,3 +54,16 @@ function grbi() {
     echo "Usage: grb 3"
   fi
 }
+
+# WSL file explorer helper
+function wfx() {
+    if [[ -z "$1" ]]; then
+        echo "No filepath provided. Using CWD as path argument."
+        explorer.exe
+    else
+        prev_cwd="$(pwd)"
+        cd "$1"
+        explorer.exe .
+        cd -
+    fi
+}
