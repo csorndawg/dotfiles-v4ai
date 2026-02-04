@@ -1,0 +1,75 @@
+return {
+	-- { "nvim-treesitter/nvim-treesitter", }
+
+	{
+		"nvim-treesitter/nvim-treesitter",
+    lazy = false,
+		build = ":TSUpdate",
+		dependencies = {
+			{
+				"LiadOz/nvim-dap-repl-highlights",
+				config = function()
+					require("nvim-dap-repl-highlights").setup()
+				end,
+			},
+		},
+		config = function()
+      opts = {
+				ensure_installed = {
+					"awk",
+					"bash",
+					"c",
+					"cmake",
+					"comment",
+					"cpp",
+					"csv",
+					-- "dap_repl", -- note: plugin must be installed/setup or this will break
+					"diff",
+					"dockerfile",
+					"editorconfig",
+					"git_config",
+					"git_rebase",
+					"gitcommit",
+					"gitignore",
+					"html",
+					"http",
+					"ini",
+					"jinja",
+					"jinja_inline",
+					"jq",
+					"json",
+					"just",
+					"lua",
+					"luadoc",
+					"make",
+					"markdown",
+					"markdown_inline",
+					"python",
+					"query",
+					"regex",
+					"sql",
+					"ssh_config",
+					"terraform",
+					"tmux",
+					"todotxt",
+					"toml",
+					"tsv",
+					"vim",
+					"vimdoc",
+					"xml",
+					"yaml",
+          "go",
+          "powershell",
+          "promql",
+          "readline",
+          "requirements",
+          "zsh",
+				},
+				-- sync_install = false,
+				-- sync_install = false,
+				highlight = { enable = true },
+				indent = { enable = true },
+      }
+		end,
+	},
+}
