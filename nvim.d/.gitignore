@@ -12,3 +12,6 @@ lazyignore/
 # anything and everything
 nvim-kickstart/
 
+# temporarily ignore while building out plugins
+lazy-lock.json
+
