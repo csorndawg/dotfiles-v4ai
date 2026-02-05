@@ -46,9 +46,13 @@ return {
 				end,
 			})
 
-      -- Show diagnostics in floating window when cursor holds on a line
+      -- Show diagnostics in floating window when cursor holds on a line AND diagnostics are not "TOGGLED OFF"
+      local diag_float_grp = vim.api.nvim_create_augroup("DiagnosticFloat", { clear = true })
       vim.api.nvim_create_autocmd("CursorHold", {
+        group  = diag_float_grp,
           callback = function()
+            -- supress float windows if diagnostics toggled off
+            if vim.diagnostic.is_enabled() then
               vim.diagnostic.open_float(nil, { 
                   focusable = false,
                   close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
@@ -56,6 +60,7 @@ return {
                   source = "always",
                   prefix = " ",
               })
+            end
           end
       })
 
@@ -116,6 +121,22 @@ return {
             })
         end,
         { desc = "Show line diagnostics" }
+    )
+
+    -- toggle linting diagnostics for CURRENT buffer only
+    -- Toggle diagnostics visibility for current buffer only
+    vim.keymap.set(
+      "n",
+      "<leader>lt",
+      function()
+          local bufnr = vim.api.nvim_get_current_buf()
+          local is_enabled = vim.diagnostic.is_enabled({ bufnr = bufnr })
+          vim.diagnostic.enable(not is_enabled, { bufnr = bufnr })
+          
+          local status = not is_enabled and "enabled" or "disabled"
+          vim.notify("Diagnostics " .. status .. " for this buffer", vim.log.levels.INFO)
+      end,
+      { noremap = true, silent = true, desc = "Toggle diagnostics (buffer)" }
     )
 
       -- @NOTE: DONT DELETE -- using this as reference for tweaking lazy lua plugins structure
