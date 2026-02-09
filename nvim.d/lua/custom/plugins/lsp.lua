@@ -4,6 +4,8 @@ return {
     dependencies = {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
+      "onsails/lspkind.nvim",
+      "hrsh7th/cmp-nvim-lsp",  -- Add this dependency
     },
     config = function()
       -- Mason setup
@@ -11,131 +13,126 @@ return {
 
       require("mason-lspconfig").setup({
         ensure_installed = {
-          "bashls",	    -- bash
-          "clangd",	    -- c/c++
+          "bashls",
+          "clangd",
           "html",
           "jsonls",
-          "lua_ls",	    -- lua
-          "powershell_es",	-- powershell
-          "pyright",	-- python types only
-          "ruff",   	-- everything else besides python types
-          "sqlls",    -- SQL
-          "taplo",    -- TOML
+          "lua_ls",
+          "powershell_es",
+          "pyright",
+          "ruff",
+          "sqlls",
+          "taplo",
           "yamlls",
-          "vimls",    -- vimscript
-          "lemminx",  -- xml
-          --"awk_ls",
-          --"copilot",
-          "diagnosticls",   -- diagnostics integrates w/ linters
-            --"docker_compose_language_service",
-            --"docker_language_service",
-            --"dockerls",
-            --"jinja_lsp",		-- 
-            --"jqls",		-- JQ
-            --"just",		-- just
-            --"lsp_ai",		-- 
-          "marksman",   -- markdown
-          --"postgres_lsp",		-- 
+          "vimls",
+          "lemminx",
+          "diagnosticls",
+          "marksman",
         },
       })
+
+      -- Get capabilities from nvim-cmp
+      local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
       -- LSP servers configuration 
       local lsp = vim.lsp
 
       -- Python LSP 
-      lsp.config.pyright = {}
+      lsp.config.pyright = {
+        capabilities = capabilities,
+      }
 
       -- C/C++ LSP
-      lsp.config.clangd = {}
+      lsp.config.clangd = {
+        capabilities = capabilities,
+      }
 
       -- Bash LSP
-      lsp.config.bashls = {}
+      lsp.config.bashls = {
+        capabilities = capabilities,
+      }
 
       -- POWERSHELL
       lsp.config.powershell_es = {
         bundle_path = vim.fn.stdpath("data") .. "/mason/packages/powershell-editor-services",
+        capabilities = capabilities,
       }
 
       -- YAML
       lsp.config.yamlls = {
-				settings = {
-					yaml = {
-						keyOrdering = false,
-					},
-				},
-			}
+        capabilities = capabilities,
+        settings = {
+          yaml = {
+            keyOrdering = false,
+          },
+        },
+      }
+
       -- JSON
-      lsp.config.jsonls = {}
+      lsp.config.jsonls = {
+        capabilities = capabilities,
+      }
 
       -- TOML
-      lsp.config.taplo = {}
+      lsp.config.taplo = {
+        capabilities = capabilities,
+      }
 
       -- LUA (Neovim)
-			lsp.config.lua_ls = {
-				settings = {
-					Lua = {
-						diagnostics = {
-							globals = { "vim" },
-						},
-						workspace = {
-							library = vim.api.nvim_get_runtime_file("",true),
-							checkThirdParty = false,
-						},
-						telemetry = { enbaled = false },
-					},
-				},
-			}
+      lsp.config.lua_ls = {
+        capabilities = capabilities,
+        settings = {
+          Lua = {
+            diagnostics = {
+              globals = { "vim" },
+            },
+            workspace = {
+              library = vim.api.nvim_get_runtime_file("",true),
+              checkThirdParty = false,
+            },
+            telemetry = { enbaled = false },
+          },
+        },
+      }
+
       -- VIMSCRIPT
-			lsp.config.vimls = {}
+      lsp.config.vimls = {
+        capabilities = capabilities,
+      }
 
       -- SQL (Postgres + MySQL)
-			lsp.config.sqlls = {}
---       lspconfig.sqlls.setup({
---         settings = {
---           sqlLanguageServer = {
---             connections = {
---               {
---                 driver = "postgresql",
---                 --dataSourceName = "postgresql://user:password@localhost:5432/dbname",
--- --                -- dataSourceName = "postgresql://zac:zac@localhost:5432/nonprod",
---                 dataSourceName = "postgresql://dba:zac@localhost:5432/prod",
---               },
--- --              -- {
--- --              --   driver = "mysql",
--- --              --   -- dataSourceName = "mysql://user:password@localhost:3306/dbname",
--- --              --   dataSourceName = "mysql://dba:zac@localhost:3306/dbname",
--- --              -- },
---             },
---           },
---         },
---       })
-	
+      lsp.config.sqlls = {
+        capabilities = capabilities,
+      }
 
       -- Markdown LSP
-      vim.lsp.config.marksman = {}
+      lsp.config.marksman = {
+        capabilities = capabilities,
+      }
 
       -- XML LSP
-      vim.lsp.config.lemminx = {}
+      lsp.config.lemminx = {
+        capabilities = capabilities,
+      }
 
-      --
-      -- once LSP servers are configured turn them on
-			lsp.enable({
-				"pyright",
-				"clangd",
-				"bashls",
-				"powershell_es",
-				"yamlls",
-				"jsonls",
-				"taplo",
-				"lua_ls",
-				"vimls",
-				"sqlls",
-				"marksman",
-				"lemminx",
-			})
+      -- Enable all LSP servers
+      lsp.enable({
+        "pyright",
+        "clangd",
+        "bashls",
+        "powershell_es",
+        "yamlls",
+        "jsonls",
+        "taplo",
+        "lua_ls",
+        "vimls",
+        "sqlls",
+        "marksman",
+        "lemminx",
+      })
 
-        -- disable builtin LSP formatting 
-        -- Conform plugin handles all LSP formatting
+      -- Disable builtin LSP formatting 
+      -- Conform plugin handles all LSP formatting
       vim.api.nvim_create_autocmd("LspAttach", {
         callback = function(args)
           local client = vim.lsp.get_client_by_id(args.data.client_id)
@@ -143,7 +140,8 @@ return {
             client.server_capabilities.documentFormattingProvider = false
             client.server_capabilities.documentRangeFormattingProvider = false
           end
-        end,})
+        end,
+      })
     end,
-    },
- }
+  },
+}

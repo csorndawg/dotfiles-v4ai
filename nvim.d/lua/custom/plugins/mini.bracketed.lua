@@ -12,9 +12,9 @@ return {
         -- Disable creation of mappings for `indent` target (for example,
         -- in favor of ones from |mini.indentscope|)
         -- indent = { suffix = '' },
+
         -- Disable mappings for `window` target in favor of custom ones
         window = { suffix = '' },
-
         -- Disable oldfile, undo, file, and treesitter targets
         oldfile = { suffix = '' },
         undo = { suffix = '' },
