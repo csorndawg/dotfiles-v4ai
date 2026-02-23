@@ -2,7 +2,7 @@
 
 
 -- open Lazy UI
-vim.keymap.set("n", "<leader>L", ":Lazy<CR>", { desc = "Open Lazy" })
+vim.keymap.set("n", "<leader>ll", ":Lazy<CR>", { desc = "Open Lazy" })
 
 -- mini.files open
 vim.keymap.set("n", "<leader>-", function()

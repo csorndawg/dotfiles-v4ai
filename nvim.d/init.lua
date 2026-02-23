@@ -29,6 +29,8 @@ vim.g.have_nerd_font = true
 
 -- ==========================================================================================
 -- MY CUSTOM CONFIG
+--   -- lua/custom:	all core nvim related config files (e.g. settings)
+--   -- lua/plugins:  	all plugin related config files	(e.g. setup file for UFO plugin)
 -- ==========================================================================================
 
 -- @TODO: move to a settings/opts file
@@ -46,14 +48,13 @@ require 'custom.keymaps'
 -- import custom autocmds
 require 'custom.autocmds'
 
--- source all "extras" plugin custom configurations files
--- folder is for post-setup configurations that are too
--- bloated to be defined within the custom/plugin/ "setup" file
-local extras_dir = vim.fn.stdpath 'config' .. '/lua/custom/extras'
+-- source all EXTRA/EXTENDED PLUGIN custom config files
+-- these files are ALWAYS sourced AFTER their respective plugin install/setup file
+local extras_dir = vim.fn.stdpath 'config' .. '/lua/plugins/extras'
 for _, file in ipairs(vim.fn.readdir(extras_dir)) do
-  -- ignore any non ".lua" files
+  -- non ".lua" files will be ignored
   if file:sub(-4) == '.lua' then
-    local extra_module = 'custom.extras.' .. file:sub(1, -5)
+    local extra_module = 'plugins.extras.' .. file:sub(1, -5)
     -- print('Extra module:  ',extra_module)
 
     local ok, mod = pcall(require, extra_module)
@@ -66,7 +67,7 @@ for _, file in ipairs(vim.fn.readdir(extras_dir)) do
 end
 
 -- import custom plugin keymaps
-require 'custom.lazy-keymaps'
+require 'utils.lazy-keymaps'
 
 -- import custom <x>
 -- require 'custom.x'
