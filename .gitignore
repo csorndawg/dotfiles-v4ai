@@ -83,6 +83,18 @@ IGNORED/
 .patches/
 **/.patches/
 
+.deprecated/
+deprecated/
+Deprecated/
+DEPRECATED/
+.Deprecated/
+.DEPRECATED/
+**/deprecated/
+**/.deprecated/
+**/Deprecated/
+**/.Deprecated/
+**/.DEPRECATED/
+**/DEPRECATED/
 
 ###########################
 # Misc.
