@@ -66,8 +66,10 @@ for _, file in ipairs(vim.fn.readdir(extras_dir)) do
   end
 end
 
+-- @TODO: Refactor into 'lua/keymaps'
 -- import custom plugin keymaps
 require 'utils.lazy-keymaps'
+require 'keymaps'
 
 -- import custom <x>
 -- require 'custom.x'
