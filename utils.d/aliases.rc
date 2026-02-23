@@ -1,7 +1,6 @@
 # runtime config file with shell-agnostic aliases 
 
 # adhoc aliases
-
 alias ce="cheat -e"
 alias cl="cheat -l"
 alias egv="egrep -v"
@@ -113,6 +112,4 @@ alias ze="zoxide edit"
 
 # alias bloated newdots nvim config until dotfiles-v4 nvim is operational
 alias nvim-newdots='NVIM_APPNAME="nvim-newdots" nvim'
-
-alias fx="explorer.exe"
 

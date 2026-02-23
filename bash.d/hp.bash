@@ -1,24 +1,25 @@
-### DOTFILES/BASHRC CONFIGS FOR HP LOCAL MACHINE ONLY ###
+###########################################
+# LOCAL HP/WSL BASHRC CONFIGURATIONS 
+###########################################
 
 
-# fd fdfind binary symlink
-#if ! which fd; then
-if ! which fd; then
-  echo "No 'fd' command exists. A symlink to the 'fdfind' binary will be generated."
-  ln -s "$(command -v fdfind)" "$HOME/.local/bin/fd"
-fi
+## HP/WSL ALIASES ##
+alias fx="explorer.exe"
 
 
-# WSL/HP Env. Variables
+## HP/WSL EXPORTS ##
+
 export HP_USER_HOME="/mnt/c/Users/zaccs"
 export WSL_DESKTOP_HOME="/mnt/c/Users/zaccs/Desktop"
 export DESKTOP_HOME="/mnt/c/Users/zaccs/Desktop"
 export HP_LINKFARM_DIR="/mnt/c/Users/zaccs/Desktop/_LinkFarm"
 export DESKTOP_LINKFARM_DIR="/mnt/c/Users/zaccs/Desktop/_LinkFarm"
-
-# WSL/HP Alacritty config file path
+# Alacritty config file path
 export WSL_TERMINAL_CONFIG="/mnt/c/Users/zaccs/AppData/Roaming/alacritty/alacritty.toml"
 export WSL_ALACRITTY_CONFIG="/mnt/c/Users/zaccs/AppData/Roaming/alacritty/alacritty.toml"
+
+
+## HP/WSL FUNCTIONS ##
 
 # WSL file explorer helper
 function wfx() {
@@ -32,3 +33,13 @@ function wfx() {
         cd -
     fi
 }
+
+
+## HP/WSL OTHER ##
+
+# fd/fdfind binary symlink
+if ! which fd; then
+  echo "No 'fd' command exists. A symlink to the 'fdfind' binary will be generated."
+  ln -s "$(command -v fdfind)" "$HOME/.local/bin/fd"
+fi
+

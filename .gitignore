@@ -68,7 +68,10 @@
 .temp/
 **/.temp/
 .ignored/
+ignored/
+IGNORED/
 **/.ignored/
+**/ignored/
 **/.IGNORED/
 .IGNORED/
 .ignoreme/
@@ -80,6 +83,18 @@
 .patches/
 **/.patches/
 
+.deprecated/
+deprecated/
+Deprecated/
+DEPRECATED/
+.Deprecated/
+.DEPRECATED/
+**/deprecated/
+**/.deprecated/
+**/Deprecated/
+**/.Deprecated/
+**/.DEPRECATED/
+**/DEPRECATED/
 
 ###########################
 # Misc.

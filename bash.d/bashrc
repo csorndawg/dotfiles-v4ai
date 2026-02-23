@@ -195,5 +195,4 @@ function cache_ssh_creds () {
 cache_ssh_creds 1> /dev/null
 # @TEMPFIX: move to "variables.rc" or "rust.rc" after figuring out rust/cargo issue
 export PATH="$HOME/.cargo/bin:$PATH"
-echo -e "Successfully sourced:  \"$BASHRC\"\n"
-
+#echo -e "Successfully sourced:  \"$BASHRC\"\n"

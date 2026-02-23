@@ -55,7 +55,7 @@ require("lazy").setup({
 
     -- lua paths are defined RELATIVE to my "nvim.d/init.lua"
     -- imports all plugin specs definied in "lua/custom/plugins/" folder 
-    { import = "custom.plugins" },
+    { import = "plugins" },
   },
 })
 
