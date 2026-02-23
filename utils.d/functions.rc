@@ -36,10 +36,16 @@ function venvActivate() {
 	source "$activateScriptPath" 1> /dev/null
 }
 
-# OSC 52 clipboard workaround
-clip() {
-    printf "\033]52;c;$(base64 -w0)\a"
-}
+
+# Remote machine OSC 52 clipboard workaround
+if ! hostname | grep -q "zac.hp"; then
+  echo "Remote machine"
+  clip() {
+      printf "\033]52;c;$(base64 -w0)\a"
+  }
+else
+  echo "Local machine"
+fi
 
 # git rebase helper
 # Interactive rebase helper
@@ -55,15 +61,4 @@ function grbi() {
   fi
 }
 
-# WSL file explorer helper
-function wfx() {
-    if [[ -z "$1" ]]; then
-        echo "No filepath provided. Using CWD as path argument."
-        explorer.exe
-    else
-        prev_cwd="$(pwd)"
-        cd "$1"
-        explorer.exe .
-        cd -
-    fi
-}
+

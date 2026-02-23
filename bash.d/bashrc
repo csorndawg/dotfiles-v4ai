@@ -138,16 +138,10 @@ export PATH="$PATH:$HOME/.local/bin"
 eval "$(zoxide init bash)"
 #eval "$(zoxide init zsh)"
 
-# fdfind symlink to binary
-if [ ! -e ~/.local/bin/fd ]; then
-      ln -s "$(command -v fdfind)" "$HOME/.local/bin/fd"
-fi
-
 # golang setup
 export GOPATH="/usr/lib/go"
 export GOBIN="$GOPATH/bin"
 export PATH="$PATH:$GOBIN"
-
 
 ### SSH ###
 
@@ -166,13 +160,40 @@ source "$HOME/dotfiles/utils.d/make_utilsd_symlinks.sh" 1>/dev/null
 # enable nvim python venv by default
 source "$HOME/dotfiles/config.d/venvs/venv-nvimd/bin/activate"
 
-# source shell (bash) completion scripts
-BASHD_COMP_SUBMODULE="$HOME/dotfiles/bash.d/completions.bash"
-source $BASHD_COMP_SUBMODULE
-#source '/home/zac/.bash_completions/sqlfmt.sh'
 
+# DYNAMIC BASHD SUBMODULE SOURCING
+function src_bashd_submods () {
+  BASHD_DIR="$HOME/dotfiles/bash.d"
+  IGNORE_RGXS="hp|ignore|.(ignore|igr)$"
+  if [[ -d "$BASHD_DIR" ]]; then
+    echo "Local 'dotfiles/bash.d' folder exists. Sourcing its bashrc submodules."
 
+    for f in $(find "$BASHD_DIR" -type f -name "*.bash"); do
+      if egrep -i "$IGNORE_RGXS" "$f"; then
+        # "unignore" and source local HP cpu custom bashrc file
+        hostname | grep -q "zac.hp" && echo "Sourcing File: $f" && source "$f"
+        continue
+      else
+        echo "Sourcing File: $f"
+        source "$f"
+      fi
+      echo -e "Done sourcing BASHD submodules\n"
+    done
+  fi
+}
+src_bashd_submods 1> /dev/null
+
+function cache_ssh_creds () {
+  SSH_PWD_CACHER="$HOME/.ssh/sshCachePass.sh" 
+  if [[ -f "$SSH_PWD_CACHER" ]]; then
+     #echo "bash \"$SSH_PWD_CACHER\"" 
+    echo -e "\nSourcing: $SSH_PWD_CACHER"
+    source $SSH_PWD_CACHER
+    #bash $SSH_PWD_CACHER
+  fi
+}
+cache_ssh_creds 1> /dev/null
 # @TEMPFIX: move to "variables.rc" or "rust.rc" after figuring out rust/cargo issue
 export PATH="$HOME/.cargo/bin:$PATH"
-echo "Sourced bashrc configuration:  \"$HOME/.bashrc\""
-echo ""
+echo -e "Successfully sourced:  \"$BASHRC\"\n"
+
