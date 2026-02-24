@@ -77,3 +77,46 @@ vim.g.clipboard = {
     ['*'] = require('vim.ui.clipboard.osc52').paste('*'),
   },
 }
+
+-- disabling swap files
+-- enabling undodir
+opt.swapfile = false
+opt.undofile = true
+
+local undodir = vim.fn.expand('~/.local/state/undo')
+
+if vim.fn.isdirectory(undodir) == 0 then
+  vim.fn.mkdir(undodir,"p")
+end
+opt.undodir = undodir
+
+
+--
+-- newdots copypasta
+--
+
+vim.opt.hlsearch = false
+
+-- better CMD wildmenu/mode completion
+-- :set wildmode=list:longest,full
+vim.opt.wildmode = { "list:longest", "full" }
+
+-- do not show below file types in wildmenu
+vim.opt.wildignore = "*.o,*.obj,*.dll,*.exe,*.pyc,*.swp,*node_modules/**,*venv**,*.gig,*.IgnoreMe**,*.patch"
+
+-- function for toggling case sensitivity searching w/ ripgrep as vimgrep search engine
+local function set_rg_grepprg(case_sensitive)
+	local base_cmd = "rg --vimgrep --no-heading --color=never"
+	if case_sensitive == false then
+		vim.opt_local.grepprg = base_cmd .. " -i" -- Add -i for case-insensitive
+	else
+		vim.opt_local.grepprg = base_cmd -- Default is case-sensitive
+	end
+end
+
+-- case-insensitive:
+-- set_rg_grepprg(false)
+
+-- case-sensitive:
+set_rg_grepprg(true)
+

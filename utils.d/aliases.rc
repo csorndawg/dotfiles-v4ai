@@ -72,10 +72,10 @@ alias gfo="git fetch origin"
 alias grb="git rebase"
 
 # sort branches, with the most recent commits first 	(gbst == [g]it [b]ranch [s]orted by [t]ime descending)
-alias gbst="git branch -la --sort=-committerdate"
+alias gbst="git branch --sort=-committerdate"
 
 # sort branches, with the oldest commits first
-alias gbsT="git branch -la --sort=committerdate"
+alias gbsT="git branch --sort=committerdate"
 
 # ------------------------------------------------------------------------------------
 # Unsorted Aliases
