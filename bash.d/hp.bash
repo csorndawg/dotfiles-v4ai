@@ -43,3 +43,5 @@ if ! which fd; then
   ln -s "$(command -v fdfind)" "$HOME/.local/bin/fd"
 fi
 
+export HP_DWNLDS_DIR="/mnt/c/Users/zaccs/Favorites/Downloads"
+export WSL_DWNLDS_DIR="/mnt/c/Users/zaccs/Favorites/Downloads"

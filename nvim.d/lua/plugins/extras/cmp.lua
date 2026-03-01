@@ -27,9 +27,31 @@ cmp.setup({
     -- Abort completion
     ['<C-e>'] = cmp.mapping.abort(),
     
-    -- Confirm selection
+    -- accept current selection and remain in INSERT mode
     ['<CR>'] = cmp.mapping.confirm({ select = true }),
     
+
+    -- use "<Ctrl-,>" to accept current selection and switch to NORMAL mode
+      --['<Leader><CR>'] = cmp.mapping(function(fallback)
+      ['<C-,>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        -- accepts selection (defaults to the 1st item if no explicit selection made)
+        cmp.confirm({ select = true })  
+        
+        -- use schedule to ensure text is inserted before switching to Normal mode
+        vim.schedule(function()
+          vim.api.nvim_feedkeys(
+            vim.api.nvim_replace_termcodes('<Esc>', true, true, true), 
+            'n', 
+            true
+          )
+        end)
+      else
+        fallback() -- Just behaves like Leader + Enter if menu is closed
+      end
+    end, { "i", "s" }),
+
+
     -- Navigate completion menu
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then

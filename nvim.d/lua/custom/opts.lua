@@ -1,4 +1,5 @@
 -- Nvim Custom Options/Settings
+-- Nvim Custom Options/Settings
 --
 
 vim.opt.number = true		-- turn line numbers on
@@ -8,7 +9,7 @@ vim.opt.incsearch = true	-- turn on incremental search
 -- Lazyvim Options Copypasta
 local opt = vim.opt
 
-opt.clipboard = vim.env.SSH_CONNECTION and "" or "unnamedplus" -- Sync with system clipboard
+
 opt.completeopt = "menuone,noselect,noinsert,popup"	-- completion menu options
 opt.confirm = true -- Confirm to save changes before exiting modified buffer
 opt.cursorline = true -- Enable highlighting of the current line
@@ -64,19 +65,35 @@ opt.wrap = false -- Disable line wrap
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
 
+-- Sync clipboard between OS and Neovim.
+-- Sync clipboard between OS and Neovim.
 
--- SSH remote clipboard intergration (Gemini)
-vim.g.clipboard = {
-  name = 'OSC 52',
-  copy = {
-    ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
-    ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
-  },
-  paste = {
-    ['+'] = require('vim.ui.clipboard.osc52').paste('+'),
-    ['*'] = require('vim.ui.clipboard.osc52').paste('*'),
-  },
-}
+--  Schedule the setting after `UiEnter` because it can increase startup-time.
+--  Remove this option if you want your OS clipboard to remain independent.
+--  See `:help 'clipboard'`
+-- vim.schedule(function()
+--   vim.o.clipboard = 'unnamedplus'
+-- end)
+
+-- WSL clipboard error fix 
+-- Detect WSL
+local is_wsl = vim.fn.has("wsl") == 1
+if is_wsl then
+  vim.g.clipboard = {
+    name = "win32yank-wsl",
+    copy = {
+      ["+"] = "win32yank.exe -i --crlf",
+      ["*"] = "win32yank.exe -i --crlf",
+    },
+    paste = {
+      ["+"] = "win32yank.exe -o --lf",
+      ["*"] = "win32yank.exe -o --lf",
+    },
+    cache_enabled = 0,
+  }
+end
+--
+opt.clipboard = vim.env.SSH_CONNECTION and "" or "unnamedplus" -- Sync with system clipboard
 
 -- disabling swap files
 -- enabling undodir
@@ -118,5 +135,7 @@ end
 -- set_rg_grepprg(false)
 
 -- case-sensitive:
+-- case-sensitive:
+set_rg_grepprg(true)
 set_rg_grepprg(true)
 
