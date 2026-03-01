@@ -1,4 +1,5 @@
 -- Nvim Custom Options/Settings
+-- Nvim Custom Options/Settings
 --
 
 vim.opt.number = true		-- turn line numbers on
@@ -8,7 +9,7 @@ vim.opt.incsearch = true	-- turn on incremental search
 -- Lazyvim Options Copypasta
 local opt = vim.opt
 
-opt.clipboard = vim.env.SSH_CONNECTION and "" or "unnamedplus" -- Sync with system clipboard
+
 opt.completeopt = "menuone,noselect,noinsert,popup"	-- completion menu options
 opt.confirm = true -- Confirm to save changes before exiting modified buffer
 opt.cursorline = true -- Enable highlighting of the current line
@@ -70,9 +71,9 @@ vim.g.markdown_recommended_style = 0
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
-vim.schedule(function()
-  vim.o.clipboard = 'unnamedplus'
-end)
+-- vim.schedule(function()
+--   vim.o.clipboard = 'unnamedplus'
+-- end)
 
 -- WSL clipboard error fix 
 -- Detect WSL
@@ -92,6 +93,7 @@ if is_wsl then
   }
 end
 --
+opt.clipboard = vim.env.SSH_CONNECTION and "" or "unnamedplus" -- Sync with system clipboard
 
 -- disabling swap files
 -- enabling undodir
