@@ -1,0 +1,345 @@
+#!/usr/bin/env bash
+
+#####################################################################
+##  FZF Scripts and Functions
+#####################################################################
+
+
+##############################
+## PERSONAL 
+##############################
+
+
+## @VALIDATED
+function activate-venv() {
+    LOCAL_VENVS_DIR="$XDG_STATE_HOME/python/venvs"
+    echo venv: $LOCAL_VENVS_DIR
+    source "$(find $LOCAL_VENVS_DIR -type f -path '*activate' | fzf)"
+ }
+
+## @VALIDATED
+function activate-venv-cwd() {
+    echo venv: $LOCAL_VENVS_DIR
+    source "$(find  -type f -ipath '*env/bin/activate' | fzf)"
+ }
+
+
+# run FZF from home 
+_fzfhm() {
+    # check if type flag present
+    if [[ "$1" = "f" ]];
+    then
+      find $HOME -type f | fzf 
+    elif [[ "$1" = "d" ]];
+
+    then
+      find $HOME -type d | fzf 
+    else
+      find $HOME | fzf 
+    fi
+}
+
+
+
+#############################################################
+# 	FZF Wiki Scripts
+#	Source: https://github.com/junegunn/fzf/wiki/examples
+#############################################################
+
+
+# fdr - cd to selected parent directory
+_fdr() {
+  local declare dirs=()
+  get_parent_dirs() {
+    if [[ -d "${1}" ]]; then dirs+=("$1"); else return; fi
+    if [[ "${1}" == '/' ]]; then
+      for _dir in "${dirs[@]}"; do echo $_dir; done
+    else
+      get_parent_dirs $(dirname "$1")
+    fi
+  }
+  local DIR=$(get_parent_dirs $(realpath "${1:-$PWD}") | fzf-tmux --tac)
+  cd "$DIR"
+}
+
+# fe [FUZZY PATTERN] - Open the selected file with the default editor
+#   - Bypass fuzzy finder if there's only one match (--select-1)
+#   - Exit if there's no match (--exit-0)
+_fe() {
+  IFS=$'\n' files=($(fzf --tmux --query="$1" --multi --select-1 --exit-0))
+  [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
+}
+
+
+
+
+
+
+# Run command/application and choose paths/files with fzf.                      
+# Always return control of the terminal to user (e.g. when opening GUIs).       
+# The full command that was used will appear in your history just like any      
+# other (N.B. to achieve this I write the shell's active history to             
+
+# ~/.bash_history)                                                                
+#                                                                               
+# Usage:
+# f cd [OPTION]... (hit enter, choose path)
+# f cat [OPTION]... (hit enter, choose files)
+# f vim [OPTION]... (hit enter, choose files)
+# f vlc [OPTION]... (hit enter, choose files)
+
+# FIXME
+_f() {
+    # Store the program
+    program="$1"
+
+    # Remove first argument off the list
+    shift
+
+    # Store option flags with separating spaces, or just set as single space
+    options="$@"
+    if [ -z "${options}" ]; then
+        options=" "
+    else
+        options=" $options "
+    fi
+
+    # Store the arguments from fzf
+    arguments="$(fzf --multi)"
+
+    # If no arguments passed (e.g. if Esc pressed), return to terminal
+    if [ -z "${arguments}" ]; then
+        return 1
+    fi
+
+    # We want the command to show up in our bash history, so write the shell's
+    # active history to ~/.bash_history. Then we'll also add the command from
+    # fzf, then we'll load it all back into the shell's active history
+    history -w
+
+    # ADD A REPEATABLE COMMAND TO THE BASH HISTORY ############################
+    # Store the arguments in a temporary file for sanitising before being
+    # entered into bash history
+
+    : > /tmp/fzf_tmp
+    for file in "${arguments[@]}"; do
+        echo "$file" >> /tmp/fzf_tmp
+    done
+
+
+    # Put all input arguments on one line and sanitise the command by putting
+    # single quotes around each argument, also first put an extra single quote
+    # next to any pre-existing single quotes in the raw argument
+    sed -i "s/'/''/g; s/.*/'&'/g; s/\n//g" /tmp/fzf_tmp
+
+    # If the program is on the GUI list, add a '&' to the command history
+    if [[ "$program" =~ ^(nautilus|zathura|evince|vlc|eog|kolourpaint)$ ]]; then
+        sed -i '${s/$/ \&/}' /tmp/fzf_tmp
+    fi
+
+    # Grab the sanitised arguments
+    arguments="$(cat /tmp/fzf_tmp)"
+
+
+    # Add the command with the sanitised arguments to our .bash_history
+
+    echo $program$options$arguments >> ~/.bash_history
+
+
+    # Reload the ~/.bash_history into the shell's active history
+    history -r
+
+    # EXECUTE THE LAST COMMAND IN ~/.bash_history #############################
+    fc -s -1
+
+    # Clean up temporary variables
+    rm /tmp/fzf_tmp
+}
+
+
+
+##############################
+#   FZF Wiki - History
+##############################
+
+
+
+# fh - repeat history
+__runcmd (){ perl -e 'ioctl STDOUT, 0x5412, $_ for split //, <>' ; }
+
+
+_fh() {
+  ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed -re 's/^\s*[0-9]+\s*//' | __runcmd
+}
+
+
+# fhe - repeat history edit
+__writecmd (){ perl -e 'ioctl STDOUT, 0x5412, $_ for split //, do{ chomp($_ = <>); $_ }' ; }
+
+fhe() {
+  ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed -re 's/^\s*[0-9]+\s*//' | __writecmd
+}
+
+
+
+
+##############################
+#   FZF Wiki - Other
+##############################
+
+
+##############################
+#   FZF Wiki - Git
+##############################
+
+
+
+
+# fco_preview - checkout git branch/tag, with a preview showing the commits between the tag/branch and HEAD
+fco_preview() {
+
+  local tags branches target
+  branches=$(
+    git --no-pager branch --all \
+      --format="%(if)%(HEAD)%(then)%(else)%(if:equals=HEAD)%(refname:strip=3)%(then)%(else)%1B[0;34;1mbranch%09%1B[m%(refname:short)%(end)%(end)" \
+    | sed '/^$/d') || return
+  tags=$(
+    git --no-pager tag | awk '{print "\x1b[35;1mtag\x1b[m\t" $1}') || return
+  target=$(
+    (echo "$branches"; echo "$tags") |
+    fzf --no-hscroll --no-multi -n 2 \
+        --ansi --preview="git --no-pager log -150 --pretty=format:%s '..{2}'") || return
+  git checkout $(awk '{print $2}' <<<"$target" )
+}
+
+# fcoc - checkout git commit
+fcoc() {
+  local commits commit
+  commits=$(git log --pretty=oneline --abbrev-commit --reverse) &&
+
+  commit=$(echo "$commits" | fzf --tac +s +m -e) &&
+  git checkout $(echo "$commit" | sed "s/ .*//")
+}
+
+# fstash - easier way to deal with stashes
+# type fstash to get a list of your stashes
+# enter shows you the contents of the stash
+# ctrl-d shows a diff of the stash against your current HEAD
+# ctrl-b checks the stash out as a branch, for easier merging
+fstash() {
+  local out q k sha
+  while out=$(
+    git stash list --pretty="%C(yellow)%h %>(14)%Cgreen%cr %C(blue)%gs" |
+
+    fzf --header "<C-d> shows a diff of stash against HEAD. <C-b> checks stash out as a branch. <Enter> shows stash contents." \
+    --ansi --no-sort --query="$q" --print-query \
+        --expect=ctrl-d,ctrl-b);
+  do
+    mapfile -t out <<< "$out"
+    q="${out[0]}"
+    k="${out[1]}"
+    sha="${out[-1]}"
+
+    sha="${sha%% *}"
+    [[ -z "$sha" ]] && continue
+    if [[ "$k" == 'ctrl-d' ]]; then
+      git diff $sha
+    elif [[ "$k" == 'ctrl-b' ]]; then
+      git stash branch "stash-$sha" $sha
+
+      break;
+    else
+      git stash show -p $sha
+    fi
+  done
+}
+
+
+function git-fixup () {
+  git ll -n 20 | fzf | cut -f 1 | xargs git commit --no-verify --fixup
+}
+
+
+##############################
+#   FZF Wiki - TMUX
+##############################
+
+# tm - create new tmux session, or switch to existing one. Works from within tmux too. (@bag-man)
+# `tm` will allow you to select your tmux session via fzf.
+# `tm irc` will attach to the irc session (if it exists), else it will create it.
+
+_tm() {
+  [[ -n "$TMUX" ]] && change="switch-client" || change="attach-session"
+  if [ $1 ]; then
+    tmux $change -t "$1" 2>/dev/null || (tmux new-session -d -s $1 && tmux $change -t "$1"); return
+  fi
+  session=$(tmux list-sessions -F "#{session_name}" 2>/dev/null | fzf --exit-0) &&  tmux $change -t "$session" || echo "No sessions found."
+}
+
+
+
+
+##############################
+#   QUICKADDS
+##############################
+
+
+
+# use /home/<user> as starting point for fzf
+_fzcd_hm() {
+  local dir
+  dir=$(find ${1:-.} -path '*/\.*' -prune \
+
+                  -o -type d -print 2> /dev/null | fzf +m) &&
+  cd "$dir"
+}
+
+# use current dir as starting point for fzf, include subdirs
+_fzcd_cwd() {
+  local dir
+  dir=$(find ${1:-.} -path '*/\.*' -prune \
+                  -o -type d -print 2> /dev/null | fzf +m) &&
+  cd "$dir"
+}
+
+
+# current dir max depth 1 (no subdirs)
+_fzcd_cwd1() {
+  DIR=`find * -maxdepth 0 -type d -print 2> /dev/null | fzf-tmux` 
+    \ && cd "$DIR"
+}
+
+
+
+## @TODO: make separate function to include hidden and no-ignore-vcs
+_ff (){
+# Interactive search.
+# Usage: `ff` or `ff <folder>`.
+#
+[[ -n $1 ]] && cd $1 # go to provided folder or noop
+#RG_DEFAULT_COMMAND="rg -i -l"
+RG_DEFAULT_COMMAND="rg -i -l --hidden --no-ignore-vcs"
+
+
+selected=$(
+FZF_DEFAULT_COMMAND="rg --files" fzf \
+  -m \
+  -e \
+  --ansi \
+
+  --disabled \
+  --reverse \
+  --bind "ctrl-a:select-all" \
+  --bind "f12:execute-silent:(subl -b {})" \
+  --bind "change:reload:$RG_DEFAULT_COMMAND {q} || true" \
+  --preview "rg -i --pretty --context 2 {q} {}" | cut -d":" -f1,2
+)
+
+[[ -n $selected ]] && subl $selected # open multiple files in editor
+}
+
+# fh - repeat history and add selection back on to history command stack
+_fh() {
+
+      print -z $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed -E 's/ *[0-9]*\*? *//' | sed -E 's/\\/\\\\/g')
+}

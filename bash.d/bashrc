@@ -193,6 +193,19 @@ function cache_ssh_creds () {
   fi
 }
 cache_ssh_creds 1> /dev/null
+
+##########################################
+#   EXTRASSSS 
+##########################################
+
+CONFIGD_DIRPATH="$HOME/dotfiles/config.d"
+
+# FZF config
+source "$CONFIGD_DIRPATH/fzf/fzf.main"
+
+
 # @TEMPFIX: move to "variables.rc" or "rust.rc" after figuring out rust/cargo issue
 export PATH="$HOME/.cargo/bin:$PATH"
 #echo -e "Successfully sourced:  \"$BASHRC\"\n"
+
+

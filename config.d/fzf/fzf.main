@@ -1,0 +1,33 @@
+
+# Sourcing file for FZF configuration files
+
+# configure FZF shell integration for current shell 
+if [ -n "$ZSH_VERSION" ]; then
+    # Zsh-specific fzf initialization
+    source <(fzf --zsh)
+elif [ -n "$BASH_VERSION" ]; then
+    # Bash-specific fzf initialization
+    eval "$(fzf --bash)"
+fi
+
+
+FZF_CONFIGD_DIRPATH="$HOME/dotfiles/config.d/fzf"
+
+# FZF modules
+#   # fzf.comp
+#   # fzf.config
+#   # fzf.ignored
+#   # fzf.opts
+#   # fzf.utils: custom FZF functions
+#   # fzf_dependencies.sh
+#   # fzf_fuzzy.comp
+
+# @NOTE: fzf.comp MUST be sourced first  
+FILES_TO_SOURCE=(fzf.comp fzf.config fzf_fuzzy.comp fzf.utils)
+
+echo -e "\nStarting sourcing for FZF files"
+source "$FZF_CONFIGD_DIRPATH/fzf.comp"
+source "$FZF_CONFIGD_DIRPATH/fzf.config"
+source "$FZF_CONFIGD_DIRPATH/fzf_fuzzy.comp"
+source "$FZF_CONFIGD_DIRPATH/fzf.utils"
+echo "Done sourcing FZF files"

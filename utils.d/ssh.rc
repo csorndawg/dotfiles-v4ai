@@ -10,7 +10,7 @@ export DISPLAY=:0
 eval "$(ssh-agent -s)" 1>/dev/null
 
 alias SSH="$(which ssh)"
-alias ssh="ssh -Y"
+alias ssh="ssh -X"
 
 
 # XCLIP Helpers
