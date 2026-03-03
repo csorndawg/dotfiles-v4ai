@@ -69,3 +69,7 @@ vim.keymap.set({ "n", "v" }, ":", ";", { desc = "Repeat last f, t, F, or T" })
 
 -- buffer keymaps
 -- <TBD>
+
+-- <Left>/<Right> arrow keys cycle through search pattern matches
+vim.keymap.set("n", "<Right>", "nzzzv", { noremap = true, silent = true })
+vim.keymap.set("n", "<Left>",  "Nzzzv", { noremap = true, silent = true })

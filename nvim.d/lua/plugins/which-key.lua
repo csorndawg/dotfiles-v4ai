@@ -29,8 +29,8 @@ return {
         end,
         desc = "Local Buffer Keymaps",
       },
-      {"n", "<leader>wK", "<cmd>WhichKey <CR>", desc = "view all whichkey keymaps" },
-      {"n", "<leader>?w", "<cmd>WhichKey <CR>", desc = "View all whichkey keymaps" },
+      {"<leader>w?", "<cmd>WhichKey <CR>", desc = "view all whichkey keymaps" },
+      {"<leader>??", "<cmd>WhichKey <CR>", desc = "View all whichkey keymaps" },
     },
   }
 }
