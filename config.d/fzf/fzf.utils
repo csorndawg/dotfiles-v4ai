@@ -12,10 +12,16 @@
 
 ## @VALIDATED
 function activate-venv() {
-    LOCAL_VENVS_DIR="$XDG_STATE_HOME/python/venvs"
-    echo venv: $LOCAL_VENVS_DIR
-    source "$(find $LOCAL_VENVS_DIR -type f -path '*activate' | fzf)"
- }
+    LOCAL_VENVS_DIR="$XDG_CONFIG_HOME/venvs"
+    CONFIGD_VENVS_DIR="$HOME/dotfiles/config.d/venvs"
+    echo -e "VENV sources:\n$LOCAL_VENVS_DIR\n$CONFIGD_VENVS_DIR"
+
+    # send VENV sources from FIND commands to FZF
+    source "$(
+        { find "$LOCAL_VENVS_DIR" -type f -path '*activate'; find "$CONFIGD_VENVS_DIR" -type f -path '*activate'; } | fzf -1
+    )"
+}
+
 
 ## @VALIDATED
 function activate-venv-cwd() {
