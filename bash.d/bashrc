@@ -139,9 +139,14 @@ eval "$(zoxide init bash)"
 #eval "$(zoxide init zsh)"
 
 # golang setup
-export GOPATH="/usr/lib/go"
-export GOBIN="$GOPATH/bin"
-export PATH="$PATH:$GOBIN"
+#export GOPATH="/usr/lib/go"
+#export GOBIN="$GOPATH/bin"
+#export PATH="$PATH:$GOBIN"
+
+# GO 1.26 postinstall fix
+export GOPATH="$HOME/go"
+#export PATH="$PATH:$GOROOT/bin:$GOPATH/bin"
+export PATH="$PATH:$GOPATH/bin"
 
 ### SSH ###
 
@@ -194,14 +199,16 @@ function cache_ssh_creds () {
 }
 cache_ssh_creds 1> /dev/null
 
+# @TODO: Refactor this + all the other bashrc submodule sourcing code into their
+#        own files and source just files here for a cleaner install (like vimrc)
+source $HOME/dotfiles/bash.d/aliases.bash
+
 ##########################################
 #   EXTRASSSS 
 ##########################################
 
-CONFIGD_DIRPATH="$HOME/dotfiles/config.d"
+source "$HOME/dotfiles/bash.d/extras.bash"
 
-# FZF config
-source "$CONFIGD_DIRPATH/fzf/fzf.main"
 
 
 # @TEMPFIX: move to "variables.rc" or "rust.rc" after figuring out rust/cargo issue

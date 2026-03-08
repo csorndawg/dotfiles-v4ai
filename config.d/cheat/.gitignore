@@ -1,3 +1,6 @@
 cheatsheets/community/
 cheatsheets/drafts/*
 !cheatsheets/drafts/*-vcx
+
+# this is generated dynamically w/ conf.yml.tmpl template
+conf.yml
