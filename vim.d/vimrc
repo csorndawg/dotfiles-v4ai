@@ -1,0 +1,16 @@
+"
+" Main configuration file for dotfiles4 vimrc 
+"
+" Use this as a fallback for when NVIM isnt available 
+" Try to keep it as lean as possible, nvim should be used for feature rich experience
+
+
+" vimrc submodules
+" 	opts.vim - vimrc settings
+" 	keymaps.vim - vimrc settings
+" 	plug.vim - plugin installer
+" 	plugged.vim - plugin configuration
+" 	experimental.vim - experimental/exploratory configuration that can be loaded in adhoc
+
+
+" ## START CODE 
