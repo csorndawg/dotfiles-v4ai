@@ -106,6 +106,13 @@ alias zq="zoxide query"
 alias zr="zoxide remove"
 alias ze="zoxide edit"
 
+
+# @EXPT: from FC cmd help page
+# Usage:
+#	`r cc`	# run last command beginning with 'cc'
+#	`r`	# rerun last command
+r='fc -s'
+
 # ------------------------------------------------------------------------------------
 # Final Aliases (aliases that are intentionally sourced last)
 # ------------------------------------------------------------------------------------
