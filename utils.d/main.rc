@@ -1,0 +1,16 @@
+# RC submodule sourcing file (which is sourced by bashrc)
+
+IGNR_RGX=""
+
+# dependencies (e.g. package dependency, folder existing, etc.) resolved here
+# <code>
+
+
+# RC modules w/o dependencies sourced here
+#
+
+# source terminal/prompt related configurations
+source "$HOME/dotfiles/utils.d/terminal.rc"
+
+
+# post-sourcing dependencies + override/patch modules sourced here

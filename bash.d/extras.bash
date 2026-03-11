@@ -14,7 +14,9 @@
 
 DOTFILES_DIR="$HOME/dotfiles"
 CONFIGD_DIR="$DOTFILES_DIR/config.d"
-#BASHD_DIR="$DOTFILES_DIR/bash.d"
+BASHD_DIR="$DOTFILES_DIR/bash.d"
+NVIMD_DIR="$DOTFILES_DIR/nvim.d"
+VIMD_DIR="$DOTFILES_DIR/vim.d"
 #TMUX_DIR="$DOTFILES_DIR/tmux.d"
 
 
@@ -23,14 +25,18 @@ CONFIGD_DIR="$DOTFILES_DIR/config.d"
 ################################
 
 
+##
 ## FZF 
+##
 
 # FZF config
 source "$CONFIGD_DIR/fzf/fzf.main" 1> /dev/null
 
 
 
+##
 ## CHEAT 
+##
 
 # creates dotfile symlinks for CHEAT expected files and folders 
 bash "$CONFIGD_DIR/cheat/make_xdgconfig_cheat_symlink.sh" 1> /dev/null
@@ -41,6 +47,10 @@ CHEAT_CONF="$HOME/.config/cheat/conf.yml"
 CHEAT_CONF_TEMPLATE="$CHEAT_CONF.tmpl"
 envsubst < "$CHEAT_CONF_TEMPLATE" > "$CHEAT_CONF"
 
+
+##
+## BAT
+##
 
 ################################
 # Overrides/Patches 

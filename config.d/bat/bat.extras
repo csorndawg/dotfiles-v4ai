@@ -1,0 +1,6 @@
+# BAT CONFIG MODULE
+# Contains bat related aliases, functions, etc. Basically anything that doesn't belong in bat.conf
+
+
+# runs bat plain w/o paging 
+alias cat="bat -pp"

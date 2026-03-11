@@ -1,0 +1,14 @@
+# Submodule for all terminal related, shell-agnostic, configuration code
+# Some examples include setting prompt, terminal colors, autocompletion colors, etc.
+
+
+# activate and load (use) default color theme (nord) for shell
+if [[ -e "$HOME/.dir_colors"  ]]; then
+  echo -e "Local ~/.dir_colors exists - sourcing theme from existing file."
+  eval $(dircolors "$HOME/.dir_colors")
+else
+
+  dircolors_update_script="$HOME/dotfiles/config.d/dircolors/set_dircolors.sh"
+  echo -e "\nmNo ~/.dir_colors exists. Running setup script \"$(basename $dircolors_update_script)\""
+  bash $dircolors_update_script 1> /dev/null
+fi

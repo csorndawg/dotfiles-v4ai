@@ -207,6 +207,7 @@ source $HOME/dotfiles/bash.d/aliases.bash
 #   EXTRASSSS 
 ##########################################
 
+source "$HOME/dotfiles/utils.d/main.rc"
 source "$HOME/dotfiles/bash.d/extras.bash"
 
 

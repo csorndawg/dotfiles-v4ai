@@ -3,9 +3,19 @@
 # adhoc aliases
 alias ce="cheat -e"
 alias cl="cheat -l"
+alias clg="cheat -l | egrep "
 alias egv="egrep -v"
+alias fdcb="fd -a --changed-before"
 alias fdcb="fd --changed-before"
-alias fdcw="fd --changed-within"
+alias fdcw="fd -a --changed-within"
+alias fdcwr="fd --changed-within"
+
+# conveience alias for quick listing all files within current working filetree 
+alias fdfq="fd -t f . \"$(pwd)\""
+
+# same as above but for dirs
+alias fdfq="fd -t d . \"$(pwd)\""
+
 alias jc="jupyter console"
 alias jl="jupyter lab"
 alias la="ls -la"
@@ -89,15 +99,15 @@ alias ag="alias | egrep"
 alias hg="history | egrep"
 alias vg="env | egrep"
 alias h5="head -n 5"
-alias h15="head -n 5"
-alias h25="head -n 5"
-alias h50="head -n 5"
-alias h100="head -n 5"
+alias h15="head -n 15"
+alias h25="head -n 25"
+alias h50="head -n 50"
+alias h100="head -n 100"
 alias t5="tail -n 5"
-alias t15="tail -n 5"
-alias t25="tail -n 5"
-alias t50="tail -n 5"
-alias t100="tail -n 5"
+alias t15="tail -n 15"
+alias t25="tail -n 25"
+alias t50="tail -n 50"
+alias t100="tail -n 100"
 
 # zoxide shortcuts
 alias Z="zi"
@@ -111,7 +121,7 @@ alias ze="zoxide edit"
 # Usage:
 #	`r cc`	# run last command beginning with 'cc'
 #	`r`	# rerun last command
-r='fc -s'
+alias r='fc -s'
 
 # ------------------------------------------------------------------------------------
 # Final Aliases (aliases that are intentionally sourced last)
@@ -119,4 +129,17 @@ r='fc -s'
 
 # alias bloated newdots nvim config until dotfiles-v4 nvim is operational
 alias nvim-newdots='NVIM_APPNAME="nvim-newdots" nvim'
+
+# peek 1 level below in filesystem 
+alias t1="tree -L 1"
+alias tree1="tree -L1"
+
+# xclip copy
+alias xclipi="xclip -i --selection clipboard"
+alias cpi="xclip -i --selection clipboard"
+
+# xclip paste
+#   example: echo $(xclip -o -selection clipboard)  
+alias xclipo="echo $(xclip -o -selection clipboard) "
+alias cpo="echo $(xclip -o -selection clipboard) "
 

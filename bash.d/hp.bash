@@ -12,8 +12,11 @@ alias fx="explorer.exe"
 export HP_USER_HOME="/mnt/c/Users/zaccs"
 export WSL_DESKTOP_HOME="/mnt/c/Users/zaccs/Desktop"
 export DESKTOP_HOME="/mnt/c/Users/zaccs/Desktop"
+export WSL_TMP_DIR="/mnt/c/Users/zaccs/Desktop"
 export HP_LINKFARM_DIR="/mnt/c/Users/zaccs/Desktop/_LinkFarm"
 export DESKTOP_LINKFARM_DIR="/mnt/c/Users/zaccs/Desktop/_LinkFarm"
+export WSL_DWNLDS_HOME="/mnt/c/Users/zaccs/Favorites/Downloads"
+
 # Alacritty config file path
 export WSL_TERMINAL_CONFIG="/mnt/c/Users/zaccs/AppData/Roaming/alacritty/alacritty.toml"
 export WSL_ALACRITTY_CONFIG="/mnt/c/Users/zaccs/AppData/Roaming/alacritty/alacritty.toml"
@@ -43,5 +46,4 @@ if ! which fd; then
   ln -s "$(command -v fdfind)" "$HOME/.local/bin/fd"
 fi
 
-export HP_DWNLDS_DIR="/mnt/c/Users/zaccs/Favorites/Downloads"
-export WSL_DWNLDS_DIR="/mnt/c/Users/zaccs/Favorites/Downloads"
+
