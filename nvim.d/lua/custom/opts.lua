@@ -65,33 +65,33 @@ opt.wrap = false -- Disable line wrap
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
 
--- Sync clipboard between OS and Neovim.
--- Sync clipboard between OS and Neovim.
-
---  Schedule the setting after `UiEnter` because it can increase startup-time.
---  Remove this option if you want your OS clipboard to remain independent.
---  See `:help 'clipboard'`
--- vim.schedule(function()
---   vim.o.clipboard = 'unnamedplus'
--- end)
-
--- WSL clipboard error fix 
--- Detect WSL
-local is_wsl = vim.fn.has("wsl") == 1
-if is_wsl then
-  vim.g.clipboard = {
-    name = "win32yank-wsl",
-    copy = {
-      ["+"] = "win32yank.exe -i --crlf",
-      ["*"] = "win32yank.exe -i --crlf",
-    },
-    paste = {
-      ["+"] = "win32yank.exe -o --lf",
-      ["*"] = "win32yank.exe -o --lf",
-    },
-    cache_enabled = 0,
-  }
-end
+-- -- Sync clipboard between OS and Neovim.
+-- -- Sync clipboard between OS and Neovim.
+--
+-- --  Schedule the setting after `UiEnter` because it can increase startup-time.
+-- --  Remove this option if you want your OS clipboard to remain independent.
+-- --  See `:help 'clipboard'`
+-- -- vim.schedule(function()
+-- --   vim.o.clipboard = 'unnamedplus'
+-- -- end)
+--
+-- -- WSL clipboard error fix 
+-- -- Detect WSL
+-- local is_wsl = vim.fn.has("wsl") == 1
+-- if is_wsl then
+--   vim.g.clipboard = {
+--     name = "win32yank-wsl",
+--     copy = {
+--       ["+"] = "win32yank.exe -i --crlf",
+--       ["*"] = "win32yank.exe -i --crlf",
+--     },
+--     paste = {
+--       ["+"] = "win32yank.exe -o --lf",
+--       ["*"] = "win32yank.exe -o --lf",
+--     },
+--     cache_enabled = 0,
+--   }
+-- end
 --
 opt.clipboard = vim.env.SSH_CONNECTION and "" or "unnamedplus" -- Sync with system clipboard
 
@@ -139,3 +139,40 @@ end
 set_rg_grepprg(true)
 set_rg_grepprg(true)
 
+
+-- WSL Local/Remote OS Synced Clipboard
+
+-- if vim.fn.has('wsl') == 1 then
+--   vim.g.clipboard = {
+--     name = 'wsl-clipboard',
+--     copy  = {
+--       ['+'] = 'clip.exe',
+--       ['*'] = 'clip.exe',
+--     },
+--
+--     paste = {
+--       ['+'] = 'powershell.exe -NoProfile -Command [Console]::Out.Write($(Get-Clipboard -Raw))',
+--       ['*'] = 'powershell.exe -NoProfile -Command [Console]::Out.Write($(Get-Clipboard -Raw))',
+--     },
+--     cache_enabled = 0,
+--   }
+-- end
+
+-- Smart clipboard provider: WSL, SSH (OSC52), or native
+local function setup_clipboard()
+  -- WSL: use win32yank
+  if vim.fn.has('wsl') == 1 then
+    vim.g.clipboard = {
+      name = 'win32yank-wsl',
+      copy  = { ['+'] = 'win32yank.exe -i --crlf', ['*'] = 'win32yank.exe -i --crlf' },
+      paste = { ['+'] = 'win32yank.exe -o --lf',   ['*'] = 'win32yank.exe -o --lf'   },
+      cache_enabled = 0,
+    }
+  end
+  -- else: not WSL, not SSH → let Neovim auto-detect (xclip/pbcopy/etc.)
+end
+
+
+
+setup_clipboard()
+vim.opt.clipboard = 'unnamedplus'

@@ -135,11 +135,14 @@ alias t1="tree -L 1"
 alias tree1="tree -L1"
 
 # xclip copy
-alias xclipi="xclip -i --selection clipboard"
-alias cpi="xclip -i --selection clipboard"
+#   example: cat file1.txt | cpi
+alias xclipi="xclip -i -selection clipboard"
+alias cpi="xclip -i -selection clipboard"
 
 # xclip paste
 #   example: echo $(xclip -o -selection clipboard)  
-alias xclipo="echo $(xclip -o -selection clipboard) "
-alias cpo="echo $(xclip -o -selection clipboard) "
+alias xclipo='echo $(xclip -o -selection clipboard)'
+alias cpo='echo $(xclip -o -selection clipboard)'
 
+# curl real help
+alias curl_man="curl -M"

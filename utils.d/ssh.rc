@@ -6,7 +6,7 @@
 # need to configure $DISPLAY on LOCAL machine before SSHing with X11
 #export DISPLAY=localhost:0:0
 #export DISPLAY=localhost:0:0
-export DISPLAY=:0
+#export DISPLAY=:0
 
 # ensure ssh-agent enabled/exists before attemping to cache ssh pwds
 eval "$(ssh-agent -s)" 1>/dev/null
