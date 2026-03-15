@@ -22,4 +22,6 @@ else
 fi
 
 # remove nested symlink
-rm "$CONFIGD_CHEAT_DIR/cheat"
+if [[ -e "$CONFIGD_CHEAT_DIR/cheat" ]]; then
+	rm -v "$CONFIGD_CHEAT_DIR/cheat" 
+fi

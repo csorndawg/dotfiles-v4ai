@@ -13,19 +13,13 @@ export XDG_TMP_HOME="$HOME/.local/tmp"
 export XDG_GIT_REPOS_HOME="$HOME/git"
 export XDG_DOWNLOADS_HOME="$HOME/.local/var/downloads"
 
-# set editor to NVIM if installed, otherwise use VIM as fallback
-#export EDITOR=$(command -v nvim || command -v vim || echo "vi")
-#export EDITOR="nvim"
-export EDITOR="vim"
-#export EDITOR="nvim"
 
-#if command -v nvim >/dev/null 2>&1; then
-#  export EDITOR='nvim'
-#else
-#  export EDITOR='vim'
-#fi
-#
-#export VISUAL=$EDITOR
+if command -v nvim >/dev/null 2>&1; then
+  export EDITOR='nvim'
+else
+  export EDITOR='vim'
+fi
+export VISUAL=$EDITOR
 
 
 # add RC env. vars for core dotfiles files

@@ -112,3 +112,8 @@ config.d/venvs/*/**
 #!config.d/venvs/*/*.txt
 !config.d/venvs/*/requirements.txt
 !config.d/venvs/*/dependencies.txt
+
+**.ignore
+**.ignore.*
+**.ignored
+**.ignored.*
