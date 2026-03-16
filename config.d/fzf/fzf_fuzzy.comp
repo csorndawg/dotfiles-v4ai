@@ -28,7 +28,7 @@ _fzf_comprun() {
   shift
 
   case "$command" in
-    cd)           fzf --preview 'tree -C {} | head -200'   "$@" ;;
+    cd)           fzf --preview 'tree -C {} | head -150'   "$@" ;;
     export|unset) fzf --preview "eval 'echo \$'{}"         "$@" ;;
     ssh)          fzf --preview 'dig {}'                   "$@" ;;
     *)            fzf --preview 'bat -n --color=always {}' "$@" ;;
@@ -57,8 +57,21 @@ _fzf_compgen_dir() {
 #
 # usage: _fzf_setup_completion path|dir|var|alias|host COMMANDS...
 
-# enable fuzzy path comp for 'git' cmd 
-_fzf_setup_completion path git 
+# enable fuzzy path comp for 'nvim' and nv (alias) cmds
+_fzf_setup_completion path nvim 
+_fzf_setup_completion path nv 
+
+# enable fuzzy path comp for ripgrep and bat
+_fzf_setup_completion path rg 
+_fzf_setup_completion path bat 
+_fzf_setup_completion path fd
 
 # enable fuzzy dir comp for 'tree' cmd
 #_fzf_setup_completion dir tree
+
+
+# git aliases (temp. soln until fzf-git.sh fully setup)
+_fzf_setup_completion path gd 
+_fzf_setup_completion path ga
+_fzf_setup_completion path grs
+_fzf_setup_completion path grss
