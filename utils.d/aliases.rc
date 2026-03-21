@@ -146,3 +146,5 @@ alias cpo='echo $(xclip -o -selection clipboard)'
 
 # curl real help
 alias curl_man="curl -M"
+alias timestamp='date +"%Y%m%d_%H%M%S"'
+alias datestamp='date +"%Y%m%d"'
