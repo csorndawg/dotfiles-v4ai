@@ -67,7 +67,7 @@ return {
       })
 
       -- Manual format keymap (improved version that handles visual mode)
-      vim.keymap.set("", "<leader>f", function()
+      vim.keymap.set("", "<leader>af", function()
         require("conform").format({ async = true }, function(err)
           if not err then
             local mode = vim.api.nvim_get_mode().mode

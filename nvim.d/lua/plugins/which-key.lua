@@ -5,10 +5,11 @@ return {
     opts = {
       spec = {
         { "<leader>g", group = "[G]it" },
+        { "<leader>t", group = "[T]elescope" },
         { "<leader>d", group = "[d]ebug" },
         { "<leader>o", group = "[O]bsidian" },
-        -- { "<leader>c", group = "[C]ode" },
-        { "<leader>l", group = "[L]int" },
+        { "<leader>a", group = "Code [A]ctions" },
+        -- { "<leader>l", group = "[L]int" },
         { "<leader>z", group = "[Z]ac" },
         { "<leader>zz", group = "[Z]ac Overflow" },
         { "<leader>?", group = "WhichKey Maps" },

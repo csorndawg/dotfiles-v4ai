@@ -19,14 +19,14 @@ return {
         }
 
         -- search all files in cwd 
-        vim.keymap.set("n","<space>tf",require('telescope.builtin').find_files)
+        vim.keymap.set("n","<space>tf",require('telescope.builtin').find_files, {desc="Find files (cwd)"})
 
         -- search all dotfiles 
         vim.keymap.set("n","<space>tz", function() 
           require('telescope.builtin').find_files{
             cwd = vim.fn.expand('~') ..  '/dotfiles'
           }
-        end)
+        end,{desc = 'Search dotfiles'})
 
         -- search all files in neovim directory
         vim.keymap.set("n","<space>tn", function() 
@@ -34,7 +34,7 @@ return {
             cwd = vim.fn.stdpath("config")
           })
           require('telescope.builtin').find_files(opts)
-        end)
+        end, {desc = 'Search nvim files'})
 
         -- search all git repos 
         vim.keymap.set("n","<space>tg", function() 
@@ -42,10 +42,10 @@ return {
             cwd = vim.fn.expand('~') .. '/git'
           })
           require('telescope.builtin').find_files(opts)
-        end)
+        end, {desc = 'Search git repo'})
 
         -- search nvim help docs 
-        vim.keymap.set("n","<space>th", require('telescope.builtin').help_tags)
-      end
+        vim.keymap.set("n","<space>th", require('telescope.builtin').help_tags, {desc = 'Search help tags'})
+      end,
   }
 }

@@ -67,34 +67,33 @@ return {
     -- Adjust how quickly the float appears (in milliseconds)
       vim.opt.updatetime = 500  -- 500ms delay
 
-      --
       -- LINTER Keymaps
 			vim.api.nvim_set_keymap(
 				"n",
-				"<leader>li",
+				"<leader>aI",
 				":lua update_lint_level('info')<CR>",
 				{ noremap = true, silent = true, desc = "Lint Level: Info" }
 			)
 
 			vim.api.nvim_set_keymap(
 				"n",
-				"<leader>lw",
+				"<leader>aW",
 				":lua update_lint_level('warning')<CR>",
 				{ noremap = true, silent = true, desc = "Lint Level: Warning" }
 			)
 
 			vim.api.nvim_set_keymap(
 				"n",
-				"<leader>le",
+				"<leader>aE",
 				":lua update_lint_level('error')<CR>",
-				{ noremap = true, silent = true, desc = "Lint Level: Error (Disabled)" }
+				{ noremap = true, silent = true, desc = "Lint Level: Error" }
 			)
 
       -- shows linters are configured for current buffer file type
       -- AND which ones are currently running
       vim.keymap.set(
         "n",
-        "<leader>lv",
+        "<leader>av",
         function()
             local linters = require("lint").get_running()
             local configured = require("lint").linters_by_ft[vim.bo.filetype] or {}
@@ -113,21 +112,21 @@ return {
       -- forcefully shows linter diagnostics
       vim.keymap.set(
         "n",
-        "<leader>ld",
+        "<leader>ad",
         function()
             vim.diagnostic.open_float(nil, { 
                 border = "rounded",
                 source = "always",
             })
         end,
-        { desc = "Show line diagnostics" }
+        { desc = "Forcefully show linter line diagnostics" }
     )
 
     -- toggle linting diagnostics for CURRENT buffer only
     -- Toggle diagnostics visibility for current buffer only
     vim.keymap.set(
       "n",
-      "<leader>lt",
+      "<leader>al",
       function()
           local bufnr = vim.api.nvim_get_current_buf()
           local is_enabled = vim.diagnostic.is_enabled({ bufnr = bufnr })
@@ -136,7 +135,7 @@ return {
           local status = not is_enabled and "enabled" or "disabled"
           vim.notify("Diagnostics " .. status .. " for this buffer", vim.log.levels.INFO)
       end,
-      { noremap = true, silent = true, desc = "Toggle diagnostics (buffer)" }
+      { noremap = true, silent = true, desc = "Toggle linting diagnostics (buffer)" }
     )
 
       -- @NOTE: DONT DELETE -- using this as reference for tweaking lazy lua plugins structure
