@@ -148,3 +148,7 @@ alias cpo='echo $(xclip -o -selection clipboard)'
 alias curl_man="curl -M"
 alias timestamp='date +"%Y%m%d_%H%M%S"'
 alias datestamp='date +"%Y%m%d"'
+
+# jupyter w/ specified kernel envs. 
+alias jlz="jupyter lab --kernel=venv_default"
+alias jcz="jupyter lab --kernel=venv_default"
