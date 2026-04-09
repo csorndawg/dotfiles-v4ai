@@ -2,6 +2,7 @@
 -- Core Nvim Remaps
 --------------------------------------------------
 
+local map = vim.keymap.set
 
 -- --------------------------------
 -- Essentials
@@ -146,3 +147,45 @@ end, { silent = true })
 -- keep visual selection when indenting
 vim.keymap.set("x", "<", "<gv")
 vim.keymap.set("x", ">", ">gv")
+
+-- kill existing command/chord ++ escape to Normal Mode
+-- .. I use <Esc> alot like <Ctrl-L> to clear the screen and this remap 
+-- .. makes escaping easier. Currently setting "<Leader>/" as trigger
+-- .. but if this conflicts/creates friction with other mappings
+-- .. just prepend another "<Leader>".
+vim.keymap.set({ 'n', 'i', 'v', 't' },"<Leader>/","<Esc>", {silent=True,desc="Reset to Normal mode"})
+-- vim.keymap.set({ 'n', 'i', 'v', 't' },"<Leader><Leader>/","<Esc>", {silent=True,desc="Reset to Normal mode"})
+
+
+-- The Togglers 
+
+-- toggle line wrapping
+map('n', '<Leader>zw', function()
+  vim.opt.wrap = not vim.opt.wrap:get()
+  print("Wrap: " .. (vim.opt.wrap:get() and "On" or "Off"))
+end, { desc = "Toggle line wrap" })
+
+-- toggle cursorline
+map('n', '<Leader>zc', function()
+  vim.opt.cursorline = not vim.opt.cursorline:get()
+  print("Cursorline: " .. (vim.opt.cursorline:get() and "On" or "Off"))
+end, { desc = "Toggle cursorline" })
+
+-- toggle cursorcolumn
+map('n', '<Leader>zC', function()
+  vim.opt.cursorcolumn = not vim.opt.cursorcolumn:get()
+  print("Cursorcolumn: " .. (vim.opt.cursorcolumn:get() and "On" or "Off"))
+end, { desc = "Toggle cursorcolumn" })
+
+-- toggle line + relative numbering
+map('n', '<Leader>zl', function()
+  local is_now_on = not vim.opt.number:get()
+  vim.opt.number = is_now_on
+  vim.opt.relativenumber = is_now_on
+  print("Numbering: " .. (is_now_on and "On" or "Off"))
+end, { desc = "Toggle line + relative numbering" })
+
+-- "dummy" keymap to add whichkey description to another ACTUAL keymap
+map('n','<Leader>Za','',
+  { desc = "<LDR>/ abort switch to Normal mode", silent=True
+})
