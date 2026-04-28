@@ -14,29 +14,51 @@ function mcd() {
     fi
 }
 
-function venvActivate() {
-	
-	venvLinuxRgx="bin.activate$"		# pattern to filter out VENV file noise
 
-	# use "XDG Local Config 'venvs' dir for default
-	if [[ ! -d "$1" ]]; then
-		VENV_DIR="$HOME/.config/venvs"
-	else
-		VENV_DIR="$1"
-	fi
+#
+# passes list of available venvs to FZF and activates selected venv
+function __setVenv() {
+  
+  local persist_venvs="$HOME/.config/venvs"
+  local activate_rgx='bin.activate$'
 
-	echo "VENV search will start from dir: \"$VENV_DIR\""
-	echo ""
+  if [[ $# -eq 0 ]]; then
+    echo "No argument provided. Using persistent bucket"
 
-	# fetch venv path from FZF and activate
-	activateScriptPath="$(find "$VENV_DIR" -type f  | egrep "$venvLinuxRgx" \
-				 	| fzf --exit-0 --select-1)"
+    # store selected path so we can enable (run it)
+    activatePath="$( fd -a -t f --regex "acti" . "$persist_venvs" | \
+      egrep "$activate_rgx" | \
+      fzf  --highlight-line     \
+        --wrap        \
+        --height 40% \
+        --prompt="venvs>  " \
+        --ghost="nothing to pick from" \
+        --exit-0  \
+        --select-1)"
+  else
+    echo "Argument provided. Using current filetree bucket"
+    echo -n "\nDebugging Cmd:\t \"fd -a -t f --regex \"acti\" . \"$(pwd -P)\""
 
-	#echo source "$activateScriptPath"
-	source "$activateScriptPath" 1> /dev/null
+    activatePath="$( fd -a -t f -HI --regex "acti" . "$(pwd -P)" | \
+      egrep "$activate_rgx" | \
+      fzf  --highlight-line     \
+        --wrap        \
+        --height 40% \
+        --prompt="venvs>  " \
+        --ghost="nothing to pick from" \
+        --exit-0  \
+        --select-1)"
+ fi
+
+ # activate selected venv
+ . $activatePath
+ echo "Activated:  $(echo $activatePath | awk -F '/' '{print $(NF-2)}')"
 }
 
 
+
+
+#
 # Remote machine OSC 52 clipboard workaround
 if ! hostname | grep -q "zac.hp"; then
   echo "Remote machine"
