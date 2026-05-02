@@ -1,0 +1,54 @@
+# Insert your preferred key mappings here.
+
+## 
+## Remapping Syntax
+## <map> <trigger> <action>
+## 
+## After new remap, DONT FORGET to unmap old chord
+##
+
+
+# make scroll down/up keys more vim-like
+unmap d
+unmap j
+unmap J
+map j scrollPageDown
+map J scrollDown
+map d scrollLeft
+
+unmap u
+unmap k
+unmap K
+map k scrollPageUp
+map K scrollUp
+map u scrollRight
+
+
+# cycle back/forward thru tabs with <h/l>
+unmap h
+unmap l
+map h previousTab
+map l nextTab
+
+# remap <d/u> to scroll left/right
+map d scrollLeft
+map u scrollRight 
+
+#  <ALT>.  acts as <Escape>
+mapkey  <a-.> <c-[>
+
+# <Space>f  opens multiple URLs in new tabs 
+map <space>f LinkHints.activateModeWithQueue
+
+# tab management remaps
+map <space>1  closeOtherTabs
+
+map <space>q removeTab
+map qq removeTab
+
+map <space>Q restoreTab
+
+# grep mode alts.
+map <space>s enterFindMode
+map ss enterFindMode
+
