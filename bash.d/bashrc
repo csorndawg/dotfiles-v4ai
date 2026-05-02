@@ -159,20 +159,19 @@ source "$sshCachePassRunner" 1> /dev/null
 ### DOTFILE V4 CONFIGURATION ###
 
 # <need to copy/transfer other config code from zac nyc3 bashrc file>
-source "$HOME/dotfiles/utils.d/source_rc_utils.sh" 1>/dev/null
-source "$HOME/dotfiles/utils.d/make_utilsd_symlinks.sh" 1>/dev/null
+source "$HOME/dotfiles/utils.d/source_rc_utils.sh" > /dev/null 2>&1
+source "$HOME/dotfiles/utils.d/make_utilsd_symlinks.sh" > /dev/null 2>&1
 
 # enable nvim python venv by default
-source "$HOME/dotfiles/config.d/venvs/venv-nvimd/bin/activate"
-
+source "$HOME/dotfiles/config.d/venvs/venv-nvimd/bin/activate" > /dev/null 2>&1
 
 # DYNAMIC BASHD SUBMODULE SOURCING
 function src_bashd_submods () {
   BASHD_DIR="$HOME/dotfiles/bash.d"
-  IGNORE_RGXS="hp|ignore|.(ignore|igr)$"
+  IGNORE_RGXS="hp|ignore|.(ignore|ignr)$"
+  
+  # source bash.d submodules if they exist on machine
   if [[ -d "$BASHD_DIR" ]]; then
-    echo "Local 'dotfiles/bash.d' folder exists. Sourcing its bashrc submodules."
-
     for f in $(find "$BASHD_DIR" -type f -name "*.bash"); do
       if egrep -i "$IGNORE_RGXS" "$f"; then
         # "unignore" and source local HP cpu custom bashrc file
@@ -180,13 +179,12 @@ function src_bashd_submods () {
         continue
       else
         echo "Sourcing File: $f"
-        source "$f"
+        source "$f" 
       fi
-      echo -e "Done sourcing BASHD submodules\n"
     done
   fi
 }
-src_bashd_submods 1> /dev/null
+src_bashd_submods > /dev/null
 
 function cache_ssh_creds () {
   SSH_PWD_CACHER="$HOME/.ssh/sshCachePass.sh" 
@@ -197,23 +195,20 @@ function cache_ssh_creds () {
     #bash $SSH_PWD_CACHER
   fi
 }
-cache_ssh_creds 1> /dev/null
+cache_ssh_creds 1> /dev/null 
 
 # @TODO: Refactor this + all the other bashrc submodule sourcing code into their
 #        own files and source just files here for a cleaner install (like vimrc)
-source $HOME/dotfiles/bash.d/aliases.bash
+#source $HOME/dotfiles/bash.d/aliases.bash
 
 ##########################################
 #   EXTRASSSS 
 ##########################################
 
-source "$HOME/dotfiles/utils.d/main.rc"
-source "$HOME/dotfiles/bash.d/extras.bash"
-
-
+# @NOTE: "main.rc" is causing FZF_DEFAULT_OPS false warning -- need to revist code and refactor later 
+source "$HOME/dotfiles/utils.d/main.rc" > /dev/null 2>&1
+source "$HOME/dotfiles/bash.d/extras.bash" > /dev/null 2>&1
 
 # @TEMPFIX: move to "variables.rc" or "rust.rc" after figuring out rust/cargo issue
 export PATH="$HOME/.cargo/bin:$PATH"
-#echo -e "Successfully sourced:  \"$BASHRC\"\n"
-
-
+echo -e "Successfully sourced:  \"$BASHRC\"\n"

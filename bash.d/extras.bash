@@ -71,7 +71,7 @@ __git_complete grb _git_rebase
 # ------------------------------
 
 # FZF config
-source "$CONFIGD_DIR/fzf/fzf.main" 1> /dev/null
+source "$CONFIGD_DIR/fzf/fzf.main" #1> /dev/null
 
 
 

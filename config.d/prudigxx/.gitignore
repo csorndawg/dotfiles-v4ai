@@ -1,9 +1,0 @@
-**/*.zip
-**/*Zone*
-#!**/*.noignore.zip
-!**/*.noig.zip
-**/temp/
-**/.temp/
-**/uploads/
-**/.uploads/
-

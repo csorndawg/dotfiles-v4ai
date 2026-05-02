@@ -10,7 +10,7 @@ IGNR_RGX=""
 #
 
 # source terminal/prompt related configurations
-source "$HOME/dotfiles/utils.d/terminal.rc"
+source "$HOME/dotfiles/utils.d/terminal.rc" 1> /dev/null
 
 
 # post-sourcing dependencies + override/patch modules sourced here
