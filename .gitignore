@@ -117,3 +117,4 @@ config.d/venvs/*/**
 **.ignore.*
 **.ignored
 **.ignored.*
+**/*Zone.Identifier
