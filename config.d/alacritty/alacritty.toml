@@ -1,45 +1,72 @@
 # For all configuration options see: https://alacritty.org/config-alacritty.html
 [terminal.shell]
 program = "C:\\Windows\\System32\\wsl.exe"
-args = ["~"]
-osc52 = "CopyPaste"
+args = ["-d", "Ubuntu-24.04", "--cd", "~", "--user", "zaccsorny"]
+# args = ["-d", "Ubuntu", "--cd", "~", "--", "zsh"]
+# osc52 = "CopyPaste"
 
-# Colors (Nord)
+[env]
+TERM = "alacritty"
 
-# Default colors
+# Nord Color Theme
+
 [colors.primary]
-background = '#2E3440'
-foreground = '#D8DEE9'
+background = "#2e3440"
+foreground = "#d8dee9"
+dim_foreground = "#a5abb6"
 
-# Normal colors
+[colors.cursor]
+text = "#2e3440"
+cursor = "#d8dee9"
+
+[colors.vi_mode_cursor]
+text = "#2e3440"
+cursor = "#d8dee9"
+
+[colors.selection]
+text = "CellForeground"
+background = "#4c566a"
+
+[colors.search.matches]
+foreground = "CellBackground"
+background = "#88c0d0"
+
+# [colors.search.bar]
+# background = "#434c5e"
+# foreground = "#d8dee9"
+
 [colors.normal]
-black   = '#3B4252'
-# custom (brighter and lighter) blacks:
-# #black   = '#5A667D'   
-# black   = '#3909DB3'
-red     = '#BF616A'
-green   = '#A3BE8C'
-yellow  = '#EBCB8B'
-blue    = '#81A1C1'
-magenta = '#B48EAD'
-cyan    = '#88C0D0'
-white   = '#E5E9F0'
+black = "#3b4252"
+red = "#bf616a"
+green = "#a3be8c"
+yellow = "#ebcb8b"
+blue = "#81a1c1"
+magenta = "#b48ead"
+cyan = "#88c0d0"
+white = "#e5e9f0"
 
-# Bright colors
 [colors.bright]
-black   = '#4C566A'
-#custom/testing: black   = '#3B4252'
-red     = '#BF616A'
-green   = '#A3BE8C'
-yellow  = '#EBCB8B'
-blue    = '#81A1C1'
-magenta = '#B48EAD'
-cyan    = '#8FBCBB'
-white   = '#ECEFF4'
+black = "#4c566a"
+red = "#bf616a"
+green = "#a3be8c"
+yellow = "#ebcb8b"
+blue = "#81a1c1"
+magenta = "#b48ead"
+cyan = "#8fbcbb"
+white = "#eceff4"
+
+[colors.dim]
+black = "#373e4d"
+red = "#94545d"
+green = "#809575"
+yellow = "#b29e75"
+blue = "#68809a"
+magenta = "#8c738c"
+cyan = "#6d96a5"
+white = "#aeb3bb"
 
 
 [cursor]
-
 style = "Beam"
 # vi_mode_style = { <shape>, <blinking> } | "None"
 
@@ -49,20 +76,13 @@ title = "Zacs Alacritty"
 #startup_mode = "Fullscreen"
 decorations = 'buttonless'
 dynamic_padding = true
-
 # full: borders and title bar
 # none: neither borders nor title bar
-
-# supress WARNING messages
-[debug]
-persistent_logging = false
-log_level = "Error"
 
 
 # for windows font must be among fonts listed at: Settings > Personalization > Fonts
 [font]
-
-size = 11
+size = 10
 
 [font.normal]
 family = "JetBrainsMono Nerd Font"
@@ -81,10 +101,17 @@ style = "Light Italic"
 family = "JetBrainsMono Nerd Font"
 style = "SemiBold Italic"
 
-
 [scrolling]
 # max scroll history: 100000
-history = 15000
+history = 14999
+multiplier = 5
 
 [selection]
 save_to_clipboard = true
+
+# supress WARNING messages
+[debug]
+persistent_logging = false
+# log_level = "Error"
+log_level = "Off"
+
