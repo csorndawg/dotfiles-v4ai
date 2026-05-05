@@ -40,10 +40,10 @@ vim.keymap.set("i", ",,", "<Esc>", { desc = "Insert to normal mode" })
 vim.keymap.set("v", ",,", "<Esc>", { desc = "Alternative escape (visual)" })
 
 -- switch b/w Normal and Cmdline Mode with <C-;>
-vim.keymap.set("n", "<C-,>", ":", { desc = "Normal to command mode" })
-vim.keymap.set("n", "<C-;>", ":", { desc = "Normal to command mode" })
+vim.keymap.set("n", ";;", ":", { desc = "Normal to command mode" })
+vim.keymap.set("n", "<Leader-.>", ":", { desc = "Normal to command mode" })
+vim.keymap.set("c", ";;", "<Esc>", { desc = "Command to normal mode" })
 vim.keymap.set("c", "<C-;>", "<C-c>", { desc = "Command to normal mode" })
-vim.keymap.set("c", "<C-,>", "<C-c>", { desc = "Command to normal mode" })
 
 -- Experimental mode cycling keymaps
 -- <Left>/<Right> arrow keys cycle through search pattern matches
@@ -124,7 +124,8 @@ vim.keymap.set({ "n", "x", "o" }, "N", function()
   return vim.v.searchforward == 1 and "N" or "n"
 end, { expr = true, silent = true })
 
--- smarter command-line wildmenu navigation w/ <C-n>/<C-p>
+-- smarter cmdline wildmenu navigation 
+--   cycle up/down syggestions with <C-n>/<C-p>
 vim.keymap.set("c", "<C-n>", function()
   return vim.fn.wildmenumode() == 1 and "<C-n>" or "<Down>"
 end, { expr = true })
@@ -146,3 +147,87 @@ end, { silent = true })
 -- keep visual selection when indenting
 vim.keymap.set("x", "<", "<gv")
 vim.keymap.set("x", ">", ">gv")
+
+-- @TODO: Need to test before uncommenting
+-- -- --------------------------------------------
+-- -- Lunar Vim Copypasta
+-- -- --------------------------------------------
+-- local lunar_opts = { noremap = true, silent = true }
+-- local term_opts = { silent = true }
+-- local keymap = vim.api.nvim_set_keymap
+--
+--
+-- -- Normal --
+-- -- Better window navigation
+-- keymap("n", "<C-h>", "<C-w>h", lunar_opts)
+-- keymap("n", "<C-j>", "<C-w>j", lunar_opts)
+-- keymap("n", "<C-k>", "<C-w>k", lunar_opts)
+-- keymap("n", "<C-l>", "<C-w>l", lunar_opts)
+--
+-- -- Resize with arrows
+-- keymap("n", "<C-Up>", ":resize -2<CR>", lunar_opts)
+-- keymap("n", "<C-Down>", ":resize +2<CR>", lunar_opts)
+-- keymap("n", "<C-Left>", ":vertical resize -2<CR>", lunar_opts)
+-- keymap("n", "<C-Right>", ":vertical resize +2<CR>", lunar_opts)
+--
+-- -- Naviagate buffers
+-- keymap("n", "<S-l>", ":bnext<CR>", lunar_opts)
+-- keymap("n", "<S-h>", ":bprevious<CR>", lunar_opts)
+--
+-- -- Move text up and down
+-- keymap("n", "<A-j>", "<Esc>:m .+1<CR>==gi", lunar_opts)
+-- keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", lunar_opts)
+--
+-- -- Insert --
+-- -- Press jk fast to enter
+-- keymap("i", "jk", "<ESC>", lunar_opts)
+--
+--
+-- -- Move text up and down
+-- keymap("v", "<A-j>", ":m .+1<CR>==", lunar_opts)
+-- keymap("v", "<A-k>", ":m .-2<CR>==", lunar_opts)
+--
+-- -- Visual Block --
+-- -- Move text up and down
+-- keymap("x", "J", ":move '>+1<CR>gv-gv", lunar_opts)
+-- keymap("x", "K", ":move '<-2<CR>gv-gv", lunar_opts)
+-- keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", lunar_opts)
+-- keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", lunar_opts)
+--
+-- -- Terminal --
+-- -- Better terminal navigation
+-- keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
+-- keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
+-- keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
+-- keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
+--
+
+
+-- emacs-like navi keybinds in cmdline
+-- b/c of special keyboard cmdline requires raw escape characters 
+-- use ":echo getcharstr()" + <key>  to get raw char sequence
+
+-- jump to start of line w/ <Alt-a>
+vim.keymap.set("c", "<A-a>", "<Home>", { desc= 'Cmd cursor to SOL', silent=false})
+vim.keymap.set("c", "<80><fc>^Ha", "<Home>")
+
+-- jump to start of line w/ <Alt-e>
+vim.keymap.set("c", "<A-e>", "<End>", { desc= 'Cmd cursor to EOL', silent=false})
+vim.keymap.set("c", "<80><fc>^He", "<End>", { desc= 'Cmd cursor to EOL', silent=false})
+
+
+-- left/right char movement <Alt-,> + <Alt-.>
+-- vim.keymap.set("c", "<A-h>", "<Left>", { desc= 'Cmd cursor left', silent=false})
+-- vim.keymap.set("c", "<80><fc>^Hh", "<Left>", { desc= 'Cmd cursor left', silent=false})
+-- vim.keymap.set("c", "<A-l>", "<Right>", { desc= 'Cmd cursor right', silent=false})
+-- vim.keymap.set("c", "<80><fc>^Hl", "<Right>", { desc= 'Cmd cursor right', silent=false})
+vim.keymap.set("c", "<A-,>", "<Left>", { desc= 'Cmd cursor left', silent=false})
+vim.keymap.set("c", "<A-.>", "<Right>", { desc= 'Cmd cursor right', silent=false})
+vim.keymap.set("c", "<80><fc>^H,", "<Left>", { desc= 'Cmd cursor left', silent=false})
+vim.keymap.set("c", "<80><fc>^H.", "<Right>", { desc= 'Cmd cursor left', silent=false})
+
+-- Jump to next/back words <Alt-S-,> + <Alt-S-.>
+vim.keymap.set("c", "<A-<>", "<S-Left>", { desc= 'Cmd cursor SOW', silent=false})
+vim.keymap.set("c", "<A->>", "<S-Right>", { desc= 'Cmd cursor SOW', silent=false})
+vim.keymap.set("c", "<80><fc>^H<", "<S-Left>", { desc= 'Cmd cursor left', silent=false})
+vim.keymap.set("c", "<80><fc>^H>", "<S-Right>", { desc= 'Cmd cursor left', silent=false})

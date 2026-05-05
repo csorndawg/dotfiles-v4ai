@@ -55,6 +55,7 @@ alias tmsvb='tmux save-buffer'
 alias ga="git add"
 alias gad="git add --dry-run"
 alias gco="git checkout"
+alias gco1="git checkout @{-1}"
 alias gbl="git branch -la"
 alias gbsa="git branch --sort=refname"		# [g]it [b]ranch [s]ort [a]lphabetically
 alias gbl="git branch -la"
@@ -64,22 +65,31 @@ alias gcmm="git commit -m"
 alias gcma="git commit -a"
 alias gcmn="git checkout main"
 alias gd="git diff"
+alias gdh="git diff HEAD"
 alias gdst="git diff --stat"
 alias gdsg="git diff --staged"
 alias gdo="git diff origin"
 alias gdm="git diff main"
 alias gdom="git diff origin/main"
-alias glg="git log"
+alias glg="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias glgh="git log --graph --decorate --pretty=oneline --abbrev-commit --all"
+alias glgl="git log   -1 HEAD"
 alias gm="git merge"
+alias gm1="git merge @{-1}"
 alias gp="git push"
 alias gpf="git push -f"
 alias gpu="git push -u origin"
 alias gpl="git pull"
 alias gs="git status"
+alias gsst="git status --show-stash"
 alias grs="git restore"
 alias grss="git restore --staged"
 alias gfo="git fetch origin"
 alias grb="git rebase"
+alias gsh="git stash"
+alias gshl="git stash --list --all"
+alias gshp="git stash push --message"
+alias gshv="git stash show --patch"   # view patched stash
 
 # sort branches, with the most recent commits first 	(gbst == [g]it [b]ranch [s]orted by [t]ime descending)
 alias gbst="git branch --sort=-committerdate"
@@ -121,28 +131,25 @@ alias ze="zoxide edit"
 # Usage:
 #	`r cc`	# run last command beginning with 'cc'
 #	`r`	# rerun last command
-alias r='fc -s'
+alias r="fc -s"
 
 # ------------------------------------------------------------------------------------
 # Final Aliases (aliases that are intentionally sourced last)
 # ------------------------------------------------------------------------------------
-
-# alias bloated newdots nvim config until dotfiles-v4 nvim is operational
-alias nvim-newdots='NVIM_APPNAME="nvim-newdots" nvim'
 
 # peek 1 level below in filesystem 
 alias t1="tree -L 1"
 alias tree1="tree -L1"
 
 # xclip copy
-#   example: cat file1.txt | cpi
-alias xclipi="xclip -i -selection clipboard"
-alias cpi="xclip -i -selection clipboard"
+#   - example: cat file1.txt | cpi
+alias copy='xclip -selection clipboard'
+alias xcopy="xclip -i -selection clipboard"
 
 # xclip paste
-#   example: echo $(xclip -o -selection clipboard)  
-alias xclipo='echo $(xclip -o -selection clipboard)'
-alias cpo='echo $(xclip -o -selection clipboard)'
+#   - example: echo $(xclip -o -selection clipboard)  
+alias xpaste='echo $(xclip -o -selection clipboard)'
+alias paste='xclip -selection clipboard -o'
 
 # curl real help
 alias curl_man="curl -M"
