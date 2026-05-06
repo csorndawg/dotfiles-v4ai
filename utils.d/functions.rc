@@ -83,4 +83,34 @@ function grbi() {
   fi
 }
 
+# resolves missing path components automatically for given path 
+# kind of like "mcd()" but for nvim paths
+function nvp() { 
+
+  # when no input paths given, run NVIM with no args
+  if [ -z "$1" ]; then
+    nvim
+    return 0
+  fi
+
+  # collect/parse path arguments
+  local paths=("$@")
+  local dirs_to_create=()
+
+  for path in "${paths[@]}"; do
+    local parent_dir="$(dirname "$path")"
+    if [ ! -d "$parent_dir" ]; then
+      dirs_to_create+=("$parent_dir")
+    fi
+  done
+
+  if [ ${#dirs_to_create[@]} -gt 0 ]; then
+    mkdir -pv "${dirs_to_create[@]}"
+  fi
+
+  #echo -e "Debug:\tnvim $(printf '"%s" ' "${paths[@]}")"
+  nvim "${paths[@]}"
+}
+
+
 

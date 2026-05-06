@@ -1,0 +1,23 @@
+# Runtime Configurations that "quality of life" in terminal
+
+
+function dots() {
+  local input="${1:-.}"
+  # Count dots, ignoring anything that isn't a dot
+  local count=$(grep -o '\.' <<< "$input" | wc -l)
+
+  if [ "$count" -ge 4 ]; then
+    cd "$HOME"
+  else
+    local target=""
+    for (( i=0; i<count; i++ )); do
+      target+="../"
+    done
+    cd "${target:-.}"
+  fi
+}
+alias ..='dots ..'
+alias ...='dots ...'
+alias ....='dots ....'
+alias .....='dots .....'
+alias ......='dots ......'
