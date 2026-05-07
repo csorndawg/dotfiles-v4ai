@@ -71,7 +71,6 @@ fi
 
 # git rebase helper
 # Interactive rebase helper
-
 function grbi() {
   # verify the input is a positive int
   if [[ -n "$1" && "$1" =~ ^[0-9]+$ ]]; then
@@ -83,7 +82,8 @@ function grbi() {
   fi
 }
 
-# resolves missing path components automatically for given path 
+# resolves (creates) missing path components automatically for 
+# given path(s) before running it with Nvim   
 # kind of like "mcd()" but for nvim paths
 function nvp() { 
 
@@ -108,7 +108,7 @@ function nvp() {
     mkdir -pv "${dirs_to_create[@]}"
   fi
 
-  #echo -e "Debug:\tnvim $(printf '"%s" ' "${paths[@]}")"
+  # echo -e "Debug:\tnvim $(printf '"%s" ' "${paths[@]}")"
   nvim "${paths[@]}"
 }
 

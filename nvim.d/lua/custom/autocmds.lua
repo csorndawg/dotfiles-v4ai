@@ -50,3 +50,10 @@ vim.api.nvim_create_autocmd({ "InsertEnter", "WinLeave" }, {
     vim.opt_local.cursorline = false
   end,
 })
+
+-- make Nvim treat ".rc" as ".bash"
+vim.filetype.add({
+  extension = {
+    rc = "bash",
+  },
+})
