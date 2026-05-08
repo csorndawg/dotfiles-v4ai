@@ -29,6 +29,11 @@
 *_LOCAL_*.txt
 *_REMOTE_*.txt
 
+# custom [z]ac [ig]nored
+**.zig
+**.zig.*
+**.ZIG
+**.ZIG.*
 
 
 ###########################

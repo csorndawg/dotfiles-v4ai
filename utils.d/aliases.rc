@@ -155,3 +155,8 @@ alias paste='xclip -selection clipboard -o'
 alias curl_man="curl -M"
 alias timestamp='date +"%Y%m%d_%H%M%S"'
 alias datestamp='date +"%Y%m%d"'
+
+# common qol medley
+alias zz="cd $HOME"
+alias zzd="cd $HOME/dotfiles"
+alias zzg="cd $HOME/git"
