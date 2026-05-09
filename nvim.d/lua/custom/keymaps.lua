@@ -7,6 +7,23 @@
 -- Essentials
 -- --------------------------------
 
+-- alt. <Esc> method with <Leader> across all modes 
+-- vim.keymap.set("n","<80><fc>^H,>", "zzi", {desc="Insert mode switcher"})
+-- vim.keymap.set("i","<80><fc>^H,>", "zti", {desc="Insert mode switcher"})
+
+
+vim.keymap.set( "n", ",m", "zti", {desc="Move cursor to top, enter Insert",silent=true})
+vim.keymap.set( "n", "m,", "zti", {silent=true})
+vim.keymap.set( "n", ",,", "zzi", {silent=true})
+vim.keymap.set({ "n", "i", "v", "x", "s", "o", "c" }, "<leader>,,", "<Esc>")
+vim.keymap.set('t', '<Leader>,,', '<C-\\><C-n>', { desc = 'Switch from editing to normal in Terminal mode' })
+vim.keymap.set('t', '<C-x><C-x>', '<C-\\><C-n>:exit<Cr>', { desc = 'Exit Terminal mode' })
+
+-- easier way to start terminal mode
+vim.keymap.set({"n","c","o"},"<C-\\>","<Esc><Cmd>vertical terminal<Cr>",{desc="Launch vert term"})
+vim.keymap.set({"n","c","o"},"<Leader>vt","<Esc><Cmd>vertical terminal<Cr>",{desc="Launch vert term"})
+
+
 -- quit/save buffer
 vim.keymap.set("n","<leader>w",":w<Cr>")
 vim.keymap.set("n","<leader>q",":q<Cr>")
@@ -23,9 +40,8 @@ vim.keymap.set("n","<space>qf",":q!<Cr>")
 vim.keymap.set("n","<A-w><A-f>",":w!<Cr>")
 vim.keymap.set("n","<A-q><A-f>",":q!<Cr>")
 
-
 -- switch b/w Normal and Insert mode with ",,"
-vim.keymap.set("n", ",,", "i", { desc = "Normal to insert mode" })
+-- vim.keymap.set("n", ",,", "i", { desc = "Normal to insert mode" })
 vim.keymap.set("i", "jk", "<C-c>", { desc = "Normal to insert mode" })
 vim.keymap.set("i", "kj", "<C-c>", { desc = "Normal to insert mode" })
 
@@ -34,10 +50,11 @@ vim.keymap.set("i", "jj", "<C-c>", { desc = "Insert to normal mode" })
 vim.keymap.set("i", "kk", "<C-c>", { desc = "Insert to normal mode" })
 vim.keymap.set("i", "jk", "<C-c>", { desc = "Insert to normal mode" })
 vim.keymap.set("i", "kj", "<C-c>", { desc = "Insert to normal mode" })
+
 vim.keymap.set("i", ",,", "<Esc>", { desc = "Insert to normal mode" })
 
 -- Visual to Normal Mode Escaping
-vim.keymap.set("v", ",,", "<Esc>", { desc = "Alternative escape (visual)" })
+-- vim.keymap.set("v", ",,", "<Esc>", { desc = "Alternative escape (visual)" })
 
 -- switch b/w Normal and Cmdline Mode with <C-;>
 vim.keymap.set("n", ";;", ":", { desc = "Normal to command mode" })
@@ -52,6 +69,7 @@ vim.keymap.set("c", "<C-;>", "<C-c>", { desc = "Command to normal mode" })
 
 -- exit terminal mode w/ <Esc><Esc>
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+
 
 --tmux like window navigation
 vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
@@ -175,8 +193,8 @@ vim.keymap.set("x", ">", ">gv")
 -- keymap("n", "<S-h>", ":bprevious<CR>", lunar_opts)
 --
 -- -- Move text up and down
--- keymap("n", "<A-j>", "<Esc>:m .+1<CR>==gi", lunar_opts)
--- keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", lunar_opts)
+vim.keymap.set("n", "<A-j>", "<Esc>:m .+1<CR>==gi", {desc = "Move selection down 1", remap=false})
+vim.keymap.set("n", "<A-k>", "<Esc>:m .-2<CR>==gi", {desc = "Move selection up 1", remap=false})
 --
 -- -- Insert --
 -- -- Press jk fast to enter
@@ -203,9 +221,10 @@ vim.keymap.set("x", ">", ">gv")
 --
 
 
--- emacs-like navi keybinds in cmdline
--- b/c of special keyboard cmdline requires raw escape characters 
--- use ":echo getcharstr()" + <key>  to get raw char sequence
+-- Emacs-like navi keybinds in cmdline
+-- @NOTE: Keyboard sends non-standard sequence for <ALT> (i.e. <Alt> == <80><fc>^H) 
+--        To work around this I am using the raw escape characters in the keymaps
+--        Use ":echo getcharstr()" + <key>  to get raw char sequence, if needed.
 
 -- jump to start of line w/ <Alt-a>
 vim.keymap.set("c", "<A-a>", "<Home>", { desc= 'Cmd cursor to SOL', silent=false})
@@ -217,10 +236,6 @@ vim.keymap.set("c", "<80><fc>^He", "<End>", { desc= 'Cmd cursor to EOL', silent=
 
 
 -- left/right char movement <Alt-,> + <Alt-.>
--- vim.keymap.set("c", "<A-h>", "<Left>", { desc= 'Cmd cursor left', silent=false})
--- vim.keymap.set("c", "<80><fc>^Hh", "<Left>", { desc= 'Cmd cursor left', silent=false})
--- vim.keymap.set("c", "<A-l>", "<Right>", { desc= 'Cmd cursor right', silent=false})
--- vim.keymap.set("c", "<80><fc>^Hl", "<Right>", { desc= 'Cmd cursor right', silent=false})
 vim.keymap.set("c", "<A-,>", "<Left>", { desc= 'Cmd cursor left', silent=false})
 vim.keymap.set("c", "<A-.>", "<Right>", { desc= 'Cmd cursor right', silent=false})
 vim.keymap.set("c", "<80><fc>^H,", "<Left>", { desc= 'Cmd cursor left', silent=false})

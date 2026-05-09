@@ -71,9 +71,20 @@ alias gdsg="git diff --staged"
 alias gdo="git diff origin"
 alias gdm="git diff main"
 alias gdom="git diff origin/main"
-alias glg="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+
+# condense git logs (current branch only) into 1 line, with markers for branches
+alias glg="git log --oneline --decorate --color"
+
+# same as above, but just for all branch
+alias glga="git log --oneline --decorate --color --all"
+# [g]it [l]o[g] w/ [g]raph
+alias glgg="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias glgh="git log --graph --decorate --pretty=oneline --abbrev-commit --all"
-alias glgl="git log   -1 HEAD"
+
+# [g]it [l]o[g] [l]ast commit
+alias glgl="git log --oneline --decorate --color -1 HEAD"
+alias glg1="git log --oneline --decorate --color -1 HEAD"
+
 alias gm="git merge"
 alias gm1="git merge @{-1}"
 alias gp="git push"
@@ -81,6 +92,7 @@ alias gpf="git push -f"
 alias gpu="git push -u origin"
 alias gpl="git pull"
 alias gs="git status"
+alias gss="git status --short"
 alias gsst="git status --show-stash"
 alias grs="git restore"
 alias grss="git restore --staged"
