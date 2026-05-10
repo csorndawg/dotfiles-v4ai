@@ -4,14 +4,15 @@ return {
     event = "VeryLazy",
     opts = {
       spec = {
-        { "<leader>g", group = "[G]it" },
-        { "<leader>t", group = "[T]elescope" },
+        { "<leader>g", group = "[g]it" },
+        { "<leader>t", group = "[t]elescope builtins" },
+        { "<leader>T", group = "[T]elescope extras" },
         { "<leader>d", group = "[d]ebug" },
-        { "<leader>o", group = "[O]bsidian" },
-        { "<leader>a", group = "Code [A]ctions" },
+        { "<leader>O", group = "[O]bsidian" },
+        { "<leader>a", group = "Code [a]ctions" },
         -- { "<leader>l", group = "[L]int" },
-        { "<leader>z", group = "[Z]ac" },
-        { "<leader>zz", group = "[Z]ac Overflow" },
+        { "<leader>z", group = "[z]ac" },
+        { "<leader>zz", group = "[zz]ac overflow" },
         { "<leader>?", group = "WhichKey Maps" },
       },
     },
@@ -21,16 +22,16 @@ return {
         function()
           require("which-key").show({ global = true })
         end,
-        desc = "Global WhichKey Keymaps",
+        desc = "View Global Keymaps",
       },
       {
         "<leader>?b",
         function()
           require("which-key").show({ global = false })
         end,
-        desc = "Local Buffer Keymaps",
+        desc = "View Local Buffer Keymaps",
       },
-      {"<leader>w?", "<cmd>WhichKey <CR>", desc = "view all whichkey keymaps" },
+      {"<leader>w?", "<cmd>WhichKey <CR>", desc = "View all whichkey keymaps" },
       {"<leader>??", "<cmd>WhichKey <CR>", desc = "View all whichkey keymaps" },
     },
   }

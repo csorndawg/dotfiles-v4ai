@@ -9,18 +9,22 @@ alias fx="explorer.exe"
 
 ## HP/WSL EXPORTS ##
 
-export HP_USER_HOME="/mnt/c/Users/zaccs"
+export HP_CDRIVE_HOME="/mnt/c/Users/zaccs"
 export WSL_DESKTOP_HOME="/mnt/c/Users/zaccs/Desktop"
 export DESKTOP_HOME="/mnt/c/Users/zaccs/Desktop"
-export WSL_TMP_DIR="/mnt/c/Users/zaccs/Desktop"
+export WSL_TEMP_DIR="/mnt/c/Users/zaccs/Desktop/Temp"
 export HP_LINKFARM_DIR="/mnt/c/Users/zaccs/Desktop/_LinkFarm"
 export DESKTOP_LINKFARM_DIR="/mnt/c/Users/zaccs/Desktop/_LinkFarm"
-export WSL_DWNLDS_HOME="/mnt/c/Users/zaccs/Favorites/Downloads"
+export DOWNLOADS_WSL1="/mnt/c/Users/zaccs/Favorites/Downloads"
+export DOWNLOADS_WSL2="/mnt/c/Users/zaccs/Downloads"
 
 # Alacritty config file path
 export WSL_TERMINAL_CONFIG="/mnt/c/Users/zaccs/AppData/Roaming/alacritty/alacritty.toml"
 export WSL_ALACRITTY_CONFIG="/mnt/c/Users/zaccs/AppData/Roaming/alacritty/alacritty.toml"
 
+# WSL Local Drive Mounts
+export UBU24_WSL_DRIVE='Y:\'
+export UBU26_WSL_DRIVE='Z:\'
 
 ## HP/WSL FUNCTIONS ##
 
@@ -38,6 +42,30 @@ function wfx() {
 }
 
 
+function __unix_2_windows(){
+	if [ -z $1 ]; then
+		echo -e "\nError - no path argument was provided"
+		return 1
+	fi
+
+	local UNIX_PATH="$1"
+	local TRANSLATED_PATH="$(echo $UNIX_PATH | sed -E 's/\//\\/g' | sed -E 's/^.mnt.c/C:/g')"
+	echo -e "\nTranslated \"$UNIX_PATH\" to \"$TRANSLATED_PATH\""  >&2
+	echo "$TRANSLATED_PATH"
+}
+
+function __windows_2_unix(){
+	if [ -z $1 ]; then
+		echo -e "\nError - no path argument was provided"
+		return 1
+	fi
+
+	local WINDOWS_PATH="$1"
+  local TRANSLATED_PATH="$(echo $WINDOWS_PATH | sed -E 's/\\/\//g' | sed -E 's/^C:/\/mnt\/c/g')"
+	echo -e "\nTranslated \"$WINDOWS_PATH\" to \"$TRANSLATED_PATH\""  >&2
+	echo "$TRANSLATED_PATH"
+}
+
 ## HP/WSL OTHER ##
 
 # fd/fdfind binary symlink
@@ -46,4 +74,7 @@ if ! which fd; then
   ln -s "$(command -v fdfind)" "$HOME/.local/bin/fd"
 fi
 
+# set obisidian env. var to .deb installed /opt/ path
+export OBSIDIAN_WSL_DIR="/opt/Obsidian"
+alias obby="obsidian"		# cli cmd to launch, similar to old Obisidian.exe on Windows
 
