@@ -3,6 +3,8 @@
 # Install commands for Conform formatters system depedencies
 # Assumes user has rust/cargo, pip, and npm installed
 
+source "$HOME/.config/venvs/venv_nvimd/bin/activate"
+
 ## python
 pip install ruff
 
