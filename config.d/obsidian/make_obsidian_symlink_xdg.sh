@@ -6,6 +6,7 @@
 
 OBSIDIAN_REPO_PATH="$HOME/git/obsiddy"
 OBSIDIAN_CONFD="$OBSIDIAN_REPO_PATH/.obsidian"
+OBSIDIAN_BINARY="/opt/Obsidian/obsidian"
 
 # symlink source and target
 CONFIGD_DIR="$OBSIDIAN_CONFD"
@@ -26,7 +27,12 @@ else
 	echo -e "\n\"$SYML_TARG\" directory already exists and will not be overwritten"
 fi
 
-# # remove nested symlink
-# if [[ -e "$CONFIGD_DIR/obsidian" ]]; then
-# 	rm -v "$CONFIGD_DIR/obsidian" 
-# fi
+# by default obsidian binary is installed in WSL2 `/opt/Obsidian`
+# so we need to symlink `/opt/Obsidian/obsidian` to our local $USER bin
+echo -e "\nSymlinking Obsidian WSL2 Binary:\t ln -srf \"$OBSIDIAN_BINARY\"  \"$HOME/.local/bin/\""
+ln -srf "$OBSIDIAN_BINARY"  "$HOME/.local/bin/"
+
+# and well also just create an alias while were at it
+alias ob="obsidian"
+
+# @NOTE: The obsidian binary launches the desktop application in an Ubunutu GUI on your Windows machine
