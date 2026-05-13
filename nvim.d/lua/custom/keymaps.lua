@@ -125,8 +125,12 @@ vim.keymap.set("i", "<A-k>", "<Up>", { desc = "move up" })
 vim.keymap.set('v', '<C-y>', '"+y', { desc = 'Yank to system clipboard' })
 vim.keymap.set('v', '<leader><leader>y', '"+y', { desc = 'Yank to system clipboard' })
 -- paste from system clipboard in Normal and Visual modes
-vim.keymap.set({'n', 'v'}, '<C-p>', '"+p', { desc = 'Paste from system clipboard' })
-vim.keymap.set({'n', 'v'}, '<leader><leader>p', '"+p', { desc = 'Paste from system clipboard' })
+vim.keymap.set({'n', 'v'}, '<C-p>', '"+p', { desc = 'Paste from clipboard (after cursor)' })
+vim.keymap.set({'n', 'v'}, '<leader><leader>p', '"+p', { desc = 'Paste from clipboard (after cursor)' })
+vim.keymap.set({'n', 'v'}, '<leader><leader>P', '"+P', { desc = 'Paste from clipboard (before cursor)' })
+
+vim.keymap.set({'n', 'v'}, '<leader>p', 'o<C-c>p', { desc = 'Paste on new line (below)', noremap=true })
+vim.keymap.set({'n', 'v'}, '<leader>P', 'O<Esc>p', { desc = 'Paste on new line (above)', noremap=true })
 
 
 --

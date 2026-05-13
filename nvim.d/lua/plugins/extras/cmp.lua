@@ -93,7 +93,7 @@ cmp.setup({
   }),
 })
 
--- Cmdline completions for search
+-- Cmdline search cmp
 cmp.setup.cmdline({ '/', '?' }, {
   mapping = cmp.mapping.preset.cmdline(),
 
@@ -102,7 +102,7 @@ cmp.setup.cmdline({ '/', '?' }, {
   },
 })
 
--- Cmdline completions for commands
+-- Cmdline commands cmp
 cmp.setup.cmdline(':', {
   mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
@@ -111,3 +111,28 @@ cmp.setup.cmdline(':', {
     { name = 'cmdline' },
   }),
 })
+
+-- Dadbod Cmp: Generic SQL
+cmp.setup.filetype("sql", {
+	sources = {
+		{ name = "vim-dadbod-completion" },
+		{ name = "buffer" },
+	},
+})
+
+-- Dadbod Cmp: Postgres/MySQL filetype
+cmp.setup.filetype({ "pgsql", "mysql" }, {
+	sources = {
+		{ name = "vim-dadbod-completion" },
+		{ name = "buffer" },
+	},
+})
+
+-- -- DAP Cmp: DAP debugger buffer(???)
+-- cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
+-- 	sources = {
+-- 		{ name = "dap" },
+-- 	},
+-- })
+--
+--
