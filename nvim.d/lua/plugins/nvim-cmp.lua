@@ -9,6 +9,7 @@ return {
       'hrsh7th/cmp-buffer',       -- Buffer completions
       'hrsh7th/cmp-path',         -- Path completions
       'hrsh7th/cmp-cmdline',      -- Cmdline completions
+      -- 'rcarriga/cmp-dap',      -- DAP completeion   (@TODO: install core DAP plugin)
       "lukas-reineke/cmp-under-comparator",   -- CMP sorting util
     },
   }
