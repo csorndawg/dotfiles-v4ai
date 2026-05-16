@@ -60,8 +60,12 @@ return {
     ft = "python",
     dependencies = { "mfussenegger/nvim-dap" },
     config = function()
-      -- point at the debugpy installed in your global/venv python
-      require("dap-python").setup("python")
+      -- require("dap-python").setup("python")
+
+      -- point at debugpy installed in standard/default venv python
+      local path = require("mason-registry").get_package("debugpy"):get_install_path()
+      require("dap-python").setup(vim.fn.expand("~/.config/venvs/venv-nvim/bin/python"))
+
       -- extra python-specific keymaps
       vim.keymap.set("n", "<leader>dm", require("dap-python").test_method, { desc = "Debug method" })
       vim.keymap.set("n", "<leader>dC", require("dap-python").test_class,  { desc = "Debug class" })

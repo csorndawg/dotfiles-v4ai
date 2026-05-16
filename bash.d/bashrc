@@ -163,7 +163,16 @@ source "$HOME/dotfiles/utils.d/source_rc_utils.sh" > /dev/null 2>&1
 source "$HOME/dotfiles/utils.d/make_utilsd_symlinks.sh" > /dev/null 2>&1
 
 # enable nvim python venv by default
-source "$HOME/dotfiles/config.d/venvs/venv-nvimd/bin/activate" > /dev/null 2>&1
+LOCAL_NVIM_VENV="$HOME/.config/venvs/venv-nvim"
+if [[ ! -f "$LOCAL_NVIM_VENV" ]]; then
+	echo -e "\nNvim venv does not exist and will be created" 
+	python -m venv "$LOCAL_NVIM_VENV"
+fi
+source "$LOCAL_NVIM_VENV/bin/activate" > /dev/null 2>&1
+alias vn="source $LOCAL_NVIM_VENV/bin/activate" > /dev/null 2>&1
+alias pip_nvim="pip install -r \"$HOME/dotfiles/config.d/venvs/venv-nvim.requirements.txt\""
+
+#source "$HOME/dotfiles/config.d/venvs/venv-nvimd/bin/activate" > /dev/null 2>&1
 
 # DYNAMIC BASHD SUBMODULE SOURCING
 function src_bashd_submods () {
