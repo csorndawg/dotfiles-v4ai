@@ -23,7 +23,7 @@ return {
 					"comment",
 					"cpp",
 					"csv",
-					-- "dap_repl", -- note: plugin must be installed/setup or this will break
+					"dap_repl", -- note: plugin must be installed/setup or this will break
 					"diff",
 					"dockerfile",
 					"editorconfig",

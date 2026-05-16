@@ -48,8 +48,9 @@ require 'custom.keymaps'
 -- import custom autocmds
 require 'custom.autocmds'
 
--- source all EXTRA/EXTENDED PLUGIN custom config files
--- these files are ALWAYS sourced AFTER their respective plugin install/setup file
+-- Source all custom configuration (extending + overriding default logic) defined 
+-- in "lua/plugins/extras" LUA files. These files ALWAYS will be sourced 
+-- AFTER lua files defined in "lua/plugins".
 local extras_dir = vim.fn.stdpath 'config' .. '/lua/plugins/extras'
 for _, file in ipairs(vim.fn.readdir(extras_dir)) do
   -- non ".lua" files will be ignored
