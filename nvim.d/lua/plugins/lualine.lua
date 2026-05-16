@@ -46,6 +46,7 @@ return {
         lualine_a = { { "mode" } },
         lualine_b = { "branch", "diff" },
         lualine_c = {
+          "searchcount",
           "diagnostics",
           {
             get_venv_name,
@@ -55,10 +56,11 @@ return {
               gui = "italic",
             },
           },
+          -- "buffers",
         },
         lualine_x = { "filetype" },
         lualine_y = { "progress", "location" },
-        lualine_z = { "filename" },
+        lualine_z = { "filename","hostname"  },
       },
       inactive_sections = {
         lualine_c = { "filename" },

@@ -60,10 +60,9 @@ return {
     ft = "python",
     dependencies = { "mfussenegger/nvim-dap" },
     config = function()
-      -- require("dap-python").setup("python")
 
       -- point at debugpy installed in standard/default venv python
-      local path = require("mason-registry").get_package("debugpy"):get_install_path()
+      -- local path = require("mason-registry").get_package("debugpy"):get_install_path()
       require("dap-python").setup(vim.fn.expand("~/.config/venvs/venv-nvim/bin/python"))
 
       -- extra python-specific keymaps

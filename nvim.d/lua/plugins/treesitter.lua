@@ -13,7 +13,6 @@ return {
 				end,
 			},
 		},
-		config = function()
       opts = {
 				ensure_installed = {
 					"awk",
@@ -70,6 +69,5 @@ return {
 				highlight = { enable = true },
 				indent = { enable = true },
       }
-		end,
 	},
 }

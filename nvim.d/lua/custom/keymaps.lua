@@ -250,3 +250,5 @@ vim.keymap.set("c", "<A-<>", "<S-Left>", { desc= 'Cmd cursor SOW', silent=false}
 vim.keymap.set("c", "<A->>", "<S-Right>", { desc= 'Cmd cursor SOW', silent=false})
 vim.keymap.set("c", "<80><fc>^H<", "<S-Left>", { desc= 'Cmd cursor left', silent=false})
 vim.keymap.set("c", "<80><fc>^H>", "<S-Right>", { desc= 'Cmd cursor left', silent=false})
+
+vim.keymap.set("n","<Leader>/","gcc",{noremap =true,silent=true})
