@@ -171,8 +171,16 @@ local function setup_clipboard()
   end
   -- else: not WSL, not SSH → let Neovim auto-detect (xclip/pbcopy/etc.)
 end
-
-
-
 setup_clipboard()
 vim.opt.clipboard = 'unnamedplus'
+
+---------------------------------------------
+-- Opt-Related Keymaps
+---------------------------------------------
+vim.keymap.set('n', '<leader>zzh', function()
+  vim.opt.hlsearch = not vim.opt.hlsearch:get()
+end, { desc = 'Toggle hlsearch' })
+
+
+-- disable mouse 
+vim.opt.mouse = ""

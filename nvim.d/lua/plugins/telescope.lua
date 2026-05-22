@@ -15,7 +15,8 @@ return {
               -- set ivy as default theme for all find_files pickers
               theme = "ivy"
             }
-          }
+          },
+	  -- extensions = {},
         }
 
         -- search all files in cwd 

@@ -10,7 +10,7 @@ return {
         { "<leader>d", group = "[d]ebug" },
         { "<leader>O", group = "[O]bsidian" },
         { "<leader>a", group = "Code [a]ctions" },
-        -- { "<leader>l", group = "[L]int" },
+        { "<leader>l", group = "[L]sp" },
         { "<leader>z", group = "[z]ac" },
         { "<leader>zz", group = "[zz]ac overflow" },
         { "<leader>?", group = "WhichKey Maps" },
@@ -20,6 +20,7 @@ return {
       {
         "<leader>?g",
         function()
+          -- require("which-key").show({ global = true })
           require("which-key").show({ global = true })
         end,
         desc = "View Global Keymaps",
