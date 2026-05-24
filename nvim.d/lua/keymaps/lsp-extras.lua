@@ -40,7 +40,7 @@ end,
 {desc = "Rename current symbol",noremap=true}
 )
 
-map("n","<Leader>lh",
+map("n","<Leader>lS",
 function()
   vim.lsp.buf.signature_help()
 end,
@@ -74,3 +74,32 @@ function()
 end,
 {desc = "List buffer symbols",noremap=true}
 )
+
+-- -- add hover (definition + docstring) with customized hover window
+-- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+--   vim.lsp.handlers.hover, {
+--     -- Use "single", "double", "rounded", "solid", or "shadow"
+--     border = "rounded",
+--     -- Optional: set maximum width and height
+--     max_width = 80,
+--     max_height = 30,
+--   }
+-- )
+-- map("n",
+-- "<Leader>lh",
+-- function()
+--   vim.lsp.buf.hover()
+-- end,
+-- {desc = "Toggle hover win", noremap= true}
+-- )
+
+-- customized hover window 
+vim.keymap.set('n', '<Leader>lh', function()
+  vim.lsp.buf.hover { border = "single", max_height = 15, max_width = 60 }
+  vim.cmd("normal! zz")     -- center screen after toggling hover window
+end, { desc = "Hover documentation" })
+
+vim.keymap.set('n', 'K', function()
+  vim.lsp.buf.hover { border = "single", max_height = 20, max_width = 100 }
+  vim.cmd("normal! zz")     -- center screen after toggling hover window
+end, { desc = "Hover documentation" })
