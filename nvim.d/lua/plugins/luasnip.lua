@@ -15,6 +15,9 @@ return {
       local ls = require("luasnip")
       local types = require("luasnip.util.types")
 
+      -- ensure friendly-snippets snippets are sourced and available
+      require("luasnip.loaders.from_vscode").lazy_load()
+
       -- ── Core options ────────────────────────────────────────────────────
       ls.config.set_config({
         -- Keep the last snippet active so you can jump back into it
