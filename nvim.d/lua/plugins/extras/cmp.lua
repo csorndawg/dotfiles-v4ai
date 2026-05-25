@@ -21,8 +21,14 @@ cmp.setup {
     ['<A-Up>'] = cmp.mapping.scroll_docs(-4),
     ['<A-Down>'] = cmp.mapping.scroll_docs(4),
 
+    -- @TODO: Review if keymap works, and even if so if its optimal keymap for this action (view distros, etc. for confirmation)
+    -- @FIXME: 
+    -- Broken keymap, currently it just adds a space and the cmp never executes 
+    -- nor does the popup menu appear since the current words under cursor is 
+    -- just a blank space. 
+    --
     -- Trigger completion
-    ['<C-Space>'] = cmp.mapping.complete(),
+    -- ['<C-Space>'] = cmp.mapping.complete(),
 
     -- Abort completion
     ['<C-e>'] = cmp.mapping.abort(),
@@ -30,6 +36,7 @@ cmp.setup {
     -- accept current selection and remain in INSERT mode
     ['<CR>'] = cmp.mapping.confirm { select = true },
 
+    -- @TODO: Review if keymap works, and even if so if its optimal keymap for this action (view distros, etc. for confirmation)
     -- use "<Ctrl-,>" to accept current selection and switch to NORMAL mode
     --['<Leader><CR>'] = cmp.mapping(function(fallback)
     ['<C-,>'] = cmp.mapping(function(fallback)

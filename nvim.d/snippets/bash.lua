@@ -57,18 +57,20 @@ set -euo pipefail
 }}
 ]], { i(1, "func_name"), i(2, "arg"), i(3, "# body") })),
 
-    -- if/if-else conditionals
-      s("ife", fmt([[
-      if [[ <1> ]]; then
-        <2>
-      elif [[ <3> ]]; then
-        <4>
-      else
-        <5>
-      fi
-      ]], { i(1, "condition"), i(2, "# then"), i(3, "# elif cond"), i(4, "# elif body"), i(5, "# else") },
-      { delimiters = "<>" })),
-
+    -- @DEBUG: 
+    -- @FIXME: Leaving commented until break/issue is fixed.
+    -- -- -- if/if-else conditionals -- -- --
+      -- s("ife", fmt([[
+      -- if [[ <1> ]]; then
+      --   <2>
+      -- elif [[ <3> ]]; then
+      --   <4>
+      -- else
+      --   <5>
+      -- fi
+      -- ]], { i(1, "condition"), i(2, "# then"), i(3, "# elif cond"), i(4, "# elif body"), i(5, "# else") },
+      -- { delimiters = "<>" })),
+      --
 
 
     -- ── 5. For loop — choice node: array vs range vs glob ────────────────
@@ -83,30 +85,32 @@ set -euo pipefail
     }),
 
     -- ── 6. While read loop (common pattern for file processing) ──────────
-    s("whileread", fmt([[
-while IFS= read -r {}; do
-  {}
-done < "{}"
-]], { i(1, "line"), i(2, "echo \"$line\""), i(3, "file.txt") })),
+--     s("whileread", fmt([[
+-- while IFS= read -r {}; do
+--   {}
+-- done < "{}"
+-- ]], { i(1, "line"), i(2, "echo \"$line\""), i(3, "file.txt") })),
+--
+-- @FIXME: Need to add escape characters. Leaving commented out until this is fixed.
+--
+--     -- ── 7. Case statement — dynamic node generates arms from count ────────
+--     -- trigger: `case`  →  type var name, jump, type number of cases (not
+--     -- demonstrated here for brevity — uses a static 3-arm template instead)
+--     s("case", fmt([[
+-- case "${{}}" in
+--   {})
+--     {}
+--     ;;
+--   {})
+--     {}
+--     ;;
+--   *)
+--     {}
+--     ;;
+-- esac
+-- ]], { i(1, "var"), i(2, "pattern1"), i(3, "# arm1"), i(4, "pattern2"), i(5, "# arm2"), i(6, "# default") })),
 
-    -- ── 7. Case statement — dynamic node generates arms from count ────────
-    -- trigger: `case`  →  type var name, jump, type number of cases (not
-    -- demonstrated here for brevity — uses a static 3-arm template instead)
-    s("case", fmt([[
-case "${{}}" in
-  {})
-    {}
-    ;;
-  {})
-    {}
-    ;;
-  *)
-    {}
-    ;;
-esac
-]], { i(1, "var"), i(2, "pattern1"), i(3, "# arm1"), i(4, "pattern2"), i(5, "# arm2"), i(6, "# default") })),
-
-    -- ── 8. Logging helpers — function node builds tag, choice picks level ─
+    -- ── Logging helpers — function node builds tag, choice picks level ─
     s("logfn", {
       t({
         "_log() {",
@@ -119,31 +123,10 @@ esac
       }),
     }),
 
-    -- ── 9. Argument parser boilerplate ────────────────────────────────────
-    s("argparse", fmt([[
-usage() {{
-  echo "Usage: $(basename "$0") [OPTIONS]"
-  echo "  -h, --help     Show this help"
-  echo "  -v, --verbose  Verbose output"
-  echo "  -f, --file     Input file"
-}}
 
-VERBOSE=0
-FILE=""
 
-while [[ $# -gt 0 ]]; do
-  case "$1" in
-    -h|--help)    usage; exit 0 ;;
-    -v|--verbose) VERBOSE=1; shift ;;
-    -f|--file)    FILE="$2"; shift 2 ;;
-    *) echo "Unknown option: $1" >&2; usage; exit 1 ;;
-  esac
-done
 
-{}
-]], { i(1, "# main logic") })),
-
-    -- ── 10. Trap / cleanup pattern ────────────────────────────────────────
+    -- ── Trap / cleanup pattern ────────────────────────────────────────
     s("trap", fmt([[
 _cleanup() {{
   {}

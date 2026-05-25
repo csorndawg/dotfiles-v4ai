@@ -35,6 +35,11 @@ return {
   -- ── 1. Basic snippet with insert nodes ──────────────────────────────────
   -- trigger: `todo`
   s("todo", fmt("TODO({}): {}", { i(1, "author"), i(2, "description") })),
+  
+  -- test snippet to confirm if these are being loaded in or not
+  s("zacLuaSnipTest",{
+    t("This is an expanded LuaSnip Test Snippet"),
+  }),
 
   -- ── 2. Function node — inserts computed value ────────────────────────────
   -- trigger: `date`  →  inserts today's date
