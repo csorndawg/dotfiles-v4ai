@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Script configures CONFIG.D symlinks to XDG_LOCAL_CONFIG dir
+# Script generates symlinks from dotfiles CONFIG.D subfolders to their own XDG_LOCAL_CONFIG directory.
 
 # add config.d subfolder pattern here to ignore/skip symlin
 IGNORE_RGX='venv|alacritty'

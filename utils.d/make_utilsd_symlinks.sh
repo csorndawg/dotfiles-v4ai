@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+# Makes symlinks for <<FILL LATER>>
+# 
+#
+
+
 # VARIABLES
 DOTFILE_STEM="$HOME/dotfiles"
 UTILSD_RGX="\.rc"
