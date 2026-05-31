@@ -1,0 +1,3 @@
+profile_default/**
+!profile_default/*.py
+
