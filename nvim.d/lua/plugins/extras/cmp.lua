@@ -28,7 +28,11 @@ cmp.setup {
     -- just a blank space. 
     --
     -- Trigger completion
-    -- ['<C-Space>'] = cmp.mapping.complete(),
+
+    -- @NOTE:
+    -- Alacritty maps <NUL> to <C-Space> under the hood
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<NUL>'] = cmp.mapping.complete(),
 
     -- Abort completion
     ['<C-e>'] = cmp.mapping.abort(),

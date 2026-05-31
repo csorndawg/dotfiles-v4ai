@@ -148,3 +148,13 @@ bindings = [
   { mouse = "WheelUp",   action = "ScrollLineUp" },
   { mouse = "WheelDown", action = "ScrollLineDown" },
 ]
+
+# ----------------------------------------------------------------------
+# Keyboard Remaps
+# ----------------------------------------------------------------------
+
+[[keyboard.bindings]]
+key = "Space"
+mods = "Control"
+chars = "\x00"   # sends NUL, which nvim interprets as <C-Space>
+
