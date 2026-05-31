@@ -15,6 +15,9 @@ return {
       -- { 'n', '<Leader>D', '<cmd>DBUIToggle<Cr>', { desc = 'DBUI Toggle' } },
       -- { '<Leader>Dt', '<cmd>DBUIToggle<Cr>', { desc = 'DBUI Toggle' } },
       { '<Leader>Dt', '<cmd>DBUIToggle<Cr>', desc = 'DBUI Toggle' },
+      { '<Leader>aD', '<cmd>DBUIToggle<Cr>', desc = 'DBUI toggle' },
+      { '<Leader>aD', '<cmd>DBUIToggle<Cr>', desc = 'DBUI toggle' },
+      { '<Leader>aq', '<cmd>DBUIClose<Cr>', desc = 'DBUI close' },
 
     },
     init = function()

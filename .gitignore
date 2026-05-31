@@ -9,6 +9,12 @@
 **.diff
 **.diff.*
 
+## GZIPs, TARBALLs, and ZIPs 
+**.tar.gz
+**.tar.gz.*
+**.zip
+**.zip.*
+
 ## Patch 
 **.patch
 **.patch.*
