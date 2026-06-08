@@ -34,17 +34,17 @@ export VIRTUAL_ENV_DISABLE_PROMPT=1
 #   PS1="${venv_prefix}${_nord7}\u@\h${_reset}${branch_line}\n\$ "
 # }
 
-
-# @TESTME: New nordish prompt
 # Nord RGB escapes
 _nord9='\[\e[38;2;129;161;193m\]'   # frost blue    #81A1C1  - venv + user@host
 _nord14='\[\e[38;2;163;190;140m\]'  # aurora green  #A3BE8C  - branch
 _nord13='\[\e[38;2;235;203;139m\]'  # aurora yellow #EBCB8B  - path
 _reset='\[\e[0m\]'
 
+
+# custom bash prompt builder
 build_prompt() {
   local venv_prefix=""
-  local branch_line=""
+  local branch_segment=""
 
   if [ -n "$VIRTUAL_ENV" ]; then
     venv_prefix="${_nord9}($(basename "$VIRTUAL_ENV"))${_reset} "
@@ -53,10 +53,10 @@ build_prompt() {
   if git rev-parse --is-inside-work-tree &>/dev/null 2>&1; then
     local branch
     branch=$(git branch 2>/dev/null | grep '^\*' | sed 's/\* //')
-    branch_line="\n${_nord14}(${branch})${_reset} ${_nord13}\w${_reset}"
+    branch_segment="${_nord14}(${branch})${_reset} "
   fi
 
-  PS1="${venv_prefix}${_nord9}\u@\h${_reset}${branch_line}\n\$ "
+  PS1="${venv_prefix}${_nord9}\u@\h${_reset}\n${branch_segment}${_nord13}\w${_reset}\n\$ "
 }
 
 PROMPT_COMMAND=build_prompt
