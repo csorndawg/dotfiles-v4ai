@@ -42,13 +42,13 @@ vim.keymap.set("n","<A-q><A-f>",":q!<Cr>")
 
 -- switch b/w Normal and Insert mode with ",,"
 -- vim.keymap.set("n", ",,", "i", { desc = "Normal to insert mode" })
-vim.keymap.set("i", "jk", "<C-c>", { desc = "Normal to insert mode" })
-vim.keymap.set("i", "kj", "<C-c>", { desc = "Normal to insert mode" })
+vim.keymap.set("n", "jk", "<C-c>", { desc = "Normal to insert mode" })
+vim.keymap.set("n", "kj", "<C-c>", { desc = "Normal to insert mode" })
 
 -- additional Insert to Normal mode escaping
 vim.keymap.set("i", "jj", "<C-c>", { desc = "Insert to normal mode" })
-vim.keymap.set("i", "kk", "<C-c>", { desc = "Insert to normal mode" })
-vim.keymap.set("i", "jk", "<C-c>", { desc = "Insert to normal mode" })
+vim.keymap.set("i", "kk", "<Esc>", { desc = "Insert to normal mode" })
+vim.keymap.set("i", "jk", "<Esc>", { desc = "Insert to normal mode" })
 vim.keymap.set("i", "kj", "<C-c>", { desc = "Insert to normal mode" })
 
 vim.keymap.set("i", ",,", "<Esc>", { desc = "Insert to normal mode" })
@@ -125,8 +125,12 @@ vim.keymap.set("i", "<A-k>", "<Up>", { desc = "move up" })
 vim.keymap.set('v', '<C-y>', '"+y', { desc = 'Yank to system clipboard' })
 vim.keymap.set('v', '<leader><leader>y', '"+y', { desc = 'Yank to system clipboard' })
 -- paste from system clipboard in Normal and Visual modes
-vim.keymap.set({'n', 'v'}, '<C-p>', '"+p', { desc = 'Paste from system clipboard' })
-vim.keymap.set({'n', 'v'}, '<leader><leader>p', '"+p', { desc = 'Paste from system clipboard' })
+vim.keymap.set({'n', 'v'}, '<C-p>', '"+p', { desc = 'Paste from clipboard (after cursor)' })
+vim.keymap.set({'n', 'v'}, '<leader><leader>p', '"+p', { desc = 'Paste from clipboard (after cursor)' })
+vim.keymap.set({'n', 'v'}, '<leader><leader>P', '"+P', { desc = 'Paste from clipboard (before cursor)' })
+
+vim.keymap.set({'n', 'v'}, '<leader>p', 'o<C-c>p', { desc = 'Paste on new line (below)', noremap=true })
+vim.keymap.set({'n', 'v'}, '<leader>P', 'O<Esc>p', { desc = 'Paste on new line (above)', noremap=true })
 
 
 --
@@ -199,8 +203,18 @@ vim.keymap.set("n", "<A-k>", "<Esc>:m .-2<CR>==gi", {desc = "Move selection up 1
 -- -- Insert --
 -- -- Press jk fast to enter
 -- keymap("i", "jk", "<ESC>", lunar_opts)
---
---
+
+-- add before <C-b> gets remapped to <ESC>
+vim.keymap.set("c","<C-l>","<Right>",{desc="Jump to line start"})
+-- remap delete previous character (C-h default) before remapping <C-h>
+vim.keymap.set("c","<C-S-h>","<Delete>",{desc="Jump to line start", noremap=true})
+vim.keymap.set("c","<C-h>","<Left>",{desc="Jump to line start"})
+vim.keymap.set("c","<C-a>","<C-b>",{desc="Jump to line start"})
+
+-- @NOTE: Removed "i" b/c <C-b> currently mapped to snippet jump back mapping
+vim.keymap.set({"n","c","v","x"},"<C-b>","<Esc>",{desc="Alt. Escape",noremap=true})
+-- vim.keymap.set({"i","n","c","v","x"},"<C-b>","<Esc>",{desc="Alt. Escape",noremap=true})
+
 -- -- Move text up and down
 -- keymap("v", "<A-j>", ":m .+1<CR>==", lunar_opts)
 -- keymap("v", "<A-k>", ":m .-2<CR>==", lunar_opts)
@@ -246,3 +260,5 @@ vim.keymap.set("c", "<A-<>", "<S-Left>", { desc= 'Cmd cursor SOW', silent=false}
 vim.keymap.set("c", "<A->>", "<S-Right>", { desc= 'Cmd cursor SOW', silent=false})
 vim.keymap.set("c", "<80><fc>^H<", "<S-Left>", { desc= 'Cmd cursor left', silent=false})
 vim.keymap.set("c", "<80><fc>^H>", "<S-Right>", { desc= 'Cmd cursor left', silent=false})
+
+vim.keymap.set("n","<Leader>/","gcc",{noremap =true,silent=true})

@@ -9,22 +9,27 @@ alias fx="explorer.exe"
 
 ## HP/WSL EXPORTS ##
 
-export HP_CDRIVE_HOME="/mnt/c/Users/zaccs"
+export WSL_CDRIVE_HOME="/mnt/c/Users/zaccs"
 export WSL_DESKTOP_HOME="/mnt/c/Users/zaccs/Desktop"
 export DESKTOP_HOME="/mnt/c/Users/zaccs/Desktop"
 export WSL_TEMP_DIR="/mnt/c/Users/zaccs/Desktop/Temp"
-export HP_LINKFARM_DIR="/mnt/c/Users/zaccs/Desktop/_LinkFarm"
+export WSL_LINKFARM_DIR="/mnt/c/Users/zaccs/Desktop/_LinkFarm"
 export DESKTOP_LINKFARM_DIR="/mnt/c/Users/zaccs/Desktop/_LinkFarm"
-export DOWNLOADS_WSL1="/mnt/c/Users/zaccs/Favorites/Downloads"
-export DOWNLOADS_WSL2="/mnt/c/Users/zaccs/Downloads"
+export DWNLOADS_WSL1="/mnt/c/Users/zaccs/Favorites/Downloads"
+export DWNLOADS_WSL2="/mnt/c/Users/zaccs/Downloads"
+export WSL_PLAYGROUND_HOME="/mnt/c/Users/zaccs/Desktop/playground/"
+export WSL_DWNLDS_CHROME_HOME="/mnt/c/Users/zaccs/Downloads/Chrome"
+export WSL_DWNLDS_CHROME_DEFAULT_DIR="/mnt/c/Users/zaccs/Downloads/Chrome/zaccsorny/downloads"
+export WSL_DOTFILES="/home/zaccsorny/dotfiles"
+export WSL_LINUX_HOME="/home/zaccsorny"
 
 # Alacritty config file path
 export WSL_TERMINAL_CONFIG="/mnt/c/Users/zaccs/AppData/Roaming/alacritty/alacritty.toml"
 export WSL_ALACRITTY_CONFIG="/mnt/c/Users/zaccs/AppData/Roaming/alacritty/alacritty.toml"
 
 # WSL Local Drive Mounts
-export UBU24_WSL_DRIVE='Y:\'
-export UBU26_WSL_DRIVE='Z:\'
+export WSL_UBU24_DRIVE='Y:\'
+export WSL_UBU26_DRIVE='Z:\'
 
 ## HP/WSL FUNCTIONS ##
 

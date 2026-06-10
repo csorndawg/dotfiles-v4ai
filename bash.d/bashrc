@@ -138,15 +138,11 @@ export PATH="$PATH:$HOME/.local/bin"
 eval "$(zoxide init bash)"
 #eval "$(zoxide init zsh)"
 
-# golang setup
-#export GOPATH="/usr/lib/go"
-#export GOBIN="$GOPATH/bin"
-#export PATH="$PATH:$GOBIN"
-
-# GO 1.26 postinstall fix
-export GOPATH="$HOME/go"
-#export PATH="$PATH:$GOROOT/bin:$GOPATH/bin"
-export PATH="$PATH:$GOPATH/bin"
+# golang 1.26 setup
+if [[ -d "$HOME/go" ]]; then 
+	export GOPATH="$HOME/go"
+	export PATH="$PATH:$GOPATH/bin"
+fi
 
 ### SSH ###
 
@@ -155,15 +151,35 @@ eval "$(ssh-agent -s)" 1>/dev/null
 sshCachePassRunner="$HOME/.ssh/sshCachePass.sh"
 source "$sshCachePassRunner" 1> /dev/null
 
-
 ### DOTFILE V4 CONFIGURATION ###
 
 # <need to copy/transfer other config code from zac nyc3 bashrc file>
 source "$HOME/dotfiles/utils.d/source_rc_utils.sh" > /dev/null 2>&1
 source "$HOME/dotfiles/utils.d/make_utilsd_symlinks.sh" > /dev/null 2>&1
 
+
+## Nvim stuff ##
+
+NVIM_EXISTS=$(which nvim | egrep nvim -c)
+
+if (($NVIM_EXISTS >= 1)); then 
+	echo "NVIM Exists on machine"
+	export EDITOR="nvim"
+else 
+	echo "Nvim is not installed on local machine, falling back to Vim."
+	export EDITOR="vim"
+fi
+
 # enable nvim python venv by default
-source "$HOME/dotfiles/config.d/venvs/venv-nvimd/bin/activate" > /dev/null 2>&1
+LOCAL_NVIM_VENV="$HOME/.config/venvs/venv-nvim"
+if [[ ! -d "$LOCAL_NVIM_VENV" ]]; then
+	echo -e "\nNvim venv does not exist and will be created" 
+	python -m venv "$LOCAL_NVIM_VENV"
+fi
+source "$LOCAL_NVIM_VENV/bin/activate" > /dev/null 2>&1
+alias vn="source $LOCAL_NVIM_VENV/bin/activate" > /dev/null 2>&1
+alias pip_nvim="pip install -r \"$HOME/dotfiles/config.d/venvs/venv-nvim.requirements.txt\""
+
 
 # DYNAMIC BASHD SUBMODULE SOURCING
 function src_bashd_submods () {
@@ -210,5 +226,7 @@ source "$HOME/dotfiles/utils.d/main.rc" > /dev/null 2>&1
 source "$HOME/dotfiles/bash.d/extras.bash" > /dev/null 2>&1
 
 # @TEMPFIX: move to "variables.rc" or "rust.rc" after figuring out rust/cargo issue
-export PATH="$HOME/.cargo/bin:$PATH"
+if [[ -d "$HOME/.cargo/bin" ]]; then 
+	export PATH="$HOME/.cargo/bin:$PATH"
+fi
 echo -e "Successfully sourced:  \"$BASHRC\"\n"

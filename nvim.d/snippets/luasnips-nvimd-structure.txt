@@ -1,0 +1,10 @@
+~/.config/nvim.d/         
+├── lua/
+│   └── plugins/
+│       └── luasnip.lua       ← plugin spec + config
+└── snippets/
+    ├── all.lua               ← global snippets (every filetype)
+    ├── bash.lua
+    ├── sql.lua
+    ├── python.lua
+    └── cpp.lua

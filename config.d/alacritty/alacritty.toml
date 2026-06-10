@@ -1,18 +1,28 @@
-# For all configuration options see: https://alacritty.org/config-alacritty.html
+# -----------------------------------------------------------------------
+# Alacritty Config
+# 
+# More Info: https://alacritty.org/config-alacritty.html
+# -----------------------------------------------------------------------
+
+
 [terminal.shell]
 program = "C:\\Windows\\System32\\wsl.exe"
 args = ["-d", "Ubuntu-24.04", "--cd", "~", "--user", "zaccsorny"]
 # args = ["-d", "Ubuntu", "--cd", "~", "--", "zsh"]
-# osc52 = "CopyPaste"
 
 [env]
-TERM = "alacritty"
+#TERM = "alacritty"
+# for terminal/tmux/nvim colorscheme consistency
 
-# Nord Color Theme
+TERM = "xterm-256color"
+
+
+### Nord Color Theme ###
 
 [colors.primary]
 background = "#2e3440"
 foreground = "#d8dee9"
+
 dim_foreground = "#a5abb6"
 
 [colors.cursor]
@@ -28,8 +38,10 @@ text = "CellForeground"
 background = "#4c566a"
 
 [colors.search.matches]
+
 foreground = "CellBackground"
 background = "#88c0d0"
+
 
 # [colors.search.bar]
 # background = "#434c5e"
@@ -41,6 +53,7 @@ red = "#bf616a"
 green = "#a3be8c"
 yellow = "#ebcb8b"
 blue = "#81a1c1"
+
 magenta = "#b48ead"
 cyan = "#88c0d0"
 white = "#e5e9f0"
@@ -66,40 +79,55 @@ cyan = "#6d96a5"
 white = "#aeb3bb"
 
 
+
+### Font ### 
+
+# for windows, font must be listed at: Settings > Personalization > Fonts
+[font]
+size = 9
+
+
+[font.normal]
+
+family = "JetBrainsMono Nerd Font"
+style = "ExtraLight"
+# style = "Thin"
+#style = "Light"
+
+[font.bold]
+
+family = "JetBrainsMono Nerd Font"
+style = "SemiBold"
+
+[font.italic]
+family = "JetBrainsMono Nerd Font"
+style = "Thin Italic"
+
+#style = "Light Italic"
+
+[font.bold_italic]
+
+family = "JetBrainsMono Nerd Font"
+style = "SemiBold Italic"
+
+
+### Misc. ### 
+
 [cursor]
 style = "Beam"
 # vi_mode_style = { <shape>, <blinking> } | "None"
 
 
 [window]
-title = "Zacs Alacritty"
-#startup_mode = "Fullscreen"
+
+title = "ZC"
+# decorations
+#	full: borders and title bar
+# 	none: neither borders nor title bar
 decorations = 'buttonless'
 dynamic_padding = true
-# full: borders and title bar
-# none: neither borders nor title bar
 
-
-# for windows font must be among fonts listed at: Settings > Personalization > Fonts
-[font]
-size = 10
-
-[font.normal]
-family = "JetBrainsMono Nerd Font"
-style = "Light"
-#style = "Regular"
-
-[font.bold]
-family = "JetBrainsMono Nerd Font"
-style = "SemiBold"
-
-[font.italic]
-family = "JetBrainsMono Nerd Font"
-style = "Light Italic"
-
-[font.bold_italic]
-family = "JetBrainsMono Nerd Font"
-style = "SemiBold Italic"
+#startup_mode = "Fullscreen"
 
 [scrolling]
 # max scroll history: 100000
@@ -109,9 +137,24 @@ multiplier = 5
 [selection]
 save_to_clipboard = true
 
-# supress WARNING messages
 [debug]
 persistent_logging = false
-# log_level = "Error"
-log_level = "Off"
+# supress WARNING messages
+log_level = "Error"
+
+# mouse scrolls are treated as page ups/downs instead
+[mouse]
+bindings = [
+  { mouse = "WheelUp",   action = "ScrollLineUp" },
+  { mouse = "WheelDown", action = "ScrollLineDown" },
+]
+
+# ----------------------------------------------------------------------
+# Keyboard Remaps
+# ----------------------------------------------------------------------
+
+[[keyboard.bindings]]
+key = "Space"
+mods = "Control"
+chars = "\x00"   # sends NUL, which nvim interprets as <C-Space>
 
